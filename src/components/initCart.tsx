@@ -14,6 +14,7 @@ const InitCart = () => {
       dispatch(updateCartInitialState(cart));
     }
   }, []);
+
   return <></>;
 };
 

@@ -92,7 +92,9 @@ export const getAllFavoriteProductApi = async () =>
 export const createCreditLimitApi = async (data) =>
   await axios.post("/credit-limit-request", data);
 
-export const getProfileApi = async () => await axios.get("/profile");
+export const getProfileApi = async () => {
+  return await axios.get("/profile");
+};
 
 export const editProfileApi = async (data, id) =>
   await axios.put(`/profile/${id}/edit`, data);

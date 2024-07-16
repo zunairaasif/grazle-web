@@ -40,7 +40,7 @@ import ProductCard from "@/components/ProductCard";
 export default function StoreProductpage() {
   const [searchResult, setSearchResult] = useState([]);
   const [seletedCategory, setSeletedCategory] = useState([]);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(4);
   const [brandId, setBrandId] = useState();
   const [brands, setBrands] = useState([]);
 
@@ -146,6 +146,8 @@ export default function StoreProductpage() {
     }
 
     const { data } = await getFilterProductsApi(query);
+    console.log("query", query);
+    console.log("data", data);
     setSearchResult(data?.products);
   };
   const clearFilter = () => {

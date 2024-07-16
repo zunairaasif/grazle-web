@@ -56,7 +56,6 @@ export default function StoreProduct() {
       setStoreProduct(res.data.products);
     })();
   }, [id]);
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -93,25 +92,29 @@ export default function StoreProduct() {
   return (
     <div className="lg:my-[50px] my-[20px] sm:my-[20px] md:my-[30px] lg:mx-[150px] mx-[20px] sm:mx-[20px] md:mx-[30px]">
       <div className="relative w-[100%] h-[250px]">
-        <Image
-          width={800}
-          height={600}
-          src={"/" + currentStore.store_image}
-          alt="Main"
-          className="w-full h-full"
-        />
+        {currentStore.store_image && (
+          <Image
+            width={800}
+            height={600}
+            src={"/" + currentStore?.store_image}
+            alt="Main"
+            className="w-full h-full"
+          />
+        )}
         <div
           className="absolute left-1/2 transform -translate-x-1/2"
           style={{ top: "calc(50% - -50px)" }}
         >
           <div className="w-[190px] bg-white h-[200px] flex justify-center items-center rounded-2xl border-[2px] border-[#F70000]">
-            <Image
-              width={185}
-              height={100}
-              src={"/" + currentStore.store_image}
-              alt="Logo"
-              className="w-[185px] h-[100px]"
-            />
+            {currentStore.store_image && (
+              <Image
+                width={185}
+                height={100}
+                src={"/" + currentStore?.store_image}
+                alt="Logo"
+                className="w-[185px] h-[100px]"
+              />
+            )}
           </div>
         </div>
       </div>

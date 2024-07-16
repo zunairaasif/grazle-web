@@ -1,21 +1,17 @@
-"use client";
-
+import { getProfileApi } from "@/apis";
+import Auth from "@/components/Auth";
 import { useEffect } from "react";
+// const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    let token = null;
-    if (typeof window !== "undefined") {
-      token = localStorage.getItem("token")!;
-    }
-
-    if (token === null) {
-      window.location.href = "/signIn";
-    }
-  }, []);
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Auth />
+      {children}
+    </div>
+  );
 }

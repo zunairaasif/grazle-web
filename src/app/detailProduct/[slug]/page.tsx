@@ -60,7 +60,7 @@ export default function ProductDetail() {
   };
 
   const goToShop = () => {
-    router.push("/StoreProduct?id=" + singleProduct.brand_id);
+    router.push("/StoreProduct?id=" + singleProduct.store.store_id);
   };
   const [showPopup, setShowPopup] = useState(false);
 
