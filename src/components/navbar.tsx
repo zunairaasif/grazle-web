@@ -33,8 +33,8 @@ import { debounce, searchProductApi } from "@/apis";
 import axios from "axios";
 export default function Navbar() {
   // const router = useRouter();
-  const cartLength = useSelector((state) => state.cartLength);
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartLength = useSelector((state: any) => state.cartLength);
+  const cartProducts = useSelector((state: any) => state.cartProducts);
   // const handleGoToLogin = () => {
   //   router.push("/Login");
   // };
@@ -53,7 +53,7 @@ export default function Navbar() {
   const containerRef: any = useRef(null);
   const searchContainerRef: any = useRef(null);
   const MenubarRef: any = useRef(null);
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const onSearchProduct = debounce(async (keyword) => {
+  const onSearchProduct = debounce(async (keyword: any) => {
     if (!keyword) {
       setSearchResult([]);
     }
@@ -105,16 +105,18 @@ export default function Navbar() {
       console.log(error);
     }
   }, 700);
-  function onClickDetail(item) {
+  function onClickDetail(item: any) {
     router.push(`/search?keyword=${searchValue}`);
     setIsOpenSearch(false);
     setSearchResult([]);
-    searchRef.current.value = "";
+    if (searchRef.current) {
+      searchRef.current.value = "";
+    }
   }
   return (
     <>
       <div
-        className="px-[16px] 
+        className="px-[16px] hidden
       lg:px-[150px] bg-[#F8F8F8] py-1 md:px-[60px]  flex-wrap lg:flex sm:flex-wrap   items-center justify-between"
       >
         <p className="text-[14px] font-normal text-[#909198] lg:text-start text-center">
@@ -145,8 +147,11 @@ export default function Navbar() {
           </p>
         </div>
       </div>
-      <div className="mx-[16px] lg:mx-[30px] md:mx-[60px] my-[16px] flex flex-col md:flex-wrap  sm:flex-row sm:items-center">
-        <div className="flex items-center justify-between w-full md:w-auto sm:w-auto">
+      <div
+        className="mx-[16px] 
+      lg:mx-[150px] py-1 md:mx-[60px] my-[16px] flex flex-col md:flex-wrap  sm:flex-row sm:items-center"
+      >
+        <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
             {/* <Image
               src={MenuIcon}
@@ -302,7 +307,7 @@ export default function Navbar() {
               </Link>
             </div> */}
           </div>
-          <div className="hidden lg:flex mr-[64px] ">
+          <div className="hidden lg:flex">
             <div ref={searchContainerRef} className="relative w-[380px]">
               <input
                 placeholder="Search"
@@ -322,7 +327,7 @@ export default function Navbar() {
               {isOpenSearch || searchResult?.length ? (
                 <div className="fixed inset-0 z-50 opacity-100 bg-[rgba(0,0,0,0.5);] top-[115px]">
                   <div className="absolute bg-white opacity-100  right-[37%] mt-2 w-[400px]  z-10 p-4 px-6 shadow-lg border border-[#D2D4DA] rounded-xl">
-                    {searchResult?.map((item) => (
+                    {searchResult?.map((item: any) => (
                       <div
                         className="flex items-center gap-3 my-3 cursor-pointer"
                         onClick={() => onClickDetail(item)}
@@ -407,8 +412,8 @@ export default function Navbar() {
               ) : null}
             </div>
           </div>
-          <div className="flex items-center w-[150px] lg:w-[470px]  text-[14px] font-normal lg:ml-[0px] md:ml-[200px] sm:ml-[0px]">
-            <Link href="/CartPage" className="flex items-center mr-4">
+          <div className="flex items-center text-[14px] font-normal">
+            <Link href="/CartPage" className="flex items-center">
               <Badge badgeContent={cartLength} color="primary" className="mr-3">
                 <Image src={Cart} alt="Cart" className="w-[24px] h-[24px]" />
               </Badge>
@@ -433,7 +438,7 @@ export default function Navbar() {
                     onClick={handleToggle}
                   />
                 )}
-                {isOpen && (
+                {isOpen ? (
                   <div className="absolute right-0 mt-2 w-[335px] bg-white z-10 p-5 shadow-lg border border-[#D2D4DA] rounded-md">
                     <Link href="/MyAccount" className="flex gap-2 items-center">
                       <Image src={user} alt="" className="w-[18px] h-[18px]" />
@@ -525,6 +530,13 @@ export default function Navbar() {
                       </p>
                     </Link>
                   </div>
+                ) : (
+                  <Link
+                    href="/signIn"
+                    className="bg-[#F70000] py-2 px-6 rounded-md text-white"
+                  >
+                    Login
+                  </Link>
                 )}
               </div>
             </div>
