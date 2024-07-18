@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import React, { useState } from "react";
 import PayPal from "@/assets/card333.png";
-import CustomModal from "@/components/CustomModel";
+import { createCreditLimitApi } from "@/apis";
 import { FaCircleCheck } from "react-icons/fa6";
 import Dots from "@/assets/Group 1820549907.png";
-import { createCreditLimitApi } from "@/apis";
-import { toast } from "react-toastify";
+import CustomModal from "@/components/CustomModel";
 
 export default function CreditLimit() {
   const [showSendModel, setShowSendModel] = useState(false);
@@ -15,7 +15,8 @@ export default function CreditLimit() {
   const handleCloseModel = () => {
     setShowSendModel(false);
   };
-  async function onSubmit(formdata) {
+
+  async function onSubmit(formdata: any) {
     try {
       setPending(true);
       await createCreditLimitApi(formdata);
@@ -28,6 +29,7 @@ export default function CreditLimit() {
       }, 1000);
     }
   }
+
   return (
     <form
       action={onSubmit}
@@ -46,6 +48,7 @@ export default function CreditLimit() {
             className="border-[1px] mt-[9px] border-[#7777777]  w-full flex items-center justify-center rounded-md h-[50px] p-3 focus:outline-none"
           />
         </div>
+
         <div className="flex-col mt-[30px]">
           <label className="text-[16px] font-semibold">Phone Number</label>
           <input
@@ -56,6 +59,7 @@ export default function CreditLimit() {
             className="border-[1px] mt-[9px] border-[#7777777]  w-full flex items-center justify-center rounded-md h-[50px] p-3 focus:outline-none"
           />
         </div>
+
         <div className="flex-col mt-[30px]">
           <label className="text-[16px] font-semibold">Email Address</label>
           <input
@@ -66,6 +70,7 @@ export default function CreditLimit() {
             className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
           />
         </div>
+
         <div className="flex-col mt-[30px]">
           <label className="text-[16px] font-semibold">Shop Address</label>
           <input
@@ -75,6 +80,7 @@ export default function CreditLimit() {
             className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
           />
         </div>
+
         <div className="flex-col mt-[30px]">
           <label className="text-[16px] font-semibold">
             Addhar Card (Optional)
@@ -85,6 +91,7 @@ export default function CreditLimit() {
             className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
           />
         </div>
+
         <div className="flex-col mt-[30px]">
           <label className="text-[16px] font-semibold">
             Credit Card Number
@@ -96,6 +103,7 @@ export default function CreditLimit() {
             className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
           />
         </div>
+
         <div className=" mt-[30px]">
           <button
             type="submit"
@@ -107,6 +115,7 @@ export default function CreditLimit() {
           </button>
         </div>
       </div>
+
       <div
         style={{
           boxShadow: "0px 4px 29px 0px #0000000A",
@@ -119,18 +128,22 @@ export default function CreditLimit() {
           <div className="w-[60px] h-[60px] bg-[#F96609] rounded-full flex items-center justify-center">
             <Image alt="" src={PayPal} className="w-[30px] h-[22px]" />
           </div>
+
           <p className="text-[24px] ml-3  font-semibold text-white ">
             Credit Limit
           </p>
         </div>
+
         <div className="mt-6 flex items-center">
           <p className="lg:text-[24px]  text-[18px] sm:text-[18px] md:text-[20px]  font-semibold text-white ">
             Get Credit Upto
           </p>
+
           <p className="lg:text-[64px] text-[32px] sm:text-[32px] md:text-[32px]  ml-6 font-bold text-white ">
             66 Lac
           </p>
         </div>
+
         <div className="mt-6 flex items-center">
           <div className="border-b-[1px] border-white lg:w-[70%] w-[60%] sm:[60%]"></div>
           <p className="lg:text-[16px] text-[12px] ml-2 sm:text-[14px] md:text-[16px] font-semibold">
@@ -138,6 +151,7 @@ export default function CreditLimit() {
           </p>
         </div>
       </div>
+
       <CustomModal showModal={showSendModel}>
         <div className="flex-col justify-center w-[900px]">
           <div className="mx-[150px] my-[100px]">
@@ -147,9 +161,11 @@ export default function CreditLimit() {
               <FaCircleCheck className="text-[#E24C4B] h-[105px] mx-[16px] w-[105px]" />
               <Image src={Dots} alt="" className="h-[64px] w-[64px]" />
             </div>
+
             <p className="text-[32px] text-center font-bold text-[#434343]">
               You Have Successfully purchased Prime Plan.
             </p>
+
             <div className="flex mt-[30px] mb-[100px] justify-center">
               <button
                 className=" bg-[#F70000] rounded-lg h-[50px] w-[275px] text-white font-medium"

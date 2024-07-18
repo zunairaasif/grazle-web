@@ -1,9 +1,10 @@
 import React from "react";
+import Image from "next/image";
+import bg from "@/assets/2 copy.png";
+import logo from "@/assets/BG (1).jpeg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Image from "next/image";
-import logo from "@/assets/BG (1).jpeg";
-import bg from "@/assets/2 copy.png";
+
 const responsive = {
   lgdesktop: {
     breakpoint: { max: 3000, min: 1441 },
@@ -69,7 +70,6 @@ const MainSlider = ({ banners }) => {
                 className="lg:h-[400px] h-[160px] sm:h-[200px] md:h-[250px] w-[100%]  rounded-lg lg:rounded-none sm:rounded-lg"
               />
             </div>
-            //  Slider
           ))}
 
         {banners.length < 1 &&
@@ -80,7 +80,6 @@ const MainSlider = ({ banners }) => {
                 className="lg:h-[400px] h-[160px] sm:h-[200px] md:h-[250px] w-[100%]  rounded-lg lg:rounded-none sm:rounded-lg"
               />
             </div>
-            //  Slider
           ))}
       </Carousel>
     </div>

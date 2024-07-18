@@ -1,41 +1,45 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import airpod from "@/assets/airpod.png";
-import Delivery from "@/assets/Group 1820549945.png";
-import FedEx from "@/assets/image 9.png";
-import card from "@/assets/credit-card (3) 1.png";
-import visa from "@/assets/pngwing 7.png";
-import Cash from "@/assets/image 12.png";
-import Image from "next/image";
-import Badge from "@mui/material/Badge";
-import { IoLocationOutline } from "react-icons/io5";
-import { Checkbox, Radio } from "@mui/material";
-import { FaCircleCheck } from "react-icons/fa6";
-import CustomModal from "@/components/CustomModel";
-import Dots from "@/assets/Group 1820549907.png";
-import { useDispatch, useSelector } from "react-redux";
-import { updateCart } from "@/features/features";
 import {
+  getProfileApi,
+  placeOrderApi,
+  editAddressApi,
   ccavCheckoutApi,
   ccavResponseApi,
-  editAddressApi,
-  getAddressByIdApi,
-  getProfileApi,
   payWithPaypalApi,
-  placeOrderApi,
+  getAddressByIdApi,
 } from "@/apis";
-import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { toast } from "react-toastify";
+import Badge from "@mui/material/Badge";
+import FedEx from "@/assets/image 9.png";
+import Cash from "@/assets/image 12.png";
 import { BiLoader } from "react-icons/bi";
+import visa from "@/assets/pngwing 7.png";
+import { Checkbox, Radio } from "@mui/material";
+import { FaCircleCheck } from "react-icons/fa6";
+import Dots from "@/assets/Group 1820549907.png";
+import { updateCart } from "@/features/features";
+import card from "@/assets/credit-card (3) 1.png";
+import CustomModal from "@/components/CustomModel";
+import React, { useEffect, useState } from "react";
+import { IoLocationOutline } from "react-icons/io5";
+import Delivery from "@/assets/Group 1820549945.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function PaymentAndAddress() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [showSendModel, setShowSendModel] = useState(false);
-  const [addressDetail, setAddressDetail] = useState({});
-  const [isPending, setPending] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [otherFields, setOtherFields] = useState({});
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [isPending, setPending] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [otherFields, setOtherFields] = useState({});
+  const [addressDetail, setAddressDetail] = useState({});
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [showSendModel, setShowSendModel] = useState(false);
+  const cartProducts = useSelector((state: any) => state.cartProducts);
+  const cartTotal = useSelector((state: any) => state.cartTotal);
 
   const [creditcardData, setCreditCardData] = useState({
     cardType: "Credit Card",
@@ -47,13 +51,7 @@ export default function PaymentAndAddress() {
     nameOfCard: "",
   });
 
-  const dispatch = useDispatch();
-  const cartProducts = useSelector((state) => state.cartProducts);
-  const cartTotal = useSelector((state) => state.cartTotal);
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setCreditCardData({
       ...creditcardData,
       [e.target.name]: e.target.value,
@@ -73,6 +71,7 @@ export default function PaymentAndAddress() {
   if (!searchParams.get("addressId")) {
     return null;
   }
+
   // console.log(value);
   // const handleRadioChange = (value) => {
   //   setPaymentMethod(value);
@@ -82,11 +81,12 @@ export default function PaymentAndAddress() {
   // const handleOpeneMode = () => {
   //   setShowSendModel(true);
   // };
+
   const handleCloseModel = () => {
     setShowSendModel(false);
   };
 
-  async function onEditAddress(formdata) {
+  async function onEditAddress(formdata: any) {
     const addressId = searchParams.get("addressId");
     if (!addressId) return;
     try {
@@ -103,13 +103,13 @@ export default function PaymentAndAddress() {
     }
   }
 
-  function onChangeFields(e) {
+  function onChangeFields(e: any) {
     const name = e.target.name;
     const value = e.target.value;
     setOtherFields({ [name]: value });
   }
 
-  async function onPayment(data) {
+  async function onPayment(data: any) {
     setLoading(true);
 
     if (paymentMethod === "creditcard") {
@@ -128,12 +128,14 @@ export default function PaymentAndAddress() {
     const formdata = new FormData();
     const productIds = [];
     const productQty = [];
+
     try {
       const addressId = searchParams.get("addressId");
-      cartProducts?.map((item) => {
+      cartProducts?.map((item: any) => {
         productIds.push(item?.id);
         productQty.push(item?.qty);
       });
+
       if (
         !addressId ||
         !paymentMethod ||
@@ -149,6 +151,7 @@ export default function PaymentAndAddress() {
         "payment_type",
         paymentMethod === "cod" ? "cod" : "online"
       );
+
       formdata.append("quantities", productQty);
       formdata.append("coupon_code", otherFields?.coupon_code);
       formdata.append("discount", otherFields?.discount);
@@ -158,6 +161,7 @@ export default function PaymentAndAddress() {
 
       const { data } = await placeOrderApi(formdata);
       const userData = await getProfileApi();
+
       if (data.success && paymentMethod === "paypal") {
         const billingData = new FormData();
         billingData.append("order_id", data.order.reference_id);
@@ -171,6 +175,7 @@ export default function PaymentAndAddress() {
         const ccavRes = await ccavResponseApi(resData);
         router.replace(response.data.url);
       }
+
       if (data.success && paymentMethod === "creditcard") {
         const formdata = new FormData();
         formdata.append("name", creditcardData.cardName);
@@ -216,6 +221,7 @@ export default function PaymentAndAddress() {
             <IoLocationOutline className=" w-[33px] h-[46px] mr-3" />
             <p className="text-[40px] font-bold">Shipping Address</p>
           </div>
+
           <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
             <div className="flex-col ">
               <label className="text-[16px] font-normal text-[#7777777]">
@@ -227,10 +233,12 @@ export default function PaymentAndAddress() {
                 className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
               />
             </div>
+
             <div className="flex-col ">
               <label className="text-[16px] font-normal text-[#7777777]">
                 Address Label
               </label>
+
               <input
                 name="address_label"
                 defaultValue={addressDetail?.address_label}
@@ -238,6 +246,7 @@ export default function PaymentAndAddress() {
               />
             </div>
           </div>
+
           <div className="flex-col mt-6">
             <label className="text-[16px] font-normal text-[#7777777]">
               Street Address
@@ -248,6 +257,7 @@ export default function PaymentAndAddress() {
               className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
             />
           </div>
+
           <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
             <div className="flex-col ">
               <label className="text-[16px] font-normal text-[#7777777]">
@@ -259,6 +269,7 @@ export default function PaymentAndAddress() {
                 className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
               />
             </div>
+
             <div className="flex-col">
               <label className="text-[16px] font-normal text-[#7777777]">
                 Note
@@ -270,6 +281,7 @@ export default function PaymentAndAddress() {
               />
             </div>
           </div>
+
           <div className="mt-7 flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center">
             <button
               disabled={isPending}
@@ -285,6 +297,7 @@ export default function PaymentAndAddress() {
             </button>
           </div>
         </form>
+
         <div
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
           className="w-[100%] rounded-3xl p-[20px] mt-4 "
@@ -300,6 +313,7 @@ export default function PaymentAndAddress() {
             <p className="text-[24px] font-medium ">Delivery Partner</p>
           </div>
         </div>
+
         {/* payment method */}
         <form
           action={onPayment}
@@ -316,6 +330,7 @@ export default function PaymentAndAddress() {
               All Payment Options
             </p>
           </div>
+
           <div
             className={`border-[1px] mt-3 p-3 rounded-xl ${
               paymentMethod === "creditcard"
@@ -339,10 +354,12 @@ export default function PaymentAndAddress() {
               />
               <p className="text-[18px] font-medium">Cards</p>
             </div>
+
             <p className="text-[16px] font-medium text-[#777777]">
               Pay securely using your visa, maestro, Discover, or American
               express card.
             </p>
+
             <div className="flex-col mt-6">
               <label className="text-[16px] font-normal text-[#777777]">
                 Card Number
@@ -354,6 +371,7 @@ export default function PaymentAndAddress() {
                 onChange={handleChange}
               />
             </div>
+
             <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
               <div className="flex-col">
                 <label className="text-[16px] font-normal text-[#777777]">
@@ -365,6 +383,7 @@ export default function PaymentAndAddress() {
                   onChange={handleChange}
                 />
               </div>
+
               <div className="flex-col">
                 <label className="text-[16px] font-normal text-[#777777]">
                   Card Name
@@ -403,6 +422,7 @@ export default function PaymentAndAddress() {
                   onChange={handleChange}
                 />
               </div>
+
               <div className="flex-col">
                 <label className="text-[16px] font-normal text-[#777777]">
                   Expiry Month
@@ -413,6 +433,7 @@ export default function PaymentAndAddress() {
                   onChange={handleChange}
                 />
               </div>
+
               <div className="flex-col">
                 <label className="text-[16px] font-normal text-[#777777]">
                   CVC Number
@@ -426,6 +447,7 @@ export default function PaymentAndAddress() {
               </div>
             </div>
           </div>
+
           <div
             className={`border-[1px] mt-4 p-3 flex items-center justify-between rounded-xl w-full ${
               paymentMethod === "paypal"
@@ -475,6 +497,7 @@ export default function PaymentAndAddress() {
             </div>
             <Image src={Cash} alt="visa" className=" w-[43px] h-[30px] mr-2" />
           </div>
+
           <button
             type="submit"
             disabled={isPending}
@@ -489,6 +512,7 @@ export default function PaymentAndAddress() {
 
             {loading && <BiLoader className="animate-spin ml-4" />}
           </button>
+
           <div className="mt-3 flex items-center">
             <Checkbox
               sx={{
@@ -518,6 +542,7 @@ export default function PaymentAndAddress() {
           <p className="text-[16px] font-medium text-[#777777]">
             We will contact you to confirm order
           </p>
+
           <input
             className="border-[1px] mt-4 border-[#0000061]  w-full rounded-xl h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
             placeholder="Name"
@@ -525,6 +550,7 @@ export default function PaymentAndAddress() {
             onChange={(e) => onChangeFields(e)}
           />
         </div>
+
         <div
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
           className="w-full rounded-3xl p-5 mt-5 relative"
@@ -535,6 +561,7 @@ export default function PaymentAndAddress() {
           <button className="absolute bg-[#F70000] right-8 top-[68px] rounded-md h-[35px]  w-[70px] text-[18px] font-medium text-white">
             Add
           </button>
+
           <input
             name="coupon_code"
             onChange={(e) => onChangeFields(e)}
@@ -542,11 +569,12 @@ export default function PaymentAndAddress() {
             placeholder="Add Coupen"
           />
         </div>
+
         <div
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
           className="w-full h-full rounded-3xl p-5 mt-5 relative"
         >
-          {cartProducts?.map((item) => (
+          {cartProducts?.map((item: any) => (
             <div
               key={item.id}
               className="mt-[0px] flex items-center justify-between"
@@ -562,6 +590,7 @@ export default function PaymentAndAddress() {
                   />
                 </Badge>
               </div>
+
               <div className="flex items-center ">
                 <p className="text-[16px] font-medium text-black mr-2">
                   {item.title}
@@ -570,6 +599,7 @@ export default function PaymentAndAddress() {
                   White
                 </p> */}
               </div>
+
               <p className="text-[16px] font-medium text-[#777777]">
                 ₹
                 {item.discount
@@ -585,20 +615,23 @@ export default function PaymentAndAddress() {
             <p className="text-[18px] font-medium text-[#777777] ">
               Cart Subtotal
             </p>
+
             <p className="text-[18px] font-bold text-[#777777] ">
               ₹{cartTotal}
             </p>
           </div>
+
           <div className="flex items-center mt-4 justify-between">
             <p className="text-[18px] font-medium text-[#777777] ">Shipping</p>
             <p className="text-[18px] font-bold text-black ">Free</p>
           </div>
+
           {/* TODO:add images and discount here */}
           <div className="flex items-center mt-4 justify-between">
             <p className="text-[18px] font-medium text-[#777777] ">Discount</p>
             <p className="text-[18px] font-bold text-black ">
               {cartProducts.reduce(
-                (acc, item) =>
+                (acc: any, item: any) =>
                   acc + item.discount
                     ? item.price
                     : 0 * item.qty - item.discounted_price * item.qty,
@@ -606,6 +639,7 @@ export default function PaymentAndAddress() {
               )}
             </p>
           </div>
+
           <div className="my-5 border-b-[1px] border-[#777777]"></div>
           <div className="flex items-center mt-4 justify-between">
             <p className="text-[18px] font-bold text-black ">Cart Total</p>
@@ -625,12 +659,14 @@ export default function PaymentAndAddress() {
               <FaCircleCheck className="text-[#E24C4B] h-[105px] mx-[16px] w-[105px]" />
               <Image src={Dots} alt="" className="h-[64px] w-[64px]" />
             </div>
+
             <p className="mt-5 text-[32px] text-center font-semibold text-[#434343]">
               Your order has been successfully placed
             </p>
             <p className=" mt-3 text-[16px] text-center font-semibold text-[#434343]">
               We will be sending you an email confirmation to your email shortly
             </p>
+
             <div className="flex mt-[30px] mb-[100px] gap-4 justify-center">
               {/* <button
                 className=" bg-[#F70000] rounded-lg h-[50px] w-[275px] text-white font-medium"
@@ -638,6 +674,7 @@ export default function PaymentAndAddress() {
               >
                 Leave a Review
               </button> */}
+
               <button
                 className=" bg-[#F69B26] rounded-lg h-[50px] w-[275px] text-white font-medium"
                 onClick={handleCloseModel}

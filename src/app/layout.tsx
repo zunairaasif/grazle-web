@@ -1,21 +1,22 @@
-import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Loader from "@/components/Loader";
+import type { Metadata } from "next";
+import Menu from "@/components/menu";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import Menu from "@/components/menu";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ClientProvider from "@/components/client-provider";
 import InitCart from "@/components/initCart";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { Inter, Poppins } from "next/font/google";
+import ClientProvider from "@/components/client-provider";
 // const inter = Inter({ subsets: ["latin"] });
+
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-poppins",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
 export const metadata: Metadata = {
   title: "Grazel Website",
   description: "Modern shopping plateform",

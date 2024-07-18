@@ -28,7 +28,11 @@
     ".next/types/**/*.ts",
     "src/components/mianSlider.js",
     "src/components/rencentView.tsxx",
-    "src/app/CartPage/page.jsx"
+    "src/app/CartPage/page.tsx",
+    "src/utils/index.ts",
+    "src/components/MyorderCard.jsx",
+    "src/components/ProductCard.tsx",
+    "src/components/rencentView.tsx"
   ],
   "exclude": ["node_modules"]
 }

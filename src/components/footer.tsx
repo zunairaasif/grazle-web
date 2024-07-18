@@ -1,25 +1,25 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import logo from "@/assets/Grazle Logo.png";
-import Instagram from "@/assets/Instagram.png";
-import Dribbble from "@/assets/Dribbble.png";
-import Twitter from "@/assets/Twitter.png";
-import Youtube from "@/assets/Youtube.png";
-import Email from "@/assets/email-icon.png";
-import Location from "@/assets/location-icon.png";
-import Phone from "@/assets/phone-icon.png";
-import { GrInstagram } from "react-icons/gr";
-import { FaFacebook, FaPinterest, FaTwitter } from "react-icons/fa";
-import { SiLinkedin } from "react-icons/si";
 import {
   Accordion,
+  Typography,
   AccordionSummary,
   AccordionDetails,
-  Typography,
 } from "@mui/material";
-import { FaChevronDown } from "react-icons/fa6";
 import Link from "next/link";
+import Image from "next/image";
+import React, { useState } from "react";
+import Twitter from "@/assets/Twitter.png";
+import Youtube from "@/assets/Youtube.png";
+import logo from "@/assets/Grazle Logo.png";
+import Email from "@/assets/email-icon.png";
+import Phone from "@/assets/phone-icon.png";
+import { SiLinkedin } from "react-icons/si";
+import Dribbble from "@/assets/Dribbble.png";
+import { GrInstagram } from "react-icons/gr";
+import Instagram from "@/assets/Instagram.png";
+import { FaChevronDown } from "react-icons/fa6";
+import Location from "@/assets/location-icon.png";
+import { FaFacebook, FaPinterest, FaTwitter } from "react-icons/fa";
 
 interface FAQData {
   header: string;
@@ -58,6 +58,7 @@ export default function Footer() {
             alt=""
             className="w-[120px] h-[70px] mx-auto lg:mx-0"
           />
+
           <div className="flex items-center gap-2 justify-center lg:justify-start mt-[40px]">
             <Image
               src={Instagram}
@@ -81,27 +82,30 @@ export default function Footer() {
             />
           </div>
         </div>
+
         <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
           <p className="text-[20px] font-bold">Product</p>
           <p className="text-[14px] font-normal mt-[16px]">Overview</p>
+
           <div className="flex items-center justify-center lg:justify-start mt-[12px]">
             <p className="text-[14px] font-normal">Features</p>
             <p className="text-[14px] font-bold ml-[12px] text-[#2EC5CE]">
               New
             </p>
           </div>
+
           <p className="text-[14px] font-normal mt-[12px]">Tutorials</p>
           <p className="text-[14px] font-normal mt-[12px]">Pricing</p>
           <p className="text-[14px] font-normal mt-[12px]">Releases</p>
         </div>
+
         <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
           <p className="text-[20px] font-bold">Company</p>
           <p className="text-[14px] font-normal mt-[16px]">About</p>
-          {/* <p className="text-[14px] font-normal mt-[12px]">Press</p>
-          <p className="text-[14px] font-normal mt-[12px]">Careers</p> */}
           <p className="text-[14px] font-normal mt-[12px]">Contact</p>
           <p className="text-[14px] font-normal mt-[12px]">Partners</p>
         </div>
+
         <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
           <p className="text-[20px] font-bold">Support</p>
           <p className="text-[14px] font-normal mt-[16px]">Help Center</p>
@@ -110,6 +114,7 @@ export default function Footer() {
           <p className="text-[14px] font-normal mt-[12px]">Privacy policy</p>
           <p className="text-[14px] font-normal mt-[12px]">Status</p>
         </div>
+
         <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
           <p className="text-[20px] font-bold">Legal</p>
           <p className="text-[14px] font-normal mt-[16px]">Cookies Policy</p>
@@ -118,28 +123,24 @@ export default function Footer() {
           <p className="text-[14px] font-normal mt-[12px]">Law Enforcement</p>
           <p className="text-[14px] font-normal mt-[12px]">Status</p>
         </div>
-        {/* <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
-          <p className="text-[20px] font-bold">Follow us</p>
-          <p className="text-[14px] font-normal mt-[16px]">Facebook</p>
-          <p className="text-[14px] font-normal mt-[12px]">Twitter</p>
-          <p className="text-[14px] font-normal mt-[12px]">Dribbble</p>
-          <p className="text-[14px] font-normal mt-[12px]">Instagram</p>
-          <p className="text-[14px] font-normal mt-[12px]">LinkedIn</p>
-        </div> */}
+
         <div className="w-full lg:w-[161px] text-[#393A44] text-center lg:text-left">
           <p className="text-[20px] font-bold">Reach us</p>
+
           <div className="flex items-center justify-center lg:justify-start mt-[26px]">
             <Image src={Email} alt="" className="w-[32px] h-[32px] mr-[8px]" />
             <p className="text-[14px] font-normal">ww@Grazle.com</p>
           </div>
+
           <div className="flex items-center justify-center lg:justify-start mt-[26px]">
             <Image src={Phone} alt="" className="w-[32px] h-[32px] mr-[8px]" />
             <p className="text-[14px] font-normal">+91 98765 43210</p>
           </div>
+
           <div className="flex items-center justify-center lg:justify-start mt-[26px]">
             <Image
               src={Location}
-              alt=""
+              alt="location"
               className="w-[32px] h-[32px] mr-[8px]"
             />
             <p className="text-[14px] font-normal">
@@ -148,13 +149,15 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
       <div
-        className="px-[16px] border-t-2 hidden lg:block
-      lg:px-[150px] bg-[#F8F8F8] py-6 md:px-[60px]  flex-wrap lg:flex sm:flex-wrap   items-center justify-between"
+        className="px-[16px] border-t-2 hidden lg:block lg:px-[150px] bg-[#F8F8F8] 
+        py-6 md:px-[60px] flex-wrap lg:flex sm:flex-wrap items-center justify-between"
       >
         <p className="text-[14px]  font-normal lg:text-start text-center">
           © 2024 Grazzle. All rights reserved
         </p>
+
         <div className="flex items-center lg:justify-start justify-center  ">
           <Link
             href="/Terms&Conditions"
@@ -162,6 +165,7 @@ export default function Footer() {
           >
             Terms & Conditions
           </Link>
+
           <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
           <Link
             href="/Terms&Conditions"
@@ -179,13 +183,16 @@ export default function Footer() {
 
       <div className="flex flex-col sm:flex-col lg:hidden mx-[20px]">
         <Image src={logo} alt="" className="w-[120px] h-[70px] " />
+
         <p className="mt-3 text-[14px] font-normal text-[#4E4E4E]">
           Lorem ipsum dolor sit amet cons ectet ur. Nunc sed erat tristique sed
           magna. Eget condimentum.
         </p>
+
         <p className="mt-3 text-[16px] font-semibold text-[#4E4E4E]">
           Follow Us
         </p>
+
         <div className="flex items-center gap-6  mt-4">
           <FaTwitter className="text-[24px] text-[#434343]" />
           <FaFacebook className="text-[24px] text-[#434343]" />
@@ -193,6 +200,7 @@ export default function Footer() {
           <FaPinterest className="text-[24px] text-[#434343]" />
           <GrInstagram className="text-[24px] text-[#434343]" />
         </div>
+
         <div>
           {accordionData.map((data, index) => (
             <div key={index}>
@@ -230,6 +238,7 @@ export default function Footer() {
                     </div>
                   </Typography>
                 </AccordionSummary>
+
                 <AccordionDetails
                   style={{
                     padding: "0px 0px 16px 0px",
@@ -268,12 +277,6 @@ export default function Footer() {
                     {index === 1 && (
                       <div>
                         <p className="text-[14px] font-medium ">About</p>
-                        {/* <p className="text-[14px] font-medium mt-[8px]">
-                          Press
-                        </p>
-                        <p className="text-[14px] font-medium mt-[8px]">
-                          Careers
-                        </p> */}
                         <p className="text-[14px] font-medium mt-[8px]">
                           Contact
                         </p>
@@ -282,6 +285,7 @@ export default function Footer() {
                         </p>
                       </div>
                     )}
+
                     {index === 2 && (
                       <>
                         <p className="text-[14px] font-medium mt-[0px]">
@@ -301,6 +305,7 @@ export default function Footer() {
                         </p>
                       </>
                     )}
+
                     {index === 3 && (
                       <>
                         <p className="text-[14px] font-medium mt-[0px]">
@@ -326,10 +331,7 @@ export default function Footer() {
             </div>
           ))}
 
-          <div
-            className="px-[16px] lg:hidden items-center
-            md:px-[60px] my-4"
-          >
+          <div className="px-[16px] lg:hidden items-center md:px-[60px] my-4">
             <div className="flex items-center lg:justify-start justify-center">
               <Link
                 href="/Terms&Conditions"
@@ -337,6 +339,7 @@ export default function Footer() {
               >
                 Terms of Service
               </Link>
+
               <div className="mx-2 h-2"></div>
               <Link
                 href="/Terms&Conditions"
@@ -353,6 +356,7 @@ export default function Footer() {
               </p>
             </div>
           </div>
+
           <p className="mb-6 text-[10px] font-normal flex justify-center text-center text-[#949494] ">
             © 2024 Grazle. All rights reserved
           </p>

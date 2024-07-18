@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
 import {
   Accordion,
+  Typography,
   AccordionSummary,
   AccordionDetails,
-  Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
 interface FAQData {
@@ -43,30 +43,36 @@ export default function FAQs() {
           <div className="border-l-[4px] rounded-sm border-[#F70000]">
             <p className="ml-3 text-[18px] font-normal">Grocery</p>
           </div>
+
           <div className="mt-[40px]">
             <p className="ml-4 text-[#8B8B8B] text-[18px] font-normal">
               Account
             </p>
           </div>
+
           <div className="mt-[40px]">
             <p className="ml-4 text-[#8B8B8B] text-[18px] font-normal">
               Service
             </p>
           </div>
+
           <div className="mt-[40px]">
             <p className="ml-4 text-[#8B8B8B] text-[18px] font-normal">
               Profile
             </p>
           </div>
+
           <div className="mt-[40px]">
             <p className="ml-4 text-[#8B8B8B] text-[18px] font-normal">
               Profit
             </p>
           </div>
+
           <div className="mt-[40px]">
             <p className="ml-4 text-[#8B8B8B] text-[18px] font-normal">About</p>
           </div>
         </div>
+
         <div
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
           className="rounded-3xl p-[30px] lg:w-[77%] w-[100%] lg:h-[554px] h-auto"
@@ -84,6 +90,7 @@ export default function FAQs() {
             Donec interdum nunc purus, vitae vulputate arcu fringilla quis.
             Vivamus iaculis euismod dui.
           </p>
+
           <div>
             {accordionData.map((data, index) => (
               <div key={index}>
@@ -119,6 +126,7 @@ export default function FAQs() {
                       </div>
                     </Typography>
                   </AccordionSummary>
+
                   <AccordionDetails
                     style={{
                       padding: "0px 16px 16px 16px",
@@ -145,6 +153,7 @@ export default function FAQs() {
                           euismod dui.
                         </p>
                       )}
+
                       {index === 1 && (
                         <p className="text-[16px] font-normal text-[#434343]">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -158,6 +167,7 @@ export default function FAQs() {
                           euismod dui.
                         </p>
                       )}
+
                       {index === 2 && (
                         <p className="text-[16px] font-normal text-[#434343]">
                           Lorem ipsum dolor sit amet, consectetur adipiscing

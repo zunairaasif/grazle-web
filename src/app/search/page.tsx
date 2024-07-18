@@ -1,48 +1,47 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Logoo from "@/assets/Grazle Logo.png";
-import Main from "@/assets/76 1.png";
-import Card1 from "@/assets/a5a6296b2158604a47215a2b0a00bde0.png";
-import Cart from "@/assets/CartVector.png";
-import Like from "@/assets/Frame 1820551183.png";
-import Star from "@/assets/Star 1.png";
-import Bag from "@/assets/e6217953653db114cabd2c88ed6a998d.png";
-import AA from "@/assets/111.jpeg";
-import BB from "@/assets/222.jpeg";
-import CC from "@/assets/33.jpeg";
-import DD from "@/assets/44.jpeg";
-import Baner from "@/assets/mainBag.png";
-import { BiSolidLike } from "react-icons/bi";
-import { IoSearchOutline } from "react-icons/io5";
-import { FaPlus, FaMinus } from "react-icons/fa";
-import { Checkbox, Rating, Slider } from "@mui/material";
-import MenuIcon from "@/assets/VectorMenu.png";
-
-import { IoMdClose } from "react-icons/io";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   debounce,
   getAllBrandsApi,
-  getAllCategoriesApi,
+  searchProductApi,
   getAllProductsApi,
+  getAllCategoriesApi,
   getCategoryBySlugApi,
   getFilterProductsApi,
-  searchProductApi,
 } from "@/apis";
+import Image from "next/image";
+import Baner from "@/assets/mainBag.png";
+import { IoMdClose } from "react-icons/io";
+import MenuIcon from "@/assets/VectorMenu.png";
+import { FaPlus, FaMinus } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
+import ProductCard from "@/components/ProductCard";
+import { Checkbox, Rating, Slider } from "@mui/material";
+import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+import axios from "axios";
+import CC from "@/assets/33.jpeg";
+import DD from "@/assets/44.jpeg";
+import AA from "@/assets/111.jpeg";
+import BB from "@/assets/222.jpeg";
+import Main from "@/assets/76 1.png";
+import Star from "@/assets/Star 1.png";
+import Cart from "@/assets/CartVector.png";
+import { BiSolidLike } from "react-icons/bi";
+import Logoo from "@/assets/Grazle Logo.png";
+import Like from "@/assets/Frame 1820551183.png";
+import Card1 from "@/assets/a5a6296b2158604a47215a2b0a00bde0.png";
+import Bag from "@/assets/e6217953653db114cabd2c88ed6a998d.png";
 
 type Section = "offer" | "brands" | "size" | "price" | "Rating" | "color";
 
-import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
-import axios from "axios";
-import ProductCard from "@/components/ProductCard";
-
 export default function StoreProductpage() {
-  const [searchResult, setSearchResult] = useState([]);
-  const [seletedCategory, setSeletedCategory] = useState([]);
   const [rating, setRating] = useState(4);
   const [brandId, setBrandId] = useState();
   const [brands, setBrands] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
+  const [seletedCategory, setSeletedCategory] = useState([]);
 
   const [openSections, setOpenSections] = useState<Record<Section, boolean>>({
     offer: false,
@@ -53,9 +52,10 @@ export default function StoreProductpage() {
     color: false,
   });
 
-  const priceHandler = (e, newPrice) => {
+  const priceHandler = (e: any, newPrice: any) => {
     setPrice(newPrice);
   };
+
   const toggleSection = (section: Section) => {
     setOpenSections((prevState) => ({
       ...prevState,
@@ -70,6 +70,7 @@ export default function StoreProductpage() {
 
   const keyword = useSearchParams().get("keyword");
   const categoryInSearch = useSearchParams().get("category");
+
   const onSearchProduct = debounce(async () => {
     if (keyword) {
       try {
@@ -100,14 +101,15 @@ export default function StoreProductpage() {
       setBrands(data.brands);
     })();
   }, []);
+
   // ==========================================================
   const router = useRouter();
   const pathname = usePathname();
   const searchedParams = useSearchParams();
-  const [allCategories, setAllCategories] = useState([]);
   const [price, setPrice] = useState([0, 100000]);
   const [selectedCat, setSelectedCat] = useState();
   const [keywordSearch, setKeywordSearch] = useState();
+  const [allCategories, setAllCategories] = useState([]);
   const [openCategorySection, setOpenCategorySection] = useState(
     searchedParams.get("category") ? true : false
   );
@@ -118,6 +120,7 @@ export default function StoreProductpage() {
       setAllCategories(response?.data?.categories);
     }
   };
+
   const fn_getAllProducts = async () => {
     try {
       const response = await getAllProductsApi();
@@ -126,10 +129,12 @@ export default function StoreProductpage() {
       console.log(error);
     }
   };
+
   useEffect(() => {
     fn_getAllCategories();
     fn_getAllProducts();
   }, []);
+
   const fn_selectCategory = (category: any) => {
     setSelectedCat(category.id);
   };
@@ -150,12 +155,12 @@ export default function StoreProductpage() {
     console.log("data", data);
     setSearchResult(data?.products);
   };
+
   const clearFilter = () => {
     setBrandId(undefined);
     setSelectedCat(undefined);
     setRating(0);
     setPrice([0, 100000]);
-
     onSearchProduct();
   };
   return (
@@ -168,6 +173,7 @@ export default function StoreProductpage() {
           onClick={handleButtonClick}
         />
       </div>
+
       {isDivVisible && (
         <div className="absolute z-[9999] ">
           <div
@@ -188,6 +194,7 @@ export default function StoreProductpage() {
                 </p>
               </div>
             </div>
+
             <div className="px-0 py-1">
               <div className="relative w-full px-3">
                 <IoSearchOutline className="absolute left-6 top-1/2 transform -translate-y-1/2 text-[#777777] text-[20px]" />
@@ -196,6 +203,7 @@ export default function StoreProductpage() {
                   placeholder="Search Here"
                 />
               </div>
+
               <div className="mt-3 flex pb-3 px-3 border-b-[1px] border-[#00000021] justify-between items-center">
                 <p className="text-[#74767E] text-[18px] font-medium">
                   On Offer
@@ -211,6 +219,7 @@ export default function StoreProductpage() {
                   )}
                 </div>
               </div>
+
               {openSections.offer && (
                 <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
                   Offer content...
@@ -230,9 +239,10 @@ export default function StoreProductpage() {
                   )}
                 </div>
               </div>
+
               {openSections.brands && (
                 <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
-                  {brands.map((brand) => (
+                  {brands.map((brand: any) => (
                     <div className="flex items-center gap-2">
                       <div>
                         <Checkbox
@@ -251,6 +261,7 @@ export default function StoreProductpage() {
                           }}
                         />
                       </div>
+
                       <p className="text-[10px] font-normal text-[#74767E]">
                         {brand.name}
                       </p>
@@ -272,6 +283,7 @@ export default function StoreProductpage() {
                   )}
                 </div>
               </div>
+
               {openSections.size && (
                 <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
                   <div className="flex items-center gap-2">
@@ -289,10 +301,12 @@ export default function StoreProductpage() {
                         }}
                       />
                     </div>
+
                     <p className="text-[10px] font-normal text-[#74767E]">
                       XXL
                     </p>
                   </div>
+
                   <div className="flex items-center gap-2 ">
                     <div>
                       <Checkbox
@@ -308,10 +322,12 @@ export default function StoreProductpage() {
                         }}
                       />
                     </div>
+
                     <p className="text-[10px] font-normal text-[#74767E]">
                       XXL
                     </p>
                   </div>
+
                   <div className="flex items-center gap-2">
                     <div>
                       <Checkbox
@@ -329,6 +345,7 @@ export default function StoreProductpage() {
                     </div>
                     <p className="text-[10px] font-normal text-[#74767E]">L</p>
                   </div>
+
                   <div className="flex items-center gap-2">
                     <div>
                       <Checkbox
@@ -346,6 +363,7 @@ export default function StoreProductpage() {
                     </div>
                     <p className="text-[10px] font-normal text-[#74767E]">M</p>
                   </div>
+
                   <div className="flex items-center gap-2">
                     <div>
                       <Checkbox
@@ -379,6 +397,7 @@ export default function StoreProductpage() {
                   )}
                 </div>
               </div>
+
               {openSections.price && (
                 <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
                   <Slider
@@ -391,6 +410,7 @@ export default function StoreProductpage() {
                   />
                 </div>
               )}
+
               <div className="px-3 py-2 border-b-[1px]  flex justify-between items-center border-[#00000021]">
                 <p className="text-[#74767E] text-[18px] font-medium">Rating</p>
                 <div
@@ -404,11 +424,12 @@ export default function StoreProductpage() {
                   )}
                 </div>
               </div>
+
               {openSections.Rating && (
                 <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
                   <Rating
                     size="small"
-                    onChange={(event, newValue) => {
+                    onChange={(event, newValue: any) => {
                       setRating(newValue);
                     }}
                     precision={0.5}
@@ -423,6 +444,7 @@ export default function StoreProductpage() {
           </div>
         </div>
       )}
+
       <div className="flex gap-4">
         <div
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
@@ -442,16 +464,18 @@ export default function StoreProductpage() {
               </p>
             </div>
           </div>
+
           <div className="px-0 py-1">
             <div className="relative w-full px-3">
               <IoSearchOutline className="absolute left-6 top-1/2 transform -translate-y-1/2 text-[#777777] text-[20px]" />
               <input
                 value={keywordSearch}
-                onChange={(e) => setKeywordSearch(e.target.value)}
+                onChange={(e: any) => setKeywordSearch(e.target.value)}
                 className="pl-11 w-full border-[1px] border-[#00000021] rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
                 placeholder="Search Here"
               />
             </div>
+
             {/* category search */}
             <div className="mt-3 flex pb-3 px-3 border-b-[1px] border-[#00000021] justify-between items-center">
               <p className="text-[#74767E] text-[18px] font-medium">Category</p>
@@ -466,6 +490,7 @@ export default function StoreProductpage() {
                 )}
               </div>
             </div>
+
             {/* category list */}
             {openCategorySection &&
               (allCategories?.length > 0 ? (
@@ -488,6 +513,7 @@ export default function StoreProductpage() {
                   No Content...
                 </div>
               ))}
+
             {/* <div className="mt-3 flex pb-3 px-3 border-b-[1px] border-[#00000021] justify-between items-center">
               <p className="text-[#74767E] text-[18px] font-medium">On Offer</p>
               <div
@@ -506,6 +532,7 @@ export default function StoreProductpage() {
                 Offer content...
               </div>
             )} */}
+
             <div className="px-3 py-2 border-b-[1px]  flex justify-between items-center border-[#00000021]">
               <p className="text-[#74767E] text-[18px] font-medium">Brands</p>
               <div
@@ -519,9 +546,10 @@ export default function StoreProductpage() {
                 )}
               </div>
             </div>
+
             {openSections.brands && (
               <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
-                {brands.map((brand) => (
+                {brands.map((brand: any) => (
                   <div
                     key={brand?.id}
                     className="px-3 py-2 border-b-[1px] border-[#00000021] text-[13px] font-[500] flex items-center gap-2 cursor-pointer"
@@ -551,6 +579,7 @@ export default function StoreProductpage() {
                 )}
               </div>
             </div>
+
             {openSections.price && (
               <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
                 <Slider
@@ -563,6 +592,7 @@ export default function StoreProductpage() {
                 />
               </div>
             )}
+
             <div className="px-3 py-2 border-b-[1px]  flex justify-between items-center border-[#00000021]">
               <p className="text-[#74767E] text-[18px] font-medium">Rating</p>
               <div
@@ -576,11 +606,12 @@ export default function StoreProductpage() {
                 )}
               </div>
             </div>
+
             {openSections.Rating && (
               <div className="px-3 py-2 border-b-[1px] border-[#00000021]">
                 <Rating
                   size="small"
-                  onChange={(event, newValue) => {
+                  onChange={(event, newValue: any) => {
                     setRating(newValue);
                   }}
                   precision={0.5}
@@ -600,22 +631,27 @@ export default function StoreProductpage() {
             </button>
           </div>
         </div>
+
         <div className="w-[100%] lg:w-[100%] sm:w-[100%] md:w-[100%] ">
           <div className="w-[100%] flex justify-between gap-8 lg:rounded-0 rounded-lg sm:rounded-lg md:rounded-lg   lg:h-[384px] h-[284px] lg:pl-[100px] pl-[10px] bg-[#FF9C2A] rounded-sm">
             <div className="w-[50%] pt-[50px]">
               <p className="text-white text-[24px] font-semibold">
                 Special Offer
               </p>
+
               <p className="text-white lg:text-[64px] text-[24px] sm:text-[24px] md:text-[24px]  font-bold">
                 Super Sale
               </p>
+
               <p className="text-white text-[24px]  font-semibold">
                 Up To 50% Off
               </p>
+
               <button className="mt-4 bg-[#F70000] rounded-full h-[50px]  w-[180px] text-[18px] font-medium text-white">
                 Shop Now
               </button>
             </div>
+
             <div>
               <Image
                 alt=""
@@ -624,10 +660,12 @@ export default function StoreProductpage() {
               />
             </div>
           </div>
+
           <div className="grid grid-cols-1 sm:flex flex-wrap justify-evenly items-start gap-2 mt-5 ">
-            {searchResult.map((item) => (
+            {searchResult.map((item: any) => (
               <ProductCard key={item.id} width="30" product={item} />
             ))}
+
             {/* <div
               style={{
                 boxShadow: "3px 4px 15.6px 0px rgba(0, 0, 0, 0.05)",

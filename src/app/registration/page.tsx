@@ -1,19 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import register from "@/assets/pose_38 1.png";
-import logo from "@/assets/Grazle Logo.png";
-import { IoMdMail } from "react-icons/io";
-import { IoCall } from "react-icons/io5";
-import { TiLockClosed } from "react-icons/ti";
-import { Checkbox } from "@mui/material";
-import { FaUser } from "react-icons/fa6";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useRouter, useSearchParams } from "next/navigation";
-import { toast } from "react-toastify";
-import { createReferralApi, joinedReferralApi, registerApi } from "@/apis";
 import Link from "next/link";
+import Image from "next/image";
+import { toast } from "react-toastify";
+import { FaUser } from "react-icons/fa6";
+import { Checkbox } from "@mui/material";
+import { IoCall } from "react-icons/io5";
 import { BiLoader } from "react-icons/bi";
+import { IoMdMail } from "react-icons/io";
+import logo from "@/assets/Grazle Logo.png";
+import register from "@/assets/pose_38 1.png";
+import { TiLockClosed } from "react-icons/ti";
+import React, { useEffect, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { joinedReferralApi, registerApi } from "@/apis";
+import { useRouter, useSearchParams } from "next/navigation";
+
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -25,7 +26,7 @@ export default function Register() {
     setShowPassword(!showPassword);
   };
 
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: any) => {
     setIsChecked(event.target.checked);
   };
 
@@ -41,9 +42,10 @@ export default function Register() {
       setCompleteUrl(fullUrl);
     }
   }, []);
+
   const refId = useSearchParams().get("ref_id");
 
-  async function onRegisterAccount(formdata) {
+  async function onRegisterAccount(formdata: any) {
     const password = formdata.get("password");
     const cPassword = formdata.get("cPassword");
     if (password !== cPassword) {
@@ -89,6 +91,7 @@ export default function Register() {
         <p className="md:text-[30px] text-[16px] md:w-full w-[50%] sm:text-[18px] md:text-[24px] md:font-semibold">
           Discover endless possibilities
         </p>
+
         <div className="w-[60%]">
           <p className="md:text-[45px] text-[24px] sm:text-[18px] md:text-[24px] font-bold  ">
             Explore, buy, and sell with our vibrant maketplace
@@ -97,6 +100,7 @@ export default function Register() {
 
         <Image src={register} alt="" className="bottom-0 absolute right-0" />
       </div>
+
       <div className="lg:w-[50%] sm:[100%] md:[100%] w-[100%] h-auto lg:pl-[50px] pl-[0px] py-[50px] ">
         <div className="flex flex-col justify-center items-center ">
           <Image src={logo} alt="" className="w-[210px] h-[125px]" />
@@ -105,6 +109,7 @@ export default function Register() {
             Please Get yourself Register!
           </p>
         </div>
+
         <div>
           <div className="relative mt-[40px] w-full">
             <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[20px]" />
@@ -115,6 +120,7 @@ export default function Register() {
               required
             />
           </div>
+
           <div className="relative mt-[20px] w-full">
             <IoMdMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[20px]" />
             <input
@@ -125,6 +131,7 @@ export default function Register() {
               required
             />
           </div>
+
           {/* <div className="relative mt-[20px] w-full">
             <IoCall className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[20px]" />
 
@@ -138,6 +145,7 @@ export default function Register() {
               required
             />
           </div> */}
+
           <div className="relative mt-[20px] w-full">
             <TiLockClosed className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[24px]" />
             <input
@@ -148,6 +156,7 @@ export default function Register() {
               required
               min={8}
             />
+
             <div
               onClick={togglePasswordVisibility}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#777777] text-[24px]"
@@ -155,6 +164,7 @@ export default function Register() {
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </div>
           </div>
+
           <div className="relative mt-[20px] w-full">
             <TiLockClosed className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[24px]" />
             <input
@@ -165,6 +175,7 @@ export default function Register() {
               name="cPassword"
               required
             />
+
             <div
               onClick={togglePasswordVisibility2}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#777777] text-[24px]"

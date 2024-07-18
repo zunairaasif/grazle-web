@@ -1,7 +1,7 @@
 "use client";
-import { updateCartInitialState } from "@/features/features";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { updateCartInitialState } from "@/features/features";
 
 const InitCart = () => {
   const dispatch = useDispatch();

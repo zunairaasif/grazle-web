@@ -1,30 +1,11 @@
 import React from "react";
 import { Step, StepLabel, Stepper, Box } from "@mui/material";
-import styles from "./stepper.module.css";
-import commonStyles from "shared/utils/common.module.css";
 
-const steps = [
-  {
-    id: "1",
-    lable: "Lab Info",
-  },
-  {
-    id: "2",
-    lable: "Social",
-  },
-  {
-    id: "3",
-    lable: "Bank Details",
-  },
-  {
-    id: "4",
-    lable: "Verification",
-  },
-];
 interface Props {
   steps: any;
   selectedStep: number;
 }
+
 const CustomStepper = (props: Partial<Props>) => {
   const { steps, selectedStep } = props;
 

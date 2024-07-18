@@ -1,35 +1,30 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-
-import Location from "@/assets/layer1.png";
-import Home from "@/assets/Vectorhome.png";
-
-import { Radio } from "@mui/material";
-import { MdOutlineAddToPhotos } from "react-icons/md";
-import { MdOutlineDeleteOutline } from "react-icons/md";
-import { SlLocationPin } from "react-icons/sl";
-import { AiOutlineDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
-import { MdClose } from "react-icons/md";
 import {
+  getAddressApi,
+  editAddressApi,
   createAddressApi,
   deleteAddressApi,
-  editAddressApi,
-  getAddressApi,
   setPrimaryAddressApi,
 } from "@/apis";
+import Image from "next/image";
+import { Radio } from "@mui/material";
 import { toast } from "react-toastify";
-
+import { FiEdit } from "react-icons/fi";
+import { MdClose } from "react-icons/md";
+import Location from "@/assets/layer1.png";
+import Home from "@/assets/Vectorhome.png";
 import { useRouter } from "next/navigation";
+import { SlLocationPin } from "react-icons/sl";
+import { AiOutlineDelete } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { MdOutlineAddToPhotos } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 export default function AddressPage() {
-  const [showAddress, setAddress] = useState(false);
-
-  const [isPending, setPending] = useState(false);
-
-  const [allAddress, setAllAddress] = useState([]);
   const [addressId, setAddressId] = useState("");
+  const [isPending, setPending] = useState(false);
+  const [showAddress, setAddress] = useState(false);
+  const [allAddress, setAllAddress] = useState([]);
   const [indexDialog, setDialogIndex] = useState("");
 
   const router = useRouter();
@@ -41,14 +36,16 @@ export default function AddressPage() {
     })();
   }, []);
 
-  function onShowDialog(i) {
+  function onShowDialog(i: any) {
     setDialogIndex(i);
     setAddressId("");
   }
-  function onChangeAddress(id) {
+
+  function onChangeAddress(id: any) {
     setDialogIndex("");
     setAddressId(id);
   }
+
   async function onCreateAddress(formdata) {
     try {
       setPending(true);
@@ -70,7 +67,7 @@ export default function AddressPage() {
     }
   }
 
-  async function onEditAddress(id) {
+  async function onEditAddress(id: any) {
     try {
       setPending(true);
       await setPrimaryAddressApi(id);
@@ -84,7 +81,8 @@ export default function AddressPage() {
       }, 500);
     }
   }
-  async function onDeleteAddress(id) {
+
+  async function onDeleteAddress(id: any) {
     if (!addressId) {
       return toast.error("Please select the address");
     }
@@ -116,10 +114,12 @@ export default function AddressPage() {
             <p className="md:text-[30px] text-base font-semibold">
               Shipping Address
             </p>
+
             <p className="md:text-[25px] text-sm font-semibold text-[#777777]">
               ({allAddress?.length} addresses)
             </p>
           </div>
+
           <div className="space-y-3">
             {allAddress?.map((item, index) => (
               <div
@@ -130,6 +130,7 @@ export default function AddressPage() {
                   <p className="md:text-[24px] text-[20px] font-medium ">
                     {item?.address_label?.toUpperCase()}
                   </p>
+
                   <Radio
                     sx={{
                       color: "#F70000",
@@ -152,26 +153,31 @@ export default function AddressPage() {
                     onChange={() => onChangeAddress(item?.id)}
                   />
                 </div>
+
                 <div className="flex items-center ">
                   <Image
                     src={Home}
                     alt=""
                     className="md:w-[50px] w-[25px] md:h-[50px] h-[25px] mr-4"
                   />
+
                   <div>
                     <p className="flex items-center gap-2">
                       <span className="text-[16px] font-semibold ">
                         {item?.recipient_name}
                       </span>
+
                       <span className="text-[15px] font-medium text-[#777777] ">
                         ({item?.recipient_phone})
                       </span>
                     </p>
+
                     <p className="text-[14px] md:mt-2 mt-0 font-medium text-[#777777] ">
                       {item?.address}
                     </p>
                   </div>
                 </div>
+
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center ">
                     <Image
@@ -179,10 +185,12 @@ export default function AddressPage() {
                       alt=""
                       className="w-[18px] h-[23px] mr-2"
                     />
+
                     <p className="text-[14px] font-medium text-[#777777] ">
                       New, York
                     </p>
                   </div>
+
                   <div className="flex items-center relative">
                     <div className="flex items-center cursor-pointer justify-center border-[1px] border-[#BABABA] rounded-md w-[35px] h-[35px] mr-3">
                       <FiEdit
@@ -190,6 +198,7 @@ export default function AddressPage() {
                         className="h-[20px] w-[20px] text-[#BABABA]"
                       />
                     </div>
+
                     <div
                       style={{ pointerEvents: `${isPending} && "none"` }}
                       className="flex cursor-pointer items-center justify-center border-[1px] border-[#BABABA] rounded-md w-[35px] h-[35px] "
@@ -199,6 +208,7 @@ export default function AddressPage() {
                         className="h-[20px] w-[20px] text-[#BABABA]"
                       />
                     </div>
+
                     {indexDialog === index ? (
                       <>
                         <div className="absolute top-0 right-[100%] px-3 py-4 mr-1 h-auto rounded-sm w-[230px] bg-white shadow-lg">
@@ -209,6 +219,7 @@ export default function AddressPage() {
                           >
                             <SlLocationPin /> Set as primary address
                           </p>
+
                           <p
                             style={{ pointerEvents: `${isPending} && "none"` }}
                             onClick={() => onDeleteAddress(item?.id)}
@@ -216,6 +227,7 @@ export default function AddressPage() {
                           >
                             <AiOutlineDelete /> Delete address
                           </p>
+
                           <MdClose
                             className="absolute top-2 right-2 cursor-pointer"
                             onClick={() => setDialogIndex("")}
@@ -235,6 +247,7 @@ export default function AddressPage() {
               >
                 <MdOutlineAddToPhotos size={30} /> Add New Delivery Address
               </p>
+
               <button
                 disabled={isPending}
                 onClick={() => onCheckout()}
@@ -244,6 +257,7 @@ export default function AddressPage() {
               </button>
             </div>
           </div>
+
           {showAddress ? (
             <form
               action={onCreateAddress}
@@ -296,6 +310,7 @@ export default function AddressPage() {
                   className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
                 />
               </div>
+
               <div className="flex-col mt-[30px]">
                 <label className="text-[16px] font-semibold">Note</label>
                 <input

@@ -1,7 +1,7 @@
+import React from "react";
+import Image from "next/image";
 import { timeAgo } from "@/utils";
 import { Rating } from "@mui/material";
-import Image from "next/image";
-import React from "react";
 
 const ReviewCard = ({ ...item }) => {
   return (
@@ -20,6 +20,7 @@ const ReviewCard = ({ ...item }) => {
                 },
               }}
             />
+
             <p className="text-[#000000] text-[12px] font-medium">
               {item.user.username}
             </p>
@@ -27,14 +28,17 @@ const ReviewCard = ({ ...item }) => {
               {timeAgo(new Date(item.created_at))}
             </p>
           </div>
+
           <p className="text-[#74767E] text-[16px] font-normal">
             {" "}
             {timeAgo(new Date(item.created_at))}
           </p>
         </div>
+
         <p className="text-[#000000] mt-2 text-[16px] font-medium">
           {item.comment}
         </p>
+
         <div className="flex items-center  lg:gap-4 gap-2 sm:gap-2 ">
           {item.reviewImages.map((imgObj: any) => (
             <Image

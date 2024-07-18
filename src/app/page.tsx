@@ -1,66 +1,66 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Logoo from "@/assets/Grazle Logo.png";
-import Widget from "@/assets/Widget.png";
-import Rasm1 from "@/assets/rasm33.png";
-import Rasm2 from "@/assets/rasm2.png";
-import Rasm3 from "@/assets/rasm3.png";
-import Rasmaa from "@/assets/rasmcc.png";
-import { FaArrowRightLong } from "react-icons/fa6";
-import Rasmbb from "@/assets/rasmbb.png";
-import heart from "@/assets/like.png";
-import Rasmcc from "@/assets/rasmaa.png";
-import Dami from "@/assets/dami.png";
 import sale from "@/assets/sale.png";
-import banner from "@/assets/banner.png";
-
-import MainSlider from "@/components/mianSlider";
-import bg from "@/assets/2 copy.png";
-import Google from "@/assets/Google Play Badge.png";
+import heart from "@/assets/like.png";
 import Apple from "@/assets/Group.png";
-import Arrow from "@/assets/Round Alt Arrow Right.png";
+import banner from "@/assets/banner.png";
+import Widget from "@/assets/Widget.png";
+import Cardmm from "@/assets/Cardmmm.png";
+import Cart from "@/assets/CartVector.png";
+import { useRouter } from "next/navigation";
+import Logoo from "@/assets/Grazle Logo.png";
 import Phone1 from "@/assets/Phone Mockup 1.png";
 import Phone2 from "@/assets/Phone Mockup 2.png";
+import MainSlider from "@/components/mianSlider";
+import { IconButton, Rating } from "@mui/material";
+import { FaArrowRightLong } from "react-icons/fa6";
+import Google from "@/assets/Google Play Badge.png";
+import RecentViewSlider from "@/components/rencentView";
+import React, { useState, useEffect, useRef } from "react";
+import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
+
+import Dami from "@/assets/dami.png";
+import bg from "@/assets/2 copy.png";
+import Rasm2 from "@/assets/rasm2.png";
+import Rasm3 from "@/assets/rasm3.png";
+import Rasm1 from "@/assets/rasm33.png";
+import Rasmaa from "@/assets/rasmcc.png";
+import Rasmbb from "@/assets/rasmbb.png";
+import Rasmcc from "@/assets/rasmaa.png";
+import Fram33 from "@/assets/Frame33.png";
 import Fram11 from "@/assets/Frame 11.png";
 import Fram22 from "@/assets/Frame 22.png";
-import Fram33 from "@/assets/Frame33.png";
 import Fram44 from "@/assets/Frame 44.png";
-import Cardmm from "@/assets/Cardmmm.png";
+import ProductCard from "@/components/ProductCard";
+import Arrow from "@/assets/Round Alt Arrow Right.png";
 
-import RecentViewSlider from "@/components/rencentView";
-
-import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
-import { useRouter } from "next/navigation";
 import {
-  getAllCategoriesApi,
-  guestSuggestedProductsApi,
-  trendingProductsApi,
-  guestRecentProductsApi,
-  favoriteProductApi,
-  getRecentProductsApi,
-  getSuggestedProductsApi,
-  getFirstTrendingCategoryApi,
-  getSecondTrendingCategoryApi,
+  getSeasonTop,
   getBannersApi,
   getDynamicViewApi,
-  getSeasonTop,
+  getAllCategoriesApi,
+  trendingProductsApi,
+  favoriteProductApi,
+  getRecentProductsApi,
+  guestRecentProductsApi,
+  getSuggestedProductsApi,
+  guestSuggestedProductsApi,
+  getFirstTrendingCategoryApi,
+  getSecondTrendingCategoryApi,
 } from "@/apis";
-import ProductCard from "@/components/ProductCard";
-import Cart from "@/assets/CartVector.png";
-import { IconButton, Rating } from "@mui/material";
+
 export default function Home() {
-  const [allCategories, setCategories] = useState(undefined);
-  const [suggestedProducts, setSuggestedProducts] = useState([]);
-  const [trendingProducts, setTrendingProducts] = useState([]);
+  const [seasonTop, setSeasonTop] = useState([]);
   const [recentProducts, setRecentProducts] = useState([]);
-  const [firstTrendingCategory, setFirstTrendingCategory] = useState();
-  const [secondTrendingCategory, setSecondTrendingCategory] = useState();
+  const [allCategories, setCategories] = useState(undefined);
+  const [trendingProducts, setTrendingProducts] = useState([]);
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [positionOneBanners, setPositionOneBanners] = useState([]);
   const [positionTwoBanners, setPositionTwoBanners] = useState([]);
-  const [positionThreeBanners, setPositionThreeBanners] = useState([]);
   const [dynamicViewProducts, setDynamicViewProducts] = useState([]);
-  const [seasonTop, setSeasonTop] = useState([]);
+  const [positionThreeBanners, setPositionThreeBanners] = useState([]);
+  const [firstTrendingCategory, setFirstTrendingCategory] = useState();
+  const [secondTrendingCategory, setSecondTrendingCategory] = useState();
 
   const router = useRouter();
   const sliderRef1 = useRef<any>(null);
@@ -214,11 +214,12 @@ export default function Home() {
 
   return (
     <>
-      {" "}
       {/* MianSlider */}
       <div className="lg:mx-[150px] md:mx-[60px] lg:px-0 md:px-3">
         <MainSlider banners={positionOneBanners} />
       </div>
+
+      {/* Get Now Banner */}
       <div className="lg:my-[30px] my-[10px] lg:px-0 md:px-3 sm:my-[10px] md:my-[20px] lg:mx-[150px] mx-[0px] md:mx-[30px]">
         <div className="flex  items-center justify-between md:py-5 py-2 px-5  bg-gradient-to-r from-[#F81F1F] to-[#FFA31A] w-full lg:w-[100%] h-auto md:rounded-[20px] rounded-md shadow-lg">
           <div className="flex items-center gap-4">
@@ -248,6 +249,8 @@ export default function Home() {
           </button>
         </div>
       </div>
+
+      {/* !!categories */}
       <div className="hide-scrollbar lg:mx-[150px] gap-2 sm:gap-2 lg:gap-0 mt-3 lg:mt-2 md:mx-auto overflow:-webkit-scrollbar: none; md:overflow-x-auto md:w-[645px] lg:w-auto sm:mx-auto sm:max-w-[calc(100vw - 120px)] flex items-center justify-between overflow-x-auto">
         {/* <div className="w-[92px] sm:mt-2   md:gap-2 flex flex-col justify-center items-center">
           <div className=" flex  justify-center items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] sm:w-[70px] sm:h-[70px] rounded-full bg-gradient-to-r from-[#F81F1F] to-[#FFA31A] ">
@@ -261,7 +264,7 @@ export default function Home() {
             Categories
           </p>
         </div> */}
-        {/* !!categories */}
+
         <div className="w-full flex flex-col justify-center items-center mx-2 text-center">
           <div className="border-[1px] flex justify-center items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] sm:w-[70px] sm:h-[70px]  border-[#F70000] rounded-full bg-[#F8F8F8] ">
             <Image
@@ -284,7 +287,7 @@ export default function Home() {
           )}
         </div>
 
-        {allCategories?.map((item) => (
+        {allCategories?.map((item: any) => (
           <>
             <div
               key={item?.id}
@@ -317,6 +320,7 @@ export default function Home() {
           </>
         ))}
       </div>
+
       {/* !!Recent Products */}
       {/* <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
@@ -348,6 +352,7 @@ export default function Home() {
           <h1 className="text-center text-red-500">No recent product found</h1>
         )}
       </div> */}
+
       {/* Flash sale */}
       <div className="flex justify-between items-center lg:mx-[150px] md:mx-[60px] mx-[14px] md:mt-14 mt-5">
         <span className="text-xl font-semibold">Flash Sale</span>
@@ -356,10 +361,12 @@ export default function Home() {
           <FaArrowRightLong />
         </button>
       </div>
+
       <div className="flex md:p-4 p-2 rounded-lg md:gap-20 md:justify-start justify-between mx-[14px] items-center lg:mx-[150px] md:mx-[60px] mt-5 border border-[#00000033]">
         <span className="font-medium text-[#F81F1F] md:text-base text-xs">
           On Sale Now
         </span>
+
         <div className="flex text-sm items-center gap-2">
           <span className="mr-2 md:text-base text-xs">Ending in</span>
           <span className="p-2 bg-[#F81F1F] rounded-sm text-white md:text-base text-xs">
@@ -375,6 +382,7 @@ export default function Home() {
           </span>
         </div>
       </div>
+
       {/* trending category 1 */}
       <div className="lg:mx-[150px] md:mx-[60px] mx-[5px]">
         {/* <div className="flex items-center justify-between lg:px-0 px-2">
@@ -398,6 +406,7 @@ export default function Home() {
             </div>
           ) : null}
         </div> */}
+
         {firstTrendingCategory?.data.products?.length ? (
           <div className="mx-[10px] h-fit md:mx-[20px] lg:mx-[0px]">
             <RecentViewSlider
@@ -413,6 +422,7 @@ export default function Home() {
           </h1>
         )}
       </div>
+
       {/* categories */}
       <div
         style={{ scrollbarWidth: "none" }}
@@ -432,6 +442,7 @@ export default function Home() {
           </button>
         ))}
       </div>
+
       <div className="lg:mx-[150px] md:mx-[60px] md:my-[24px] my-0">
         {firstTrendingCategory?.data.products?.length ? (
           <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
@@ -448,6 +459,7 @@ export default function Home() {
           </h1>
         )}
       </div>
+
       {/* trending category 2 */}
       {/* <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
@@ -486,6 +498,7 @@ export default function Home() {
           </h1>
         )}
       </div> */}
+
       {/* !!Baner */}
       {/* <div className="lg:mx-[150px] md:mx-[60px] m-[20px]  my-[16px]">
         <Image
@@ -500,6 +513,7 @@ export default function Home() {
           className="w-[100%] md:h-[300px] sm:h-[200px] h-[220px] lg:rounded-none rounded-lg sm:rounded-lg lg:h-[417px]"
         />
       </div> */}
+
       {/* !!dynamic view */}
       <div className="lg:mx-[150px] md:mx-[60px] mx-[14px] my-[24px]">
         <div className="flex items-center justify-between w-full">
@@ -527,6 +541,7 @@ export default function Home() {
             </div>
           ) : null}
         </div> */}
+
         {dynamicViewProducts?.length ? (
           <div>
             <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
@@ -539,6 +554,7 @@ export default function Home() {
           </h1>
         )}
       </div>
+
       {/* !!Suggested for you */}
       {token !== null && (
         <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
@@ -552,6 +568,7 @@ export default function Home() {
                 >
                   <IoMdArrowBack className="text-black h-[24px] w-[24px]" />
                 </div>
+
                 <div
                   className="h-[46px] w-[46px] rounded-full bg-[#F5F5F5] flex items-center justify-center  "
                   onClick={() => handleNext(2)}
@@ -561,6 +578,7 @@ export default function Home() {
               </div>
             ) : null}
           </div>
+
           {suggestedProducts?.length ? (
             <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
               <RecentViewSlider Data={suggestedProducts} ref={sliderRef2} />
@@ -574,10 +592,12 @@ export default function Home() {
           )}
         </div>
       )}
+
       {/* banner */}
       <div className="lg:mx-[150px] md:mx-[60px] mx-0">
         <Image src={banner} alt="banner" />
       </div>
+
       {/* season top product */}
       {/* <div
         className="lg:mx-[150px] md:mx-[60px]  my-[24px] p-10"
@@ -608,6 +628,7 @@ export default function Home() {
           </div>
         </div>
       </div> */}
+
       {/* !!Trending Products */}
       {/* <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
@@ -629,6 +650,7 @@ export default function Home() {
             </div>
           ) : null}
         </div>
+
         {trendingProducts?.length ? (
           <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
             <RecentViewSlider Data={trendingProducts} ref={sliderRef3} />
@@ -641,6 +663,7 @@ export default function Home() {
           </h1>
         )}
       </div> */}
+
       {/* sale product */}
       <div className="flex lg:flex-row flex-col lg:mx-[150px] md:mx-[60px] mx-[5px] my-[24px] border border-[#E5E7EB] py-2 lg:px-6 px-1 rounded-md">
         <div className="flex items-center justify-center md:gap-5 gap-2 lg:w-[60%] w-[100%] lg:border-r lg:border-[#77777740]">
@@ -652,6 +675,7 @@ export default function Home() {
               src={"/"}
               className="w-full h-full object-cover outline-none	rounded-2xl cursor-pointer"
             />
+
             <div className="flex absolute w-full justify-between items-center absolute px-[16px] top-[10px]">
               <button className="text-[12px] rounded-3xl text-white bg-[#F70000] py-2 px-3">
                 75% OFF
@@ -674,8 +698,10 @@ export default function Home() {
                 defaultValue={4}
                 className="lg:text-xl text-sm"
               />
+
               <span className="text-sm text-[#434343]">3</span>
             </div>
+
             <div className="flex gap-4 items-center lg:mt-10">
               <span className="md:text-lg text-sm text-[#F70000] font-semibold">
                 ₹50
@@ -701,6 +727,7 @@ export default function Home() {
             <Image src={sale} alt="" />
             <span className="uppercase text-sm font-medium">Kitchen Sale</span>
           </div>
+
           <div className="flex text-sm items-center gap-2">
             <span className="p-2 bg-[#E5E7EB] rounded-md font-bold">84</span>
             <span className="p-2 bg-[#E5E7EB] rounded-md font-bold">06</span>
@@ -724,6 +751,7 @@ export default function Home() {
           </button>
         </div>
       </div>
+
       {/* 50% off */}
       <div className="lg:mx-[150px] md:mx-[60px] my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
@@ -739,6 +767,7 @@ export default function Home() {
               <FaArrowRightLong />
             </button>
           </div>
+
           {trendingProducts?.length ? (
             <div className="flex items-center gap-4">
               <div
@@ -756,6 +785,7 @@ export default function Home() {
             </div>
           ) : null}
         </div>
+
         {trendingProducts?.length ? (
           <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
             <RecentViewSlider Data={trendingProducts} ref={sliderRef3} />
@@ -768,6 +798,7 @@ export default function Home() {
           </h1>
         )}
       </div>
+
       {/* small appliances */}
       <div
         style={{
@@ -792,6 +823,7 @@ export default function Home() {
             <p className="lg:text-[16px] md:text-[14px] text-[10px] mt-[8px] text-[#393A44] font-medium">
               Get the App
             </p>
+
             <div className="flex items-center lg:mt-[32px] mt-[8px] sm:mt-[8px]  md:mt-[8px]">
               <Image
                 src={Google}
@@ -806,6 +838,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className="flex lg:mr-40 md:mr-32 mr-16 lg:ml-[20px] md:ml-[24px] ml-0 lg:flex-row flex-col h-contain">
           <Image
             src={Phone1}

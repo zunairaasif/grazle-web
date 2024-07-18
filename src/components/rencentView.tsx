@@ -1,26 +1,24 @@
 "use client";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import Image from "next/image";
-import IconButton from "@mui/material/IconButton";
-import { FaHeart } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
-import Star from "@/assets/Star 1.png";
-import heart from "@/assets/like.png";
-import Cart from "@/assets/CartVector.png";
-import Like from "@/assets/Frame 1820551183.png";
-import { useRouter } from "next/navigation";
-import Phone1 from "@/assets/Phone Mockup 1.png";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateCart } from "@/features/features";
 import {
-  addRecenetViewedApi,
   favoriteProductApi,
+  addRecenetViewedApi,
   getAllFavoriteProductApi,
 } from "@/apis";
 import Link from "next/link";
+import Image from "next/image";
+import heart from "@/assets/like.png";
 import { Rating } from "@mui/material";
+import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import Cart from "@/assets/CartVector.png";
+import Carousel from "react-multi-carousel";
+import { useRouter } from "next/navigation";
+import "react-multi-carousel/lib/styles.css";
+import { updateCart } from "@/features/features";
+import IconButton from "@mui/material/IconButton";
+import React, { useEffect, useState } from "react";
+
 interface Props {
   Data: any;
 }
@@ -57,10 +55,9 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
   const { Data } = props;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [favoriteProducts, setFavoriteProducts] = useState([]);
-  const [selectedId, setSelectedId] = useState("");
-
   const [isPending, setPending] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+  const [favoriteProducts, setFavoriteProducts] = useState<number[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -80,7 +77,7 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
     })();
   }, [selectedId]);
 
-  const goToDetail = async (id) => {
+  const goToDetail = async (id: any) => {
     setSelectedId(id);
     if (typeof window !== "undefined") {
       const ids = localStorage.getItem("productIds")
@@ -94,11 +91,13 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
     }
     router.push("/detailProduct/" + id);
   };
+
   const onAddingCart = (e: any, product: any) => {
     e.stopPropagation();
     const updateProduct = { ...product, qty: 1 };
     dispatch(updateCart({ type: null, product: updateProduct }));
   };
+
   async function onLiked(e: any, productId: any) {
     e.stopPropagation();
     if (isPending) return; //purpose : to avoid user from calling multiple api
@@ -131,13 +130,13 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
       <Carousel
         ref={ref}
         arrows={false}
-        responsive={responsive}
         swipeable={true}
         draggable={true}
         showDots={false}
         infinite={true}
-        dotListClass="custom-dot-list-style"
+        responsive={responsive}
         itemClass="carousel-item"
+        dotListClass="custom-dot-list-style"
       >
         {Data.map((item: any, index: any) => (
           <div
@@ -157,10 +156,12 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                 src={"/" + item.featured_image}
                 className="w-full h-[203px] object-cover rounded-2xl cursor-pointer"
               />
+
               <div className="flex w-full justify-between items-center absolute px-[16px] top-[10px]">
                 <button className="md:text-[12px] text-[9px] rounded-3xl text-white bg-[#F70000] md:py-2 py-1 md:px-3 px-2">
                   75% OFF
                 </button>
+
                 <IconButton size="medium" onClick={(e) => onLiked(e, item.id)}>
                   {favoriteProducts?.includes(item.id) ? (
                     <FaHeart className="text-[#F70000]" />
@@ -169,6 +170,7 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                   )}
                 </IconButton>
               </div>
+
               <div className="p-3">
                 <p className="text-[16px] w-[80%] font-semibold">
                   {item?.title}
@@ -178,6 +180,7 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                     4.8 (342)
                   </span>
                   <FaStar size={12} color="#F69B26" />
+
                   {/* <p className="text-[12px] text-[#F69B26]">{item.review}</p>
                   <Rating
                     precision={0.5}
@@ -187,18 +190,22 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                     defaultValue={Number(item?.rating)}
                   /> */}
                 </div>
+
                 <p className="md:text-[20px] text-[14px] text-[#FC3030] font-semibold md:mt-[16px] mt-[8px]">
                   ₹{item?.discount ? item.discounted_price : item.price}
                 </p>
+
                 <div className="flex items-center md:mt-[16px] mt-[8px]">
                   <p className="md:text-[16px] text-[10px] text-[#909198] line-through font-normal">
                     ₹{item.discount ? item.price : 0}
                   </p>
+
                   <p className="md:text-[16px] text-[10px] text-[#4FAD2E] ml-[24px] font-semibold">
                     {item.discount ? item.discount : "0% Off"}
                   </p>
                 </div>
               </div>
+
               <div className="hidden mb-3 flex justify-center opacity-0 group-hover:opacity-100 group-hover:flex w-full">
                 <button
                   className="text-[#F70000] w-[90%] h-[40px] border-[1px] border-[#F70001] rounded-lg"

@@ -1,25 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import login from "@/assets/login.png";
-import logo from "@/assets/Grazle Logo.png";
-import google from "@/assets/Group 1820549999.png";
-import { IoMdMail } from "react-icons/io";
-import { TiLockClosed } from "react-icons/ti";
-import { Checkbox } from "@mui/material";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { toast } from "react-toastify";
+import Image from "next/image";
 import { loginApi } from "@/apis";
-import { useDispatch } from "react-redux";
-import { updateUser } from "@/features/features";
 import { loginAction } from "@/lib";
+import login from "@/assets/login.png";
+import { toast } from "react-toastify";
+import React, { useState } from "react";
+import { Checkbox } from "@mui/material";
+import { IoMdMail } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import logo from "@/assets/Grazle Logo.png";
+import { TiLockClosed } from "react-icons/ti";
+import { updateUser } from "@/features/features";
+import google from "@/assets/Group 1820549999.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -58,6 +57,7 @@ export default function Login() {
             Please log in into your account
           </p>
         </div>
+
         <div>
           <div className="relative mt-[40px] w-full">
             <IoMdMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[20px]" />
@@ -69,6 +69,7 @@ export default function Login() {
               required
             />
           </div>
+
           <div className="relative mt-[20px] w-full">
             <TiLockClosed className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#777777] text-[24px]" />
             <input
@@ -86,6 +87,7 @@ export default function Login() {
             </div>
           </div>
         </div>
+
         <div className="flex justify-between items-center mt-3">
           <div className="flex items-center">
             <Checkbox
@@ -103,13 +105,16 @@ export default function Login() {
               Remember me!
             </p>
           </div>
+
           <p className="text-[#F70000] font-medium text-[16px] ">
             Forgot Password?
           </p>
         </div>
+
         <button className=" bg-[#F70000] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-white">
           Sign In
         </button>
+
         <div className="flex items-center mt-5">
           <div className="flex-grow border-b border-[#77777729]"></div>
           <div className="w-fit px-3">
@@ -117,6 +122,7 @@ export default function Login() {
               or log in with
             </span>
           </div>
+
           <div className="flex-grow border-b border-[#77777729]"></div>
         </div>
 
@@ -124,11 +130,13 @@ export default function Login() {
           {/* <button className=" bg-[#00000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
             Log in with Apple
           </button> */}
+
           <button className="flex justify-center items-center w-[50%] gap-4 w-[50%] bg-[#F7000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
             <Image src={google} alt="google" className="w-[25px] h-[25px]" />
             <span>Log in with Google</span>
           </button>
         </div>
+
         <p className="font-normal text-[#777777] text-[16px] text-center mt-10">
           Don’t Have an Account?
           <Link href="/registration">

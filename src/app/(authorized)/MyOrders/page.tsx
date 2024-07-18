@@ -1,39 +1,41 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { IoCloseSharp, IoLockClosed } from "react-icons/io5";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import Chair from "@/assets/pngwing 2.png";
-import close from "@/assets/close.png";
-import Shoes from "@/assets/Rectangle 2032.png";
-import Image from "next/image";
-import AAA from "@/assets/Health Report.png";
-import BBB from "@/assets/Box.png";
-import CCC from "@/assets/Shipping.png";
-import DDD from "@/assets/sort by time.png";
-import CustomModal from "@/components/CustomModel";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { FaCircleCheck } from "react-icons/fa6";
-import Dots from "@/assets/Group 1820549907.png";
-import { Rating } from "@mui/material";
-import { PiCameraThin } from "react-icons/pi";
-import { FaCheckCircle } from "react-icons/fa";
 import {
+  getProfileApi,
   getBuyerOrdersApi,
   getCurrentUserRefsApi,
-  getProfileApi,
 } from "@/apis";
+import Image from "next/image";
+import { FaCircleCheck } from "react-icons/fa6";
+import Dots from "@/assets/Group 1820549907.png";
+import CustomModal from "@/components/CustomModel";
 import MyorderCard from "@/components/MyorderCard";
+import React, { useEffect, useState } from "react";
+
+import BBB from "@/assets/Box.png";
+import close from "@/assets/close.png";
+import { Rating } from "@mui/material";
+import CCC from "@/assets/Shipping.png";
+import Chair from "@/assets/pngwing 2.png";
+import DDD from "@/assets/sort by time.png";
+import AAA from "@/assets/Health Report.png";
+import { PiCameraThin } from "react-icons/pi";
+import { FaCheckCircle } from "react-icons/fa";
+import Shoes from "@/assets/Rectangle 2032.png";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { IoCloseSharp, IoLockClosed } from "react-icons/io5";
+
 export default function Leave() {
+  const [meta, setMeta] = useState({});
+  const [orders, setOrders] = useState([]);
+  const [showleave, setShowLeave] = useState(false);
+  const [showConfirm, setShowconfirm] = useState(false);
+  const [showSendModel, setShowSendModel] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("Active");
   const handleSectionChange = (section: string) => {
     setActiveSection(section);
   };
-  const [showSendModel, setShowSendModel] = useState(false);
-  const [showConfirm, setShowconfirm] = useState(false);
-  const [showleave, setShowLeave] = useState(false);
-  const [orders, setOrders] = useState([]);
-  const [meta, setMeta] = useState({});
 
   useEffect(() => {
     (async () => {
@@ -55,9 +57,11 @@ export default function Leave() {
   const handleOpeneModelLeave = () => {
     setShowLeave(true);
   };
+
   const handelCloseComplet = () => {
     setShowLeave(false);
   };
+
   const handleOpeneModelconfirm = () => {
     setShowSendModel(false);
     setShowconfirm(true);
@@ -67,9 +71,11 @@ export default function Leave() {
       setShowconfirm(false);
     }, 1000);
   };
+
   const handleOpeneModel = () => {
     setShowSendModel(true);
   };
+
   const handleCloseModel = () => {
     setShowSendModel(false);
   };
@@ -78,6 +84,7 @@ export default function Leave() {
   const handleButtonClick = () => {
     setIsDivVisible((prev) => !prev);
   };
+
   return (
     <div className="lg:my-[50px] my-[20px] sm:my-[20px] md:my-[30px] lg:mx-[150px] mx-[20px] sm:mx-[20px] md:mx-[30px]">
       <div
@@ -94,6 +101,7 @@ export default function Leave() {
         >
           Active orders
         </p>
+
         <p
           onClick={() => handleSectionChange("Completed")}
           className={`lg:text-[16px] text-[9px] sm:text-[13px] md:text-[14px] font-normal text-[#777777] cursor-pointer ${
@@ -104,6 +112,7 @@ export default function Leave() {
         >
           Completed orders
         </p>
+
         <p
           onClick={() => handleSectionChange("Cancelled")}
           className={`lg:text-[16px] text-[9px] sm:text-[13px] md:text-[14px] font-normal text-[#777777] cursor-pointer ${
@@ -115,6 +124,7 @@ export default function Leave() {
           Cancelled orders
         </p>
       </div>
+
       {activeSection === "Active" && (
         <>
           {orders.map((order: any) => {
@@ -135,6 +145,7 @@ export default function Leave() {
                   <FaCircleCheck className="text-[#E24C4B] h-[105px] mx-[16px] w-[105px]" />
                   <Image src={Dots} alt="" className="h-[64px] w-[64px]" />
                 </div>
+
                 <p className="text-[24px] mt-10 text-center font-bold text-[#434343]">
                   You Have Successfully purchased Prime Plan. Your order has
                   been successfully cancelled.{" "}
@@ -144,9 +155,9 @@ export default function Leave() {
           </CustomModal>
         </>
       )}
+
       {activeSection === "Completed" && (
         <>
-          {" "}
           {orders.map((order: any) => {
             return <MyorderCard status={["completed"]} order={order} />;
           })}
@@ -155,7 +166,6 @@ export default function Leave() {
 
       {activeSection === "Cancelled" && (
         <>
-          {" "}
           {orders.map((order: any) => {
             return <MyorderCard status={["cancelled"]} order={order} />;
           })}

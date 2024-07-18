@@ -1,5 +1,5 @@
-import { Rating } from "@mui/material";
 import React from "react";
+import { Rating } from "@mui/material";
 
 export default function Review() {
   return (
@@ -11,6 +11,7 @@ export default function Review() {
         <p className="lg:text-[40px] text-[32px] sm:text-[32px]  font-medium">
           Write a Review
         </p>
+
         <p className="text-[20px]  font-semibold  mt-3">Rate the Product</p>
         <Rating
           name="read-only"
@@ -29,39 +30,47 @@ export default function Review() {
             <label className="text-[16px] font-semibold text-[#777777]">
               Name
             </label>
+
             <input
               className="border-[1px] border-[#0000061]  w-full rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
               placeholder="Email Address"
             />
           </div>
+
           <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%]">
             <label className="text-[16px] font-semibold text-[#777777]">
               Email
             </label>
+
             <input
               className="border-[1px] border-[#0000061]  w-full rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
               placeholder="Email"
             />
           </div>
         </div>
+
         <div className="mt-5">
           <label className="text-[16px] font-semibold text-[#777777]">
             Messsage
           </label>
+
           <textarea
             className="border-[1px] border-[#0000061] resize-none  w-full rounded-md h-[150px] p-3 focus:outline-none placeholder:text-[#777777]"
             placeholder="Messsage"
           />
         </div>
+
         <div className="flex mt-5 items-center gap-6">
           <button className=" bg-[#F70000] rounded-xl h-[50px]  mt-[30px] w-[230px] text-[18px] font-medium text-white">
             Submit
           </button>
+
           <button className=" bg-[#F69B26] rounded-xl h-[50px] mt-[30px] w-[230px] text-[18px] font-medium text-white">
             Cancel
           </button>
         </div>
       </div>
+
       <div
         style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
         className="lg:w-[35%] w-[100%] sm:w-[100%] md:w-[100%] rounded-[30px] p-[30px] h-auto"
@@ -73,6 +82,7 @@ export default function Review() {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. 
         </p>
+
         <div className="flex items-start mt-6">
           <p className="text-[18px] mr-3  font-medium text-[#F69B26]">1</p>
           <p>
@@ -82,6 +92,7 @@ export default function Review() {
             </p>
           </p>
         </div>
+
         <div className="flex items-start mt-6">
           <p className="text-[18px] mr-3  font-medium text-[#F69B26]">2</p>
           <p>
@@ -91,6 +102,7 @@ export default function Review() {
             </p>
           </p>
         </div>
+
         <div className="flex items-start mt-6">
           <p className="text-[18px] mr-3  font-medium text-[#F69B26]">3</p>
           <p>
@@ -100,6 +112,7 @@ export default function Review() {
             </p>
           </p>
         </div>
+
         <div className="flex items-start mt-6">
           <p className="text-[18px] mr-3  font-medium text-[#F69B26]">4</p>
           <p>

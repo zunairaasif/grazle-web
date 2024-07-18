@@ -1,8 +1,7 @@
 "use client";
 import { getProfileApi } from "@/apis";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import React from "react";
 
 const Auth = () => {
   const router = useRouter();

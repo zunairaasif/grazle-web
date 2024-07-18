@@ -1,32 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { IoCloseSharp, IoLockClosed } from "react-icons/io5";
-import Chair from "@/assets/pngwing 2.png";
-import close from "@/assets/close.png";
-import Shoes from "@/assets/Rectangle 2032.png";
 import Image from "next/image";
-import AAA from "@/assets/Health Report.png";
 import BBB from "@/assets/Box.png";
+import close from "@/assets/close.png";
+import { Rating } from "@mui/material";
+import { toast } from "react-toastify";
+import CustomModal from "./CustomModel";
 import CCC from "@/assets/Shipping.png";
 import DDD from "@/assets/sort by time.png";
+import AAA from "@/assets/Health Report.png";
 import { PiCameraThin } from "react-icons/pi";
-import { timeAgo } from "@/utils";
-import CustomModal from "./CustomModel";
-import { Rating } from "@mui/material";
+import { FaCheckCircle } from "react-icons/fa";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import React, { useEffect, useRef, useState } from "react";
+import { IoCloseSharp, IoLockClosed } from "react-icons/io5";
 import { addReviewApi, cancelOrderApi, getOrderTrackingApi } from "@/apis";
-import { toast } from "react-toastify";
+
 const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
-  const [showSendModel, setShowSendModel] = useState(false);
-  const [showConfirm, setShowconfirm] = useState(false);
-  const [showleave, setShowLeave] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [selectedImages, setSelectedImages] = useState([]);
   const [productId, setProductId] = useState("");
-
+  const [showleave, setShowLeave] = useState(false);
   const [orderTracking, setOrderTracking] = useState({});
+  const [isDivVisible, setIsDivVisible] = useState(false);
+  const [showSendModel, setShowSendModel] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+
   useEffect(() => {
     (async () => {
       const { data } = await getOrderTrackingApi(order.id);
@@ -37,10 +35,10 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
   const handleOpeneModel = () => {
     setShowSendModel(true);
   };
+
   const handleCloseModel = () => {
     setShowSendModel(false);
   };
-  const [isDivVisible, setIsDivVisible] = useState(false);
 
   const handleButtonClick = () => {
     setIsDivVisible((prev) => !prev);
@@ -59,7 +57,9 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
     fileInputRef?.current?.click();
   };
 
-  const handleFileChange = async (event) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = Array.from(event.target.files);
     if (files.length > 0) {
       const imagePreviews = files.map((file) => URL.createObjectURL(file));
@@ -70,7 +70,7 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
   const revSubHandler = async () => {
     const files = fileInputRef?.current?.files;
     const formData = new FormData();
-    if (files?.length! > 0) {
+    if (files && files.length > 0) {
       Array.from(files).forEach((file) => {
         formData.append("images", file);
       });
@@ -95,17 +95,17 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
     }
   };
 
-  const orderPlaced = orderTracking?.status_history?.find((status) => {
+  const orderPlaced = orderTracking?.status_history?.find((status: any) => {
     return status.status === "new";
   });
-  const inProgressOrder = orderTracking?.status_history?.find((status) => {
+  const inProgressOrder = orderTracking?.status_history?.find((status: any) => {
     return status.status === "in_progress";
   });
 
-  const shippedOrder = orderTracking?.status_history?.find((status) => {
+  const shippedOrder = orderTracking?.status_history?.find((status: any) => {
     return status.status === "shipped";
   });
-  const deliveredOrder = orderTracking?.status_history?.find((status) => {
+  const deliveredOrder = orderTracking?.status_history?.find((status: any) => {
     return status.status === "completed";
   });
   console.log("iam updated", orderTracking);

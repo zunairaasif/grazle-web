@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
 import Image from "next/image";
-import register from "@/assets/girl-shopping-online-with-credit-card-3d-character-illustration-png 1.png";
-import logo from "@/assets/Grazle Logo.png";
-import { Avatar, Checkbox, Select } from "@mui/material";
-import CustomStepper from "@/components/Stepper";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import React, { useState } from "react";
 import { registerApi } from "@/apis/index";
+import logo from "@/assets/Grazle Logo.png";
+import { useRouter } from "next/navigation";
+import CustomStepper from "@/components/Stepper";
+import { Avatar, Checkbox, Select } from "@mui/material";
+import register from "@/assets/girl-shopping-online-with-credit-card-3d-character-illustration-png 1.png";
 
 const steps = [
   {
@@ -23,23 +23,25 @@ const steps = [
     lable: "Bank Details",
   },
 ];
+
 export default function RegisterSeller() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-  const [screenName, setScreenName] = useState("Personal Details");
+  const [isChecked, setIsChecked] = useState(false);
   const [selectedStep, setSelectedStep] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
+  const [screenName, setScreenName] = useState("Personal Details");
   const [formValues, setFormValues] = useState({ role: "seller" });
   console.log(formValues);
 
-  const handleCheckboxChange = (event) => {
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleCheckboxChange = (event: any) => {
     setIsChecked(event.target.checked);
   };
 
-  const handleClickNext = (formdata) => {
+  const handleClickNext = (formdata: any) => {
     let mergeObj;
     console.log(formdata);
     const formEntries = Object.fromEntries(formdata.entries());
@@ -63,7 +65,8 @@ export default function RegisterSeller() {
       setSelectedStep(selectedStep + 1);
     }
   };
-  async function onRegister(formdata) {
+
+  async function onRegister(formdata: any) {
     let mergeObj;
     const formEntries = Object.fromEntries(formdata.entries());
     let newFormData = new FormData();
@@ -97,6 +100,7 @@ export default function RegisterSeller() {
       toast.error("Something went wrong");
     }
   }
+
   return (
     <div className="w-[100%] mb-10 h-auto flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center lg:p-[50px] p-[10px] sm:p-[10px] md:p-[10px] ">
       <div
