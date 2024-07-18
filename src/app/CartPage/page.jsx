@@ -136,6 +136,9 @@ export default function Cartpage() {
                           {/* <div className="lg:w-[43px] lg:h-[43px] h-[30px] w-[30px]  bg-[#5EF7000A] rounded-md flex items-center justify-center">
                         <FaRegEdit className="lg:text-[24px] text-[18px] text-[#00F763]" />
                       </div> */}
+                          <div className="lg:w-[43px] cursor-pointer lg:h-[43px] h-[30px] w-[30px] bg-[#5EF7000A] rounded-md flex items-center justify-center">
+                            <FaRegEdit className="lg:text-[24px] text-[18px] text-[#00F763]" />
+                          </div>
                           <div
                             onClick={() => onDeleteProduct(item?.id)}
                             className="lg:w-[43px] cursor-pointer lg:h-[43px] h-[30px] w-[30px] bg-[#F700000A] rounded-md flex items-center justify-center"
@@ -154,24 +157,20 @@ export default function Cartpage() {
               className="lg:w-[25%] w-[100%] sm:w-[100%] md:w-[100%] rounded-[20px] p-[20px]"
             >
               <div className="w-[100%] ">
-                <p className="text-[16px] font-medium text-[#777777]">
-                  Have a Coupen
-                </p>
-                <div className="flex relative">
-                  <button className="absolute bg-[#FFA31A] right-[10px] top-[23px] rounded-full h-[35px]  w-[70px] text-[12px] font-medium text-white">
-                    Apply
-                  </button>
+                <p className="text-[20px] font-medium">Promo Code</p>
+                <div className="flex relative items-center border border-[#0000000D] rounded-full overflow-hidden">
                   <input
-                    className=" w-full rounded-xl h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
+                    className="w-full rounded-xl h-[50px] pl-3 pr-[90px] focus:outline-none placeholder:text-[#777777]"
                     placeholder="Type Here"
                   />
+                  <button className="absolute right-[10px] h-[35px] w-[70px] text-[12px] font-medium text-white bg-[#FFA31A] rounded-full">
+                    Apply
+                  </button>
                 </div>
               </div>
               <div className="border-b-[1px] mt-10"></div>
               <div className="w-[100%] ">
-                <p className="text-[24px] font-medium text-[#777777] mt-6">
-                  Cart Total
-                </p>
+                <p className="text-[24px] font-medium mt-6">Cart Total</p>
                 {/* <div className="flex items-center mt-4 justify-between">
               <p className="text-[18px] font-medium text-[#777777] "></p>
               <p className="text-[18px] font-bold text-black ">Cart Total</p>
@@ -201,7 +200,7 @@ export default function Cartpage() {
                   <p className="text-[18px] font-bold text-black ">
                     Cart Total
                   </p>
-                  <p className="text-[18px] font-bold text-[#777777] ">
+                  <p className="text-[18px] font-bold">
                     ₹{cartTotal.toFixed(0)}
                   </p>
                 </div>

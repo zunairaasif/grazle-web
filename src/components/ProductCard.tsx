@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { updateCart } from "@/features/features";
 import { FaHeart } from "react-icons/fa";
 import { favoriteProductApi } from "@/apis";
+import heart from "@/assets/like.png";
 
 const ProductCard = ({ product, width }: { product: any; width: string }) => {
   const router = useRouter();
@@ -82,7 +83,7 @@ const ProductCard = ({ product, width }: { product: any; width: string }) => {
         }}
         className={`group ${
           width ? `lg:w-[${width}%]` : "lg:w-[20%]"
-        } w-[100%] md:w-[100%] sm:w-[100%] h-[398px] mt-[24px] rounded-2xl hover:border-[1px] border-[#F70001] hover:h-[450px] relative`}
+        } w-[100%] md:w-[100%] sm:w-[100%] h-[398px] mt-[24px] overflow-hidden rounded-2xl hover:border-[1px] border-[#F70001] hover:h-[450px] relative`}
       >
         <Image
           alt=""
@@ -102,7 +103,7 @@ const ProductCard = ({ product, width }: { product: any; width: string }) => {
             {favoriteProducts?.includes(product?.id) ? (
               <FaHeart className="text-red-500" />
             ) : (
-              <FaHeart className="text-zinc-500" />
+              <Image src={heart} alt="like" />
             )}
           </IconButton>
         </div>
@@ -142,7 +143,7 @@ const ProductCard = ({ product, width }: { product: any; width: string }) => {
             </p>
           </div>
         </div>
-        <div className="flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute bottom-4 w-full">
+        <div className="flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150 w-full">
           <button
             className="text-[#F70000] w-[90%] h-[40px] border-[1px] border-[#F70001] rounded-full"
             onClick={(e) => onAddingCart(e, product)}

@@ -7,6 +7,7 @@ import Star from "@/assets/Star 1.png";
 import Cart from "@/assets/CartVector.png";
 import Like from "@/assets/Frame 1820551183.png";
 import { Box, IconButton, Rating } from "@mui/material";
+import heart from "@/assets/like.png";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Card1 from "@/assets/a5a6296b2158604a47215a2b0a00bde0.png";
 import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
@@ -218,7 +219,7 @@ export default function ProductDetail() {
                   : singleProduct.price}
               </p>
             </div>
-            <div className="flex flex-col text-start justify-start  gap-2 pb-8 border-b-[1px] border-[#0000001A]">
+            <div className="flex  text-start justify-start  gap-2 pb-8 border-b-[1px] border-[#0000001A]">
               <p className="text-[16px]  text-[#909198] font-normal line-through">
                 ₹ {singleProduct?.discount ? singleProduct?.price : 0}
               </p>
@@ -304,7 +305,7 @@ export default function ProductDetail() {
                     {favoriteProducts?.includes(singleProduct.id) ? (
                       <FaHeart className="text-red-500" />
                     ) : (
-                      <FaHeart className="text-zinc-500" />
+                      <Image src={heart} alt="like" />
                     )}
                   </IconButton>
                 </div>
@@ -593,7 +594,7 @@ export default function ProductDetail() {
         <p className="text-[14px] mt-6 text-[#000000] font-bold">
           More from frequently Our Store
         </p>
-        <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap justify-between items-start gap-2 mt-5 ">
+        <div className="flex flex-wrap md:h-[450px] sm:flex-wrap md:flex-wrap lg:flex-nowrap justify-between items-start gap-2 mt-5 ">
           {storeProductsDetails.slice(0, 5).map((item) => (
             <ProductCard key={item.id} product={item} />
           ))}

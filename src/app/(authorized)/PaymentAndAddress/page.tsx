@@ -597,15 +597,13 @@ export default function PaymentAndAddress() {
           <div className="flex items-center mt-4 justify-between">
             <p className="text-[18px] font-medium text-[#777777] ">Discount</p>
             <p className="text-[18px] font-bold text-black ">
-              {cartProducts
-                .reduce(
-                  (acc, item) =>
-                    acc + item.discount
-                      ? item.price
-                      : 0 * item.qty - item.discounted_price * item.qty,
-                  0
-                )
-                .toFixed(0)}
+              {cartProducts.reduce(
+                (acc, item) =>
+                  acc + item.discount
+                    ? item.price
+                    : 0 * item.qty - item.discounted_price * item.qty,
+                0
+              )}
             </p>
           </div>
           <div className="my-5 border-b-[1px] border-[#777777]"></div>

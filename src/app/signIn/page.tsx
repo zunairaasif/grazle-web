@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import login from "@/assets/login.png";
 import logo from "@/assets/Grazle Logo.png";
+import google from "@/assets/Group 1820549999.png";
 import { IoMdMail } from "react-icons/io";
 import { TiLockClosed } from "react-icons/ti";
 import { Checkbox } from "@mui/material";
@@ -43,14 +44,17 @@ export default function Login() {
       action={onLogin}
       className="w-[100%] lg:h-auto flex items-start flex-wrap md:flex-wrap sm:flex-wrap sm:h-auto md:h-auto "
     >
-      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] h-[100vh] bounded-5xl ">
-        <Image src={login} alt="" className="w-[100%]  h-[800px] pt-8 " />
+      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] bounded-5xl pt-8">
+        <Image src={login} alt="" />
       </div>
-      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] h-auto p-[50px]">
+
+      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] h-auto md:p-[50px] p-[20px]">
         <div className="flex flex-col justify-center items-center ">
           <Image src={logo} alt="" className="w-[210px] h-[125px]" />
-          <p className="mt-6 text-[40px] font-semibold">Welcome Back</p>
-          <p className=" text-[18px] font-medium text-[#777777]">
+          <p className="mt-6 md:text-[40px] text-[30px] font-semibold">
+            Welcome Back
+          </p>
+          <p className="md:text-[18px] text-[14px] font-medium text-[#777777]">
             Please log in into your account
           </p>
         </div>
@@ -78,15 +82,15 @@ export default function Login() {
               onClick={togglePasswordVisibility}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#777777] text-[24px]"
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
             </div>
           </div>
         </div>
-        <div className="lg:flex flex-wrap lg:flex md:flex-wrap sm:flex-wrap justify-between items-center mt-3">
+        <div className="flex justify-between items-center mt-3">
           <div className="flex items-center">
             <Checkbox
               sx={{
-                color: "#F70000",
+                color: "#00000040",
                 "& .MuiSvgIcon-root": {
                   fontSize: 24,
                 },
@@ -107,18 +111,22 @@ export default function Login() {
           Sign In
         </button>
         <div className="flex items-center mt-5">
-          <div className="border-b-[#777777] border-[1px] w-full"></div>
-          <p className="text-[#777777] text-[16px] font-normal w-[250px]">
-            or log in with
-          </p>
-          <div className="border-b-[#777777] border-[1px] w-full"></div>
+          <div className="flex-grow border-b border-[#77777729]"></div>
+          <div className="w-fit px-3">
+            <span className="text-[#777777] text-[14px] font-normal">
+              or log in with
+            </span>
+          </div>
+          <div className="flex-grow border-b border-[#77777729]"></div>
         </div>
-        <div className="lg:flex sm:flex-wrap md:flex-wrap flex-wrap justify-between  items-center gap-4">
-          <button className=" bg-[#00000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
+
+        <div className="flex md:flex-row flex-col justify-center items-center md:gap-4">
+          {/* <button className=" bg-[#00000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
             Log in with Apple
-          </button>
-          <button className=" bg-[#F7000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
-            Log in with Google
+          </button> */}
+          <button className="flex justify-center items-center w-[50%] gap-4 w-[50%] bg-[#F7000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
+            <Image src={google} alt="google" className="w-[25px] h-[25px]" />
+            <span>Log in with Google</span>
           </button>
         </div>
         <p className="font-normal text-[#777777] text-[16px] text-center mt-10">

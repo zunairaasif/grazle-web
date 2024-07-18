@@ -4,8 +4,9 @@ import "react-multi-carousel/lib/styles.css";
 import Image from "next/image";
 import IconButton from "@mui/material/IconButton";
 import { FaHeart } from "react-icons/fa";
-
+import { FaStar } from "react-icons/fa";
 import Star from "@/assets/Star 1.png";
+import heart from "@/assets/like.png";
 import Cart from "@/assets/CartVector.png";
 import Like from "@/assets/Frame 1820551183.png";
 import { useRouter } from "next/navigation";
@@ -47,7 +48,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 480, min: 320 },
-    items: 1,
+    items: 2,
     slidesToSlide: 1,
   },
 };
@@ -65,7 +66,8 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
     (async () => {
       const { data } = await getAllFavoriteProductApi();
       const productIds =
-        (data?.products?.length && data?.products?.map((item) => item.id)) ||
+        (data?.products?.length &&
+          data?.products?.map((item: any) => item.id)) ||
         [];
       setFavoriteProducts(productIds);
     })();
@@ -92,12 +94,12 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
     }
     router.push("/detailProduct/" + id);
   };
-  const onAddingCart = (e, product) => {
+  const onAddingCart = (e: any, product: any) => {
     e.stopPropagation();
     const updateProduct = { ...product, qty: 1 };
     dispatch(updateCart({ type: null, product: updateProduct }));
   };
-  async function onLiked(e, productId) {
+  async function onLiked(e: any, productId: any) {
     e.stopPropagation();
     if (isPending) return; //purpose : to avoid user from calling multiple api
 
@@ -125,7 +127,7 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
   }
 
   return (
-    <div className="parent">
+    <div className="parent md:h-[460px] h-[390px]">
       <Carousel
         ref={ref}
         arrows={false}
@@ -144,7 +146,7 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
             style={{
               boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 4px",
             }}
-            className="group lg:w-[98%] sm:w-[100%] w-[100%]  mb-3 mt-2 h-[398px] mt-[24px] rounded-2xl hover:border-[1px] border-[#F70001] hover:h-[450px] relative"
+            className="group lg:w-[98%] w-[95%] border border-gray-200 mb-1 mt-2 mt-[24px] rounded-2xl hover:border-[1px] border-[#F70001] relative"
           >
             <Link href={`/detailProduct/${item.id}`}>
               {/* TODO:add image later item.featured_image */}
@@ -153,20 +155,17 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                 width={203}
                 height={203}
                 src={"/" + item.featured_image}
-                className="w-full h-[203px] relative rounded-2xl cursor-pointer"
+                className="w-full h-[203px] object-cover rounded-2xl cursor-pointer"
               />
               <div className="flex w-full justify-between items-center absolute px-[16px] top-[10px]">
-                <button
-                  style={{ backgroundColor: "rgba(247, 0, 0, 0.1)" }}
-                  className="text-[12px] font-semibold border-[1px] rounded-3xl bg-red-500 border-[#F70000] text-[#F70000] w-[96px] h-[34px]"
-                >
-                  flash sales
+                <button className="md:text-[12px] text-[9px] rounded-3xl text-white bg-[#F70000] md:py-2 py-1 md:px-3 px-2">
+                  75% OFF
                 </button>
                 <IconButton size="medium" onClick={(e) => onLiked(e, item.id)}>
                   {favoriteProducts?.includes(item.id) ? (
-                    <FaHeart className="text-red-500" />
+                    <FaHeart className="text-[#F70000]" />
                   ) : (
-                    <FaHeart className="text-zinc-500" />
+                    <Image src={heart} alt="like" />
                   )}
                 </IconButton>
               </div>
@@ -174,31 +173,35 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                 <p className="text-[16px] w-[80%] font-semibold">
                   {item?.title}
                 </p>
-                <div className="flex items-center mt-[16px]">
-                  <p className="text-[12px] text-[#F69B26]">{item.review}</p>
+                <div className="flex items-center md:mt-[16px] mt-[8px] gap-1">
+                  <span className="md:text-sm text-[9px] text-[#F69B26]">
+                    4.8 (342)
+                  </span>
+                  <FaStar size={12} color="#F69B26" />
+                  {/* <p className="text-[12px] text-[#F69B26]">{item.review}</p>
                   <Rating
                     precision={0.5}
                     name="read-only"
                     readOnly
                     mt-3
                     defaultValue={Number(item?.rating)}
-                  />
+                  /> */}
                 </div>
-                <p className="text-[20px] font-semibold mt-[16px]">
+                <p className="md:text-[20px] text-[14px] text-[#FC3030] font-semibold md:mt-[16px] mt-[8px]">
                   ₹{item?.discount ? item.discounted_price : item.price}
                 </p>
-                <div className="flex items-center mt-[16px]">
-                  <p className="text-[16px] text-[#909198] line-through font-normal">
+                <div className="flex items-center md:mt-[16px] mt-[8px]">
+                  <p className="md:text-[16px] text-[10px] text-[#909198] line-through font-normal">
                     ₹{item.discount ? item.price : 0}
                   </p>
-                  <p className="text-[16px] text-[#4FAD2E] ml-[24px] font-semibold">
-                    {item.discount ? item.discount : "0%"}
+                  <p className="md:text-[16px] text-[10px] text-[#4FAD2E] ml-[24px] font-semibold">
+                    {item.discount ? item.discount : "0% Off"}
                   </p>
                 </div>
               </div>
-              <div className="flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute bottom-4 w-full">
+              <div className="hidden mb-3 flex justify-center opacity-0 group-hover:opacity-100 group-hover:flex w-full">
                 <button
-                  className="text-[#F70000] w-[90%] h-[40px] border-[1px] border-[#F70001] rounded-full"
+                  className="text-[#F70000] w-[90%] h-[40px] border-[1px] border-[#F70001] rounded-lg"
                   onClick={(e) => onAddingCart(e, item)}
                 >
                   <div className="flex items-center justify-center">
@@ -206,7 +209,7 @@ const RecentViewSlider = React.forwardRef((props: Partial<Props>, ref: any) => {
                     <Image
                       alt=""
                       src={Cart}
-                      className="w-[17px] h-[17px] ml-[12px]"
+                      className="w-[20px] h-[20px] ml-[12px]"
                     />
                   </div>
                 </button>

@@ -24,6 +24,7 @@ const steps = [
   },
 ];
 export default function RegisterSeller() {
+  const [isChecked, setIsChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const togglePasswordVisibility = () => {
@@ -33,6 +34,10 @@ export default function RegisterSeller() {
   const [selectedStep, setSelectedStep] = useState(0);
   const [formValues, setFormValues] = useState({ role: "seller" });
   console.log(formValues);
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+  };
 
   const handleClickNext = (formdata) => {
     let mergeObj;
@@ -99,13 +104,13 @@ export default function RegisterSeller() {
           background:
             "linear-gradient(162.65deg, #FF781E 1.87%, #FDC197 88.1%)",
         }}
-        className="lg:w-[50%] w-[100%] lg:block flex flex-col sm:flex-col  sm:w-[100%] md:w-[100%] lg:h-[100vh] sm:h-[90vh] h-[60vh] text-white relative lg:rounded-[60px] rounded-[20px] sm:rounded-[20px] px-[40px] py-[50px] mb-[50px] "
+        className="lg:w-[50%] w-[100%] lg:block flex flex-col sm:flex-col  sm:w-[100%] md:w-[100%] lg:h-[100vh] sm:h-[90vh] h-[60vh] text-white relative lg:rounded-[60px] rounded-[20px] sm:rounded-[20px] px-[40px] py-[50px] mb-[50px]"
       >
-        <p className="lg:text-[40px] text-[24px] sm:text-[24px]  md:text-[24px]  font-semibold">
+        <p className="md:text-[30px] text-[20px] font-semibold">
           Discover endless possibilities
         </p>
-        <div className="lg:w-[60%] w-[100%] sm:w-[100%]">
-          <p className="lg:text-[60px] text-[20px] sm:text-[20px]  md:text-[232px]  font-bold  ">
+        <div className="lg:w-[80%] w-[100%] sm:w-[100%]">
+          <p className="md:text-[60px] text-[30px] font-bold">
             Explore, buy, and sell with our vibrant maketplace
           </p>
         </div>
@@ -113,7 +118,7 @@ export default function RegisterSeller() {
         <Image
           src={register}
           alt=""
-          className="w-[100%] top-[100px] absolute right-[30px] lg:h-[670px] h-[350px] sm:h-[800px]"
+          className="w-auto bottom-0 absolute right-0 lg:h-[500px] h-[350px] sm:h-[800px]"
         />
       </div>
       <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%]  h-auto lg:pl-[50px] lg:m-0 m-3 lg:pb-[50px] ">
@@ -148,7 +153,7 @@ export default function RegisterSeller() {
                     />
                   </div>
 
-                  <div className=" mt-[20px] w-full">
+                  {/* <div className=" mt-[20px] w-full">
                     <input
                       className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
                       placeholder="Contact Number"
@@ -156,9 +161,25 @@ export default function RegisterSeller() {
                       required
                       name="phone"
                     />
+                  </div> */}
+
+                  <div className="relative  mt-[20px] w-full">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                      +91
+                    </span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      pattern="\d{10}"
+                      maxLength={10}
+                      inputMode="numeric"
+                      placeholder="Contact number"
+                      className="bg-[#F5F7F9] w-full pl-14 rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
+                    />
                   </div>
                 </div>
-                <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center lg:gap-4">
+                {/* <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center lg:gap-4">
                   <div className=" mt-[20px] w-full">
                     <input
                       className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
@@ -169,7 +190,7 @@ export default function RegisterSeller() {
                       type="password"
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center lg:gap-4">
                   <div className=" mt-[20px] w-full">
                     {/* <select className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none text-[#777777]">
@@ -177,18 +198,39 @@ export default function RegisterSeller() {
                       <option value="1">Audi</option>
                       <option value="2">BMW</option>
                     </select> */}
-                    <input
-                      className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
-                      placeholder="City"
+                    <select
+                      className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none text-[#777777]"
                       name="city"
-                    />
+                    >
+                      <option value="" disabled selected>
+                        City
+                      </option>
+                      <option value="NewYork">New York</option>
+                      <option value="LosAngeles">Los Angeles</option>
+                      <option value="Chicago">Chicago</option>
+                      <option value="Houston">Houston</option>
+                      <option value="Phoenix">Phoenix</option>
+                    </select>
                   </div>
                   <div className=" mt-[20px] w-full">
-                    <input
+                    <select
+                      className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none text-[#777777]"
+                      name="state"
+                    >
+                      <option value="" disabled selected>
+                        State
+                      </option>
+                      <option value="NewYork">New York</option>
+                      <option value="LosAngeles">Los Angeles</option>
+                      <option value="Chicago">Chicago</option>
+                      <option value="Houston">Houston</option>
+                      <option value="Phoenix">Phoenix</option>
+                    </select>
+                    {/* <input
                       className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none placeholder:text-[#777777]"
                       placeholder="State"
                       name="state"
-                    />
+                    /> */}
                     {/* <select className="bg-[#F5F7F9] w-full rounded-md h-[50px] p-3 focus:outline-none text-[#777777]">
                       <option value="0">State</option>
                       <option value="1">Audi</option>
@@ -219,6 +261,8 @@ export default function RegisterSeller() {
                 </div>
                 <div className="flex items-center mt-4">
                   <Checkbox
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
                     sx={{
                       color: "#F70000",
                       "& .MuiSvgIcon-root": {
@@ -229,7 +273,7 @@ export default function RegisterSeller() {
                       },
                     }}
                   />
-                  <p className="text-black font-normal lg:text-[16px] text-[11px] sm:text-[11px]   ">
+                  <p className="text-black font-normal lg:text-[16px] text-[11px] sm:text-[11px]">
                     By Clicking i agree all terms of services and Privacy &
                     Policy.
                   </p>
@@ -316,8 +360,11 @@ export default function RegisterSeller() {
             )}
 
             <button
-              className=" bg-[#F70000] mb-4 rounded-xl h-[50px] mt-[50px] w-[100%] text-[18px] font-medium text-white"
+              className={`${
+                !isChecked && "opacity-50"
+              } bg-[#F70000] mb-4 rounded-xl h-[50px] mt-[50px] w-[100%] text-[18px] font-medium text-white`}
               type="submit"
+              disabled={!isChecked}
             >
               {screenName == "Bank Details" ? "Create account" : "Next"}
             </button>

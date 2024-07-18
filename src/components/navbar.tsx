@@ -9,11 +9,14 @@ import MenuIcon from "@/assets/VectorMenu.png";
 import { Avatar } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Drawer } from "@mui/material";
 
 import { IoClose } from "react-icons/io5";
-import { CiTimer } from "react-icons/ci";
+import { PiClockCountdownThin } from "react-icons/pi";
 
 import user from "@/assets/users.png";
+import order from "@/assets/order.png";
+import location from "@/assets/layer1.png";
 import Fav from "@/assets/hearts.png";
 import Location from "@/assets/Group 1820549981.png";
 import card from "@/assets/Group 1820549982.png";
@@ -116,173 +119,149 @@ export default function Navbar() {
   return (
     <>
       <div
-        className="px-[16px] hidden
-      lg:px-[150px] bg-[#F8F8F8] py-1 md:px-[60px]  flex-wrap lg:flex sm:flex-wrap   items-center justify-between"
-      >
-        <p className="text-[14px] font-normal text-[#909198] lg:text-start text-center">
-          © 2020 Landify UI Kit. All rights reserved
-        </p>
-        <div className="flex items-center lg:justify-start justify-center  ">
-          <Link
-            href="/Terms&Conditions"
-            className="lg:text-[14px] text-[10px] font-normal text-[#909198]"
-          >
-            Terms & Conditions
-          </Link>
-          <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
-          <Link
-            href="/Terms&Conditions"
-            className="lg:text-[14px] text-[10px] font-normal text-[#909198]"
-          >
-            Privacy Policy
-          </Link>
-
-          <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
-          <p className="lg:text-[14px] text-[10px] font-normal text-[#909198]">
-            Sitemap
-          </p>
-          <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
-          <p className="lg:text-[14px] text-[10px] font-normal text-[#909198]">
-            Disclaimer
-          </p>
-        </div>
-      </div>
-      <div
         className="mx-[16px] 
       lg:mx-[150px] py-1 md:mx-[60px] my-[16px] flex flex-col md:flex-wrap  sm:flex-row sm:items-center"
       >
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
-            {/* <Image
+            <Image
               src={MenuIcon}
               alt="Menu"
-              className="w-[30px] h-[24px] relative mr-2 sm:hidden"
+              className="relative mr-2 lg:hidden"
               onClick={handleToggleMenu}
-            /> */}
-            {/* {menuBar && (
-              <div className="absolute left-0 top-10 mt-2 w-[335px] bg-white z-10 shadow-lg border border-[#D2D4DA] rounded-md">
-                <div className="flex items-center justify-between bg-[#F700000D] px-6 py-3">
-                  <div className="flex  gap-2 items-center">
-                    <FaUser className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-medium text-black">
-                      Hi, Log in
-                    </p>
-                  </div>
-                  <IoClose
-                    className="w-[18px] h-[18px]"
-                    onClick={handleMenuclose}
-                  />
-                </div>
-                <div className="px-6 pb-6">
-                  <Link
-                    href="/MyAccount"
-                    className="flex gap-2 mt-6 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={user} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Your Account
-                    </p>
-                  </Link>
-                  <Link
-                    href="/MyOrders"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={bulid} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      My Orders
-                    </p>
-                  </Link>
-                  <div
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={Fav} alt="" className="w-[20px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Favourites
-                    </p>
-                  </div>
-                  <Link
-                    href="/CreditLimit"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={card} alt="" className="w-[20px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Credit Limit
-                    </p>
-                  </Link>
-                  <Link
-                    href="/ReferralRanking"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={bulid} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Referral Ranking
-                    </p>
-                  </Link>
-                  <Link
-                    href="/PaymentPlan"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={crown} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Grazzle Membership
-                    </p>
-                  </Link>
-                  <div
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={Setting} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Notification Settings
-                    </p>
-                  </div>{" "}
-                  <p className="text-[16px] font-semibold mt-3 text-black">
-                    Grazzle
+            />
+
+            <Drawer open={menuBar} onClose={handleToggleMenu}>
+              <div className="flex items-center justify-between bg-[#F700000D] px-6 py-3">
+                <div className="flex  gap-2 items-center">
+                  <FaUser className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-medium text-black">
+                    Hi, Log in
                   </p>
-                  <Link
-                    href="/FAQs"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={FAQ} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">FAQs</p>
-                  </Link>
-                  <Link
-                    href="/Terms&Conditions"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={terms} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black">
-                      Terms of Use
-                    </p>
-                  </Link>
-                  <Link
-                    href="/Terms&Conditions"
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <Image src={Privcy} alt="" className="w-[18px] h-[18px]" />
-                    <p className="text-[16px] font-normal text-black ">
-                      Privacy Policy
-                    </p>
-                  </Link>
-                  <div
-                    className="flex gap-2 mt-4 items-center"
-                    onClick={handleMenuclose}
-                  >
-                    <BiLogOut className="text-[18px] text-[#777777]" />
-                    <p className="text-[16px] font-normal text-black">Logout</p>
-                  </div>{" "}
                 </div>
+                <IoClose
+                  className="w-[18px] h-[18px]"
+                  onClick={handleMenuclose}
+                />
               </div>
-            )} */}
+              <div className="px-6 pb-6">
+                <Link
+                  href="/MyAccount"
+                  className="flex gap-2 mt-6 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={user} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Your Account
+                  </p>
+                </Link>
+                <Link
+                  href="/MyOrders"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={order} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    My Orders
+                  </p>
+                </Link>
+                <div
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={Fav} alt="" className="w-[20px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Favourites
+                  </p>
+                </div>
+                <div
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={location} alt="" className="w-[15px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Manage Addresses
+                  </p>
+                </div>
+                <Link
+                  href="/CreditLimit"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={card} alt="" className="w-[20px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Credit Limit
+                  </p>
+                </Link>
+                <Link
+                  href="/ReferralRanking"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={bulid} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Referral Ranking
+                  </p>
+                </Link>
+                <Link
+                  href="/PaymentPlan"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={crown} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Grazzle Membership
+                  </p>
+                </Link>
+                <div
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={Setting} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Notification Settings
+                  </p>
+                </div>{" "}
+                <p className="text-[16px] font-semibold mt-3 text-black">
+                  Grazzle
+                </p>
+                <Link
+                  href="/FAQs"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={FAQ} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">FAQs</p>
+                </Link>
+                <Link
+                  href="/Terms&Conditions"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={terms} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black">
+                    Terms of Use
+                  </p>
+                </Link>
+                <Link
+                  href="/Terms&Conditions"
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <Image src={Privcy} alt="" className="w-[18px] h-[18px]" />
+                  <p className="text-[16px] font-normal text-black ">
+                    Privacy Policy
+                  </p>
+                </Link>
+                <div
+                  className="flex gap-2 mt-4 items-center"
+                  onClick={handleMenuclose}
+                >
+                  <BiLogOut className="text-[18px] text-[#777777]" />
+                  <p className="text-[16px] font-normal text-black">Logout</p>
+                </div>{" "}
+              </div>
+            </Drawer>
 
             <Link href="/">
               <Image
@@ -325,8 +304,8 @@ export default function Navbar() {
                 className="w-[36px] h-[36px] absolute top-[50%] left-[10px] transform -translate-y-1/2"
               />
               {isOpenSearch || searchResult?.length ? (
-                <div className="fixed inset-0 z-50 opacity-100 bg-[rgba(0,0,0,0.5);] top-[115px]">
-                  <div className="absolute bg-white opacity-100  right-[37%] mt-2 w-[400px]  z-10 p-4 px-6 shadow-lg border border-[#D2D4DA] rounded-xl">
+                <div className="fixed inset-0 z-50 opacity-100 bg-[rgba(0,0,0,0.2);] top-[90px]">
+                  <div className="absolute bg-white opacity-100 right-[34%] w-[400px] z-10 p-4 px-6 shadow-lg border border-[#D2D4DA] rounded-xl">
                     {searchResult?.map((item: any) => (
                       <div
                         className="flex items-center gap-3 my-3 cursor-pointer"
@@ -346,7 +325,7 @@ export default function Navbar() {
                       </div>
                     ))}
                     <div className="flex gap-3 items-center">
-                      <CiTimer className="text-black text-[#777777]" />
+                      <PiClockCountdownThin className="text-black text-[#777777]" />
                       <p className="text-black text-[16px] font-semibold">
                         Recent Searches
                       </p>
@@ -378,7 +357,7 @@ export default function Navbar() {
                         </p>
                       </div>
                     </div>
-                    <div className="rounded-xl mt-3 bg-[#E8E8E8] p-3 w-[80%]">
+                    <div className="rounded-xl mt-3 bg-[#F8F8F8] p-3 w-[80%]">
                       <p className="text-black text-[16px] font-semibold">
                         Popular Searches
                       </p>
@@ -414,7 +393,16 @@ export default function Navbar() {
           </div>
           <div className="flex items-center text-[14px] font-normal">
             <Link href="/CartPage" className="flex items-center">
-              <Badge badgeContent={cartLength} color="primary" className="mr-3">
+              <Badge
+                badgeContent={cartLength}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    backgroundColor: "#F70000",
+                    color: "white",
+                  },
+                }}
+                className="mr-3"
+              >
                 <Image src={Cart} alt="Cart" className="w-[24px] h-[24px]" />
               </Badge>
               <p className="text-[12px] hidden sm:block">Cart</p>
@@ -430,15 +418,22 @@ export default function Navbar() {
                 Become Seller
               </p>
             </Link>
-            <div className="w-[130px] flex justify-end">
+            <div className="flex justify-end ml-2">
               <div ref={containerRef} className="relative">
-                {token && token !== "" && (
+                {token && token !== "" ? (
                   <Avatar
                     className="w-[44px] h-[44px] ml-[16px] "
                     onClick={handleToggle}
                   />
+                ) : (
+                  <Link
+                    href="/signIn"
+                    className="bg-[#F70000] py-2 px-6 rounded-md text-white"
+                  >
+                    Login
+                  </Link>
                 )}
-                {isOpen ? (
+                {isOpen && (
                   <div className="absolute right-0 mt-2 w-[335px] bg-white z-10 p-5 shadow-lg border border-[#D2D4DA] rounded-md">
                     <Link href="/MyAccount" className="flex gap-2 items-center">
                       <Image src={user} alt="" className="w-[18px] h-[18px]" />
@@ -450,7 +445,12 @@ export default function Navbar() {
                       href="/MyOrders"
                       className="flex gap-2 mt-4 items-center"
                     >
-                      <Image src={bulid} alt="" className="w-[18px] h-[18px]" />
+                      <Image
+                        src={order}
+                        alt=""
+                        color="#777777"
+                        className="w-[18px] h-[18px]"
+                      />
                       <p className="text-[16px] font-normal text-[#777777]">
                         My Orders
                       </p>
@@ -459,6 +459,16 @@ export default function Navbar() {
                       <Image src={Fav} alt="" className="w-[18px] h-[18px]" />
                       <p className="text-[16px] font-normal text-[#777777]">
                         Favourites
+                      </p>
+                    </div>
+                    <div className="flex gap-2 mt-4 items-center">
+                      <Image
+                        src={location}
+                        alt=""
+                        className="w-[15px] h-[18px]"
+                      />
+                      <p className="text-[16px] font-normal text-[#777777]">
+                        Manage Addresses
                       </p>
                     </div>
                     <Link
@@ -485,7 +495,7 @@ export default function Navbar() {
                     >
                       <Image src={crown} alt="" className="w-[18px] h-[18px]" />
                       <p className="text-[16px] font-normal text-[#777777]">
-                        Grazzle Membership
+                        Grazle Membership
                       </p>
                     </Link>
                     <div className="flex gap-2 mt-4 items-center">
@@ -497,7 +507,7 @@ export default function Navbar() {
                       <p className="text-[16px] font-normal text-[#777777]">
                         Notification Settings
                       </p>
-                    </div>{" "}
+                    </div>
                     <p className="text-[16px] font-semibold mt-3 text-[#777777]">
                       Grazzle
                     </p>
@@ -505,15 +515,6 @@ export default function Navbar() {
                       <Image src={FAQ} alt="" className="w-[18px] h-[18px]" />
                       <p className="text-[16px] font-normal text-[#777777]">
                         FAQs
-                      </p>
-                    </Link>
-                    <Link
-                      href="/Terms&Conditions"
-                      className="flex gap-2 mt-4 items-center"
-                    >
-                      <Image src={terms} alt="" className="w-[18px] h-[18px]" />
-                      <p className="text-[16px] font-normal text-[#777777]">
-                        Terms of Use
                       </p>
                     </Link>
                     <Link
@@ -529,14 +530,16 @@ export default function Navbar() {
                         Privacy Policy
                       </p>
                     </Link>
+                    <div
+                      className="flex gap-2 mt-4 items-center"
+                      onClick={handleMenuclose}
+                    >
+                      <BiLogOut className="text-[18px] text-[#777777]" />
+                      <p className="text-[16px] font-normal text-[#777777]">
+                        Logout
+                      </p>
+                    </div>
                   </div>
-                ) : (
-                  <Link
-                    href="/signIn"
-                    className="bg-[#F70000] py-2 px-6 rounded-md text-white"
-                  >
-                    Login
-                  </Link>
                 )}
               </div>
             </div>

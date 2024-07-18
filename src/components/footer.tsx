@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FaChevronDown } from "react-icons/fa6";
+import Link from "next/link";
 
 interface FAQData {
   header: string;
@@ -96,8 +97,8 @@ export default function Footer() {
         <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
           <p className="text-[20px] font-bold">Company</p>
           <p className="text-[14px] font-normal mt-[16px]">About</p>
-          <p className="text-[14px] font-normal mt-[12px]">Press</p>
-          <p className="text-[14px] font-normal mt-[12px]">Careers</p>
+          {/* <p className="text-[14px] font-normal mt-[12px]">Press</p>
+          <p className="text-[14px] font-normal mt-[12px]">Careers</p> */}
           <p className="text-[14px] font-normal mt-[12px]">Contact</p>
           <p className="text-[14px] font-normal mt-[12px]">Partners</p>
         </div>
@@ -117,23 +118,23 @@ export default function Footer() {
           <p className="text-[14px] font-normal mt-[12px]">Law Enforcement</p>
           <p className="text-[14px] font-normal mt-[12px]">Status</p>
         </div>
-        <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
+        {/* <div className="w-full lg:w-[130px] text-[#393A44] mb-[32px] lg:mb-0 text-center lg:text-left">
           <p className="text-[20px] font-bold">Follow us</p>
           <p className="text-[14px] font-normal mt-[16px]">Facebook</p>
           <p className="text-[14px] font-normal mt-[12px]">Twitter</p>
           <p className="text-[14px] font-normal mt-[12px]">Dribbble</p>
           <p className="text-[14px] font-normal mt-[12px]">Instagram</p>
           <p className="text-[14px] font-normal mt-[12px]">LinkedIn</p>
-        </div>
+        </div> */}
         <div className="w-full lg:w-[161px] text-[#393A44] text-center lg:text-left">
           <p className="text-[20px] font-bold">Reach us</p>
           <div className="flex items-center justify-center lg:justify-start mt-[26px]">
             <Image src={Email} alt="" className="w-[32px] h-[32px] mr-[8px]" />
-            <p className="text-[14px] font-normal">hello@landify.co</p>
+            <p className="text-[14px] font-normal">ww@Grazle.com</p>
           </div>
           <div className="flex items-center justify-center lg:justify-start mt-[26px]">
             <Image src={Phone} alt="" className="w-[32px] h-[32px] mr-[8px]" />
-            <p className="text-[14px] font-normal">hello@landify.co</p>
+            <p className="text-[14px] font-normal">+91 98765 43210</p>
           </div>
           <div className="flex items-center justify-center lg:justify-start mt-[26px]">
             <Image
@@ -141,8 +142,38 @@ export default function Footer() {
               alt=""
               className="w-[32px] h-[32px] mr-[8px]"
             />
-            <p className="text-[14px] font-normal">hello@landify.co</p>
+            <p className="text-[14px] font-normal">
+              772 Lyonwood Ave Walnut, CA 91789
+            </p>
           </div>
+        </div>
+      </div>
+      <div
+        className="px-[16px] border-t-2 hidden lg:block
+      lg:px-[150px] bg-[#F8F8F8] py-6 md:px-[60px]  flex-wrap lg:flex sm:flex-wrap   items-center justify-between"
+      >
+        <p className="text-[14px]  font-normal lg:text-start text-center">
+          © 2024 Grazzle. All rights reserved
+        </p>
+        <div className="flex items-center lg:justify-start justify-center  ">
+          <Link
+            href="/Terms&Conditions"
+            className="lg:text-[14px] text-[10px] font-normal"
+          >
+            Terms & Conditions
+          </Link>
+          <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
+          <Link
+            href="/Terms&Conditions"
+            className="lg:text-[14px] text-[10px] font-normal"
+          >
+            Privacy Policy
+          </Link>
+
+          <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
+          <p className="lg:text-[14px] text-[10px] font-normal">Sitemap</p>
+          <div className="border-l-[1px] border-[#909198] mx-2 h-2"></div>
+          <p className="lg:text-[14px] text-[10px] font-normal">Disclaimer</p>
         </div>
       </div>
 
@@ -237,12 +268,12 @@ export default function Footer() {
                     {index === 1 && (
                       <div>
                         <p className="text-[14px] font-medium ">About</p>
-                        <p className="text-[14px] font-medium mt-[8px]">
+                        {/* <p className="text-[14px] font-medium mt-[8px]">
                           Press
                         </p>
                         <p className="text-[14px] font-medium mt-[8px]">
                           Careers
-                        </p>
+                        </p> */}
                         <p className="text-[14px] font-medium mt-[8px]">
                           Contact
                         </p>
@@ -294,8 +325,36 @@ export default function Footer() {
               </Accordion>
             </div>
           ))}
-          <p className="mt-5 mb-9 text-[12px] font-normal flex justify-center text-cneter text-[#949494] ">
-            © 2020 Landify UI Kit. All rights reserved
+
+          <div
+            className="px-[16px] lg:hidden items-center
+            md:px-[60px] my-4"
+          >
+            <div className="flex items-center lg:justify-start justify-center">
+              <Link
+                href="/Terms&Conditions"
+                className="lg:text-[14px] text-[11px] font-normal"
+              >
+                Terms of Service
+              </Link>
+              <div className="mx-2 h-2"></div>
+              <Link
+                href="/Terms&Conditions"
+                className="lg:text-[14px] text-[11px] font-normal"
+              >
+                Privacy Policy
+              </Link>
+
+              <div className="mx-2 h-2"></div>
+              <p className="lg:text-[14px] text-[11px] font-normal">Legal</p>
+              <div className="mx-2 h-2"></div>
+              <p className="lg:text-[14px] text-[11px] font-normal">
+                Disclaimer
+              </p>
+            </div>
+          </div>
+          <p className="mb-6 text-[10px] font-normal flex justify-center text-center text-[#949494] ">
+            © 2024 Grazle. All rights reserved
           </p>
         </div>
       </div>

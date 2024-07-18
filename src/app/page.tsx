@@ -7,9 +7,13 @@ import Rasm1 from "@/assets/rasm33.png";
 import Rasm2 from "@/assets/rasm2.png";
 import Rasm3 from "@/assets/rasm3.png";
 import Rasmaa from "@/assets/rasmcc.png";
+import { FaArrowRightLong } from "react-icons/fa6";
 import Rasmbb from "@/assets/rasmbb.png";
+import heart from "@/assets/like.png";
 import Rasmcc from "@/assets/rasmaa.png";
 import Dami from "@/assets/dami.png";
+import sale from "@/assets/sale.png";
+import banner from "@/assets/banner.png";
 
 import MainSlider from "@/components/mianSlider";
 import bg from "@/assets/2 copy.png";
@@ -43,6 +47,8 @@ import {
   getSeasonTop,
 } from "@/apis";
 import ProductCard from "@/components/ProductCard";
+import Cart from "@/assets/CartVector.png";
+import { IconButton, Rating } from "@mui/material";
 export default function Home() {
   const [allCategories, setCategories] = useState(undefined);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
@@ -191,10 +197,30 @@ export default function Home() {
     router.push(`/search?category=${item?.id}`);
   };
 
+  const items = [
+    { id: 0, title: "Kitchen Ware" },
+    { id: 1, title: "Home Appliances" },
+    { id: 2, title: "Plastic Ware" },
+    { id: 3, title: "Electric Appliances" },
+    { id: 4, title: "Cooperate Gifts" },
+    { id: 5, title: "Accessories" },
+    { id: 6, title: "Combo Product" },
+  ];
+
+  const [click, setClick] = useState(0);
+  const handleClickCategory = (id: number) => {
+    setClick(id);
+  };
+
   return (
     <>
-      <div className="lg:my-[20px] my-[10px] lg:px-0 sm:px-3 px-3 md:px-3 sm:my-[10px] md:my-[20px] lg:mx-[150px] mx-[0px] sm:mx-[20px] md:mx-[30px]">
-        <div className="flex  items-center justify-between py-5 px-5  bg-gradient-to-r from-[#F81F1F] to-[#FFA31A] w-full lg:w-[100%] h-auto rounded-lg shadow-lg">
+      {" "}
+      {/* MianSlider */}
+      <div className="lg:mx-[150px] md:mx-[60px] lg:px-0 md:px-3">
+        <MainSlider banners={positionOneBanners} />
+      </div>
+      <div className="lg:my-[30px] my-[10px] lg:px-0 md:px-3 sm:my-[10px] md:my-[20px] lg:mx-[150px] mx-[0px] md:mx-[30px]">
+        <div className="flex  items-center justify-between md:py-5 py-2 px-5  bg-gradient-to-r from-[#F81F1F] to-[#FFA31A] w-full lg:w-[100%] h-auto md:rounded-[20px] rounded-md shadow-lg">
           <div className="flex items-center gap-4">
             <div className="rounded-full lg:h-[60px] lg:w-[60px] h-[40px] w-[40px] sm:w-[40px] sm:h-[40px] bg-[#FA6464] flex items-center justify-center">
               <Image
@@ -210,23 +236,18 @@ export default function Home() {
                 Credit Limit
               </p>
               <p className="text-white text-[8px] lg:text-lg font-normal">
-                Get Credit Up to 10 Lacs
+                Get Credit Upto 10 Lacs
               </p>
             </div>
           </div>
           <button
-            className="text-[#F70000] text-[10px] lg:text-xl font-semibold bg-white border-[1px] border-[#F70000] rounded-full lg:h-[45px] h-[35px] lg:w-[210px] sm:h-[40px] lg:h-[50px] px-10 lg:px-10"
+            className="text-[#F70000] text-[10px] lg:text-xl font-semibold bg-white rounded-lg lg:h-[45px] h-[35px] lg:w-[300px] sm:h-[40px] lg:h-[50px] px-10 lg:px-10"
             onClick={goToCreditLimit}
           >
             Get Now
           </button>
         </div>
       </div>
-      {/* MianSlider */}
-      <div className="lg:mx-[150px] md:mx-[60px] lg:px-0 sm:px-3 px-3 md:px-3">
-        <MainSlider banners={positionOneBanners} />
-      </div>
-
       <div className="hide-scrollbar lg:mx-[150px] gap-2 sm:gap-2 lg:gap-0 mt-3 lg:mt-2 md:mx-auto overflow:-webkit-scrollbar: none; md:overflow-x-auto md:w-[645px] lg:w-auto sm:mx-auto sm:max-w-[calc(100vw - 120px)] flex items-center justify-between overflow-x-auto">
         {/* <div className="w-[92px] sm:mt-2   md:gap-2 flex flex-col justify-center items-center">
           <div className=" flex  justify-center items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] sm:w-[70px] sm:h-[70px] rounded-full bg-gradient-to-r from-[#F81F1F] to-[#FFA31A] ">
@@ -270,7 +291,7 @@ export default function Home() {
               className="w-full flex flex-col justify-center items-center mx-2 text-center"
               onClick={() => fn_categoryClicked(item)}
             >
-              <div className="border-[1px] flex justify-center items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] sm:w-[70px] sm:h-[70px]  border-[#F70000] rounded-full bg-[#F8F8F8] ">
+              <div className="flex justify-center  hover:border border-[#FC3030] items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] sm:w-[70px] sm:h-[70px]  border-[#F70000] rounded-full bg-[#F8F8F8] ">
                 {item?.image !== null ? (
                   <Image
                     width={40}
@@ -296,9 +317,8 @@ export default function Home() {
           </>
         ))}
       </div>
-
       {/* !!Recent Products */}
-      <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
+      {/* <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
           <p className="text-[24px] font-semibold">Recent Viewed</p>
           {recentProducts?.length ? (
@@ -327,11 +347,37 @@ export default function Home() {
         ) : (
           <h1 className="text-center text-red-500">No recent product found</h1>
         )}
+      </div> */}
+      {/* Flash sale */}
+      <div className="flex justify-between items-center lg:mx-[150px] md:mx-[60px] mx-[14px] md:mt-14 mt-5">
+        <span className="text-xl font-semibold">Flash Sale</span>
+        <button className="flex items-center gap-3 border border-[#FC3030] text-[#FC3030] text-sm rounded-lg py-2 px-4">
+          <span>View All</span>
+          <FaArrowRightLong />
+        </button>
       </div>
-
+      <div className="flex md:p-4 p-2 rounded-lg md:gap-20 md:justify-start justify-between mx-[14px] items-center lg:mx-[150px] md:mx-[60px] mt-5 border border-[#00000033]">
+        <span className="font-medium text-[#F81F1F] md:text-base text-xs">
+          On Sale Now
+        </span>
+        <div className="flex text-sm items-center gap-2">
+          <span className="mr-2 md:text-base text-xs">Ending in</span>
+          <span className="p-2 bg-[#F81F1F] rounded-sm text-white md:text-base text-xs">
+            02
+          </span>
+          <span>:</span>
+          <span className="p-2 bg-[#F81F1F] rounded-sm text-white md:text-base text-xs">
+            04
+          </span>
+          <span>:</span>
+          <span className="p-2 bg-[#F81F1F] rounded-sm text-white md:text-base text-xs">
+            56
+          </span>
+        </div>
+      </div>
       {/* trending category 1 */}
-      <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
-        <div className="flex items-center justify-between lg:px-0 px-2">
+      <div className="lg:mx-[150px] md:mx-[60px] mx-[5px]">
+        {/* <div className="flex items-center justify-between lg:px-0 px-2">
           <p className="text-[24px] font-semibold">
             {firstTrendingCategory?.data.category?.name}
           </p>
@@ -351,7 +397,42 @@ export default function Home() {
               </div>
             </div>
           ) : null}
-        </div>
+        </div> */}
+        {firstTrendingCategory?.data.products?.length ? (
+          <div className="mx-[10px] h-fit md:mx-[20px] lg:mx-[0px]">
+            <RecentViewSlider
+              Data={firstTrendingCategory?.data?.products}
+              ref={sliderRef4}
+            />
+          </div>
+        ) : typeof firstTrendingCategory === "undefined" ? (
+          <h1 className="text-center text-red-500">Loading products.....</h1>
+        ) : (
+          <h1 className="text-center text-red-500">
+            No {firstTrendingCategory?.data.category?.name} found
+          </h1>
+        )}
+      </div>
+      {/* categories */}
+      <div
+        style={{ scrollbarWidth: "none" }}
+        className="lg:mx-[150px] md:mx-[60px] mx-[14px] pb-2 md:my-[24px] mt-5 flex items-center lg:overflow-hidden overflow-x-scroll lg:justify-between gap-3"
+      >
+        {items.map((item, index) => (
+          <button
+            key={index}
+            onClick={() => handleClickCategory(item.id)}
+            className={`${
+              item.id === click
+                ? "border border-[#FC3030] text-[#FC3030]"
+                : "bg-[#F8F8F8]"
+            } lg:text-sm text-xs py-2 px-3 rounded-md whitespace-nowrap`}
+          >
+            {item.title}
+          </button>
+        ))}
+      </div>
+      <div className="lg:mx-[150px] md:mx-[60px] md:my-[24px] my-0">
         {firstTrendingCategory?.data.products?.length ? (
           <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
             <RecentViewSlider
@@ -367,9 +448,8 @@ export default function Home() {
           </h1>
         )}
       </div>
-
       {/* trending category 2 */}
-      <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
+      {/* <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
           <p className="text-[24px] font-semibold">
             {secondTrendingCategory?.data.category?.name}
@@ -405,10 +485,9 @@ export default function Home() {
             No {secondTrendingCategory?.data.category?.name} found
           </h1>
         )}
-      </div>
-
+      </div> */}
       {/* !!Baner */}
-      <div className="lg:mx-[150px] md:mx-[60px] m-[20px]  my-[16px]">
+      {/* <div className="lg:mx-[150px] md:mx-[60px] m-[20px]  my-[16px]">
         <Image
           width={100}
           height={100}
@@ -420,12 +499,17 @@ export default function Home() {
           alt=""
           className="w-[100%] md:h-[300px] sm:h-[200px] h-[220px] lg:rounded-none rounded-lg sm:rounded-lg lg:h-[417px]"
         />
-      </div>
-
+      </div> */}
       {/* !!dynamic view */}
-      <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
-        <div className="flex items-center justify-between lg:px-0 px-2">
-          <p className="text-[24px] font-semibold">Dynamic View</p>
+      <div className="lg:mx-[150px] md:mx-[60px] mx-[14px] my-[24px]">
+        <div className="flex items-center justify-between w-full">
+          <p className="md:text-2xl text-lg font-semibold">Dynamic View</p>
+          <button className="flex items-center gap-3 border border-[#FC3030] text-[#FC3030] text-sm rounded-lg py-2 px-4">
+            <span>View All</span>
+            <FaArrowRightLong />
+          </button>
+        </div>
+        {/* <div className="flex items-center justify-between lg:px-0 px-2">
           {dynamicViewProducts?.length ? (
             <div className="flex items-center gap-4">
               <div
@@ -442,9 +526,9 @@ export default function Home() {
               </div>
             </div>
           ) : null}
-        </div>
+        </div> */}
         {dynamicViewProducts?.length ? (
-          <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
+          <div>
             <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
           </div>
         ) : typeof dynamicViewProducts === "undefined" ? (
@@ -455,9 +539,7 @@ export default function Home() {
           </h1>
         )}
       </div>
-
       {/* !!Suggested for you */}
-
       {token !== null && (
         <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
           <div className="flex items-center justify-between lg:px-0 px-2">
@@ -492,9 +574,12 @@ export default function Home() {
           )}
         </div>
       )}
-
+      {/* banner */}
+      <div className="lg:mx-[150px] md:mx-[60px] mx-0">
+        <Image src={banner} alt="banner" />
+      </div>
       {/* season top product */}
-      <div
+      {/* <div
         className="lg:mx-[150px] md:mx-[60px]  my-[24px] p-10"
         style={{
           background:
@@ -505,11 +590,11 @@ export default function Home() {
           <p className="text-[24px] font-semibold">Season Top Pick</p>
         </div>
 
-        <div className=" flex flex-col md:flex-row gap-10 ">
-          <div className="product w-full md:w-[40%]">
+        <div className=" flex flex-col md:flex-row md:gap-0 gap-5">
+          <div className="product w-full md:w-[40%] md:h-[450px]">
             <ProductCard width="70" product={seasonTop[0]} />
           </div>
-          <div className="w-full md:w-[60%] relative">
+          <div className="w-full md:w-[70%] relative">
             <Image
               className="!relative w-full"
               alt="banners"
@@ -522,10 +607,9 @@ export default function Home() {
             />
           </div>
         </div>
-      </div>
-
+      </div> */}
       {/* !!Trending Products */}
-      <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
+      {/* <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
         <div className="flex items-center justify-between lg:px-0 px-2">
           <p className="text-[24px] font-semibold">Trending Products</p>
           {trendingProducts?.length ? (
@@ -556,56 +640,182 @@ export default function Home() {
             No trending product found
           </h1>
         )}
-      </div>
+      </div> */}
+      {/* sale product */}
+      <div className="flex lg:flex-row flex-col lg:mx-[150px] md:mx-[60px] mx-[5px] my-[24px] border border-[#E5E7EB] py-2 lg:px-6 px-1 rounded-md">
+        <div className="flex items-center justify-center md:gap-5 gap-2 lg:w-[60%] w-[100%] lg:border-r lg:border-[#77777740]">
+          <div className="relative h-[203px]">
+            <Image
+              alt=""
+              width={203}
+              height={203}
+              src={"/"}
+              className="w-full h-full object-cover outline-none	rounded-2xl cursor-pointer"
+            />
+            <div className="flex absolute w-full justify-between items-center absolute px-[16px] top-[10px]">
+              <button className="text-[12px] rounded-3xl text-white bg-[#F70000] py-2 px-3">
+                75% OFF
+              </button>
+              <IconButton size="medium">
+                <Image src={heart} alt="like" />
+              </IconButton>
+            </div>
+          </div>
 
+          <div className="flex flex-col lg:gap-3 gap-1">
+            <span className="md:text-lg text-base font-semibold">
+              Capttain pure by kapil dev xtra pure 18
+            </span>
+            <div className="flex items-center gap-2">
+              <Rating
+                precision={0.5}
+                name="read-only"
+                readOnly
+                defaultValue={4}
+                className="lg:text-xl text-sm"
+              />
+              <span className="text-sm text-[#434343]">3</span>
+            </div>
+            <div className="flex gap-4 items-center lg:mt-10">
+              <span className="md:text-lg text-sm text-[#F70000] font-semibold">
+                ₹50
+              </span>
+              <span className="text-[#949494] text-sm line-through">₹50</span>
+            </div>
+
+            <button className="lg:hidden text-[#F70000] py-3 border-[1px] border-[#F70001] rounded-lg">
+              <div className="flex items-center justify-center">
+                <p className="font-semibold text-[14px]">Add to cart</p>
+                <Image
+                  alt=""
+                  src={Cart}
+                  className="w-[20px] h-[20px] ml-[12px]"
+                />
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 lg:px-10 px-0 justify-center lg:w-[40%] w-[100%]">
+          <div className="flex items-center gap-2 bg-[#F7000014] w-fit rounded-full py-2 px-3 text-[#FC3030]">
+            <Image src={sale} alt="" />
+            <span className="uppercase text-sm font-medium">Kitchen Sale</span>
+          </div>
+          <div className="flex text-sm items-center gap-2">
+            <span className="p-2 bg-[#E5E7EB] rounded-md font-bold">84</span>
+            <span className="p-2 bg-[#E5E7EB] rounded-md font-bold">06</span>
+            <span className="p-2 bg-[#E5E7EB] rounded-md font-bold">59</span>
+            <span>:</span>
+            <span className="p-2 bg-[#E5E7EB] rounded-md font-bold">59</span>
+            <span className="mr-2 text-[#949494]">
+              Remains until the end of the offer
+            </span>
+          </div>
+
+          <button className="hidden md:text-[#F70000] py-3 mt-4 border-[1px] border-[#F70001] rounded-lg">
+            <div className="flex items-center justify-center">
+              <p className="font-semibold text-[14px]">Add to cart</p>
+              <Image
+                alt=""
+                src={Cart}
+                className="w-[20px] h-[20px] ml-[12px]"
+              />
+            </div>
+          </button>
+        </div>
+      </div>
+      {/* 50% off */}
+      <div className="lg:mx-[150px] md:mx-[60px] my-[24px]">
+        <div className="flex items-center justify-between lg:px-0 px-2">
+          <div className="flex justify-between items-center w-full">
+            <p className="hidden md:block text-[24px] font-semibold">
+              Minimum 50% On All Products
+            </p>
+            <p className="md:hidden text-md font-semibold">
+              50% On All Products
+            </p>
+            <button className="flex items-center gap-3 border border-[#FC3030] text-[#FC3030] text-sm rounded-lg py-2 px-4">
+              <span>View All</span>
+              <FaArrowRightLong />
+            </button>
+          </div>
+          {trendingProducts?.length ? (
+            <div className="flex items-center gap-4">
+              <div
+                className="h-[46px] w-[46px] rounded-full bg-[#F5F5F5] flex items-center justify-center  "
+                onClick={() => handlePrev(3)}
+              >
+                <IoMdArrowBack className="text-black h-[24px] w-[24px]" />
+              </div>
+              <div
+                className="h-[46px] w-[46px] rounded-full bg-[#F5F5F5] flex items-center justify-center  "
+                onClick={() => handleNext(3)}
+              >
+                <IoMdArrowForward className="text-black h-[24px] w-[24px]" />
+              </div>
+            </div>
+          ) : null}
+        </div>
+        {trendingProducts?.length ? (
+          <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
+            <RecentViewSlider Data={trendingProducts} ref={sliderRef3} />
+          </div>
+        ) : typeof suggestedProducts === "undefined" ? (
+          <h1 className="text-center text-red-500">Loading products.....</h1>
+        ) : (
+          <h1 className="text-center text-red-500 my-10">
+            No trending product found
+          </h1>
+        )}
+      </div>
       {/* small appliances */}
       <div
         style={{
           background:
             "linear-gradient(97.69deg, rgba(247, 0, 0, 0.1) 3.55%, rgba(145, 131, 0, 0.1) 91.28%)",
         }}
-        className="lg:mx-[150px] md:mx-[60px] mx-[20px] relative lg:h-[491px] md:h-[400px] sm:h-auto lg:px-[100px] px-[20px] sm:px-[40px] md:px-[40px] py-[0px] my-[16px] flex lg:flex-row justify-between"
+        className="lg:mx-[150px] md:mx-[60px] mx-0 relative lg:px-[70px] px-[20px] sm:px-[40px] md:px-[40px] my-[16px] flex lg:flex-row justify-between"
       >
-        <div className="flex flex-col items-start lg:w-auto md:w-auto w-[45%] lg:mt-7 mt-3">
+        <div className="md:py-7 py-2 flex flex-col items-start md:w-[60%] w-[50%]">
           <Image
             src={Logoo}
             alt=""
-            className="lg:w-[120px] lg:h-[70px] md:w-[100px] md:h-[60px] w-[80px] h-[50px]"
+            className="lg:w-[120px] lg:h-[70px] md:w-[100px] md:h-[60px] w-[40px] h-[30px]"
           />
-          <div className="lg:w-[570px] md:w-[400px] w-[180px] mt-[32px]">
-            <p className="lg:text-[48px] md:text-[36px] text-[14px] font-bold">
-              Simplify your shopping with GRAZLE
+          <div className="md:mt-[32px] mt-[15px]">
+            <p className="lg:text-[40px] md:text-[20px] text-[12px] font-bold">
+              simplify your shopping with GRAZLE
             </p>
-            <p className="lg:text-[16px] md:text-[14px] text-[10px]">
+            <p className="lg:text-[16px] md:text-[14px] text-[8px]">
               SHOPPING ON THE GO IS FAST AND EASY
             </p>
             <p className="lg:text-[16px] md:text-[14px] text-[10px] mt-[8px] text-[#393A44] font-medium">
               Get the App
             </p>
-            <div className="flex items-center lg:mt-[32px] mt-[8px] sm:mt-[8px]  md:mt-[8px]   mb-4">
+            <div className="flex items-center lg:mt-[32px] mt-[8px] sm:mt-[8px]  md:mt-[8px]">
               <Image
                 src={Google}
                 alt=""
-                className="lg:w-[135px] lg:h-[40px] md:w-[120px] md:h-[35px] w-[80px] h-[25px] mr-[16px]"
+                className="lg:w-[135px] lg:h-[40px] md:w-[120px] md:h-[35px] w-[60px] h-[20px] mr-[16px]"
               />
               <Image
                 src={Apple}
                 alt=""
-                className="lg:w-[135px] lg:h-[40px] md:w-[120px] md:h-[35px] w-[80px] h-[25px]"
+                className="lg:w-[135px] lg:h-[40px] md:w-[120px] md:h-[35px] w-[60px] h-[20px]"
               />
             </div>
           </div>
         </div>
-        <div className="flex lg:ml-[32px] md:ml-[24px] ml-[16px] lg:mt-0 mt-[0px] lg:flex-row flex-col items-center lg:w-auto md:w-auto w-full">
+        <div className="flex lg:mr-40 md:mr-32 mr-16 lg:ml-[20px] md:ml-[24px] ml-0 lg:flex-row flex-col h-contain">
           <Image
             src={Phone1}
             alt=""
-            className="lg:w-[278px] lg:h-[356px] md:w-[170px] md:h-[250px] w-[100px] h-[130px] lg:relative lg:right-[34px] lg:top-[-66px] lg:ml-[16px] md:absolute md:right-[185px] md:top-[0px] relative"
+            className="absolute top-0 lg:right-52 md:right-36 right-20 lg:w-[200px] md:w-[150px] w-[80px] lg:h-[300px] md:h-[200px] h-[100px]"
           />
           <Image
             src={Phone2}
             alt=""
-            className="lg:w-[278px] lg:h-[356px] md:w-[170px] md:h-[250px] w-[100px] h-[130px] lg:relative lg:right-[40px] top-[-10px]  right-[-55px] lg:bottom-[-66px] lg:mt-0 mt-[16px] md:absolute md:right-[40px] md:bottom-[0px] relative"
+            className="absolute bottom-0 lg:w-[200px] md:w-[150px] w-[80px] lg:h-[300px] md:h-[200px] h-[100px]"
           />
         </div>
       </div>

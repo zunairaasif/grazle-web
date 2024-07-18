@@ -110,19 +110,24 @@ export default function AddressPage() {
 
   return (
     <>
-      <div className="lg:my-[80px] flex items-center justify-center  my-[20px] sm:my-[20px] md:my-[30px] lg:mx-[150px] sm:mx-[20px] md:mx-[30px]">
+      <div className="lg:my-[80px] flex items-center justify-center  my-[20px] sm:my-[20px] md:my-[30px] lg:mx-[150px] mx-[20px] md:mx-[30px]">
         <div className="rounded-3xl lg:w-[77%] w-[100%] min-h-[454px] max-h-auto">
-          <p className="text-[30px] font-semibold mr-3 space-y-2">
-            Shipping Address ({allAddress?.length} addresses)
-          </p>
+          <div className="flex items-center gap-2 mb-4">
+            <p className="md:text-[30px] text-base font-semibold">
+              Shipping Address
+            </p>
+            <p className="md:text-[25px] text-sm font-semibold text-[#777777]">
+              ({allAddress?.length} addresses)
+            </p>
+          </div>
           <div className="space-y-3">
             {allAddress?.map((item, index) => (
               <div
                 style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
                 className="rounded-3xl p-[20px] w-full h-auto hover:border-[#F70000] border-[1px] "
               >
-                <div className="flex items-center justify-between">
-                  <p className="text-[24px] font-medium ">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="md:text-[24px] text-[20px] font-medium ">
                     {item?.address_label?.toUpperCase()}
                   </p>
                   <Radio
@@ -130,6 +135,9 @@ export default function AddressPage() {
                       color: "#F70000",
                       "& .MuiSvgIcon-root": {
                         fontSize: 34,
+                        "@media (max-width: 600px)": {
+                          fontSize: 24,
+                        },
                       },
                       "&.Mui-checked": {
                         color: "#F70000",
@@ -145,9 +153,13 @@ export default function AddressPage() {
                   />
                 </div>
                 <div className="flex items-center ">
-                  <Image src={Home} alt="" className="w-[50px] h-[50px] mr-4" />
+                  <Image
+                    src={Home}
+                    alt=""
+                    className="md:w-[50px] w-[25px] md:h-[50px] h-[25px] mr-4"
+                  />
                   <div>
-                    <p>
+                    <p className="flex items-center gap-2">
                       <span className="text-[16px] font-semibold ">
                         {item?.recipient_name}
                       </span>
@@ -155,7 +167,7 @@ export default function AddressPage() {
                         ({item?.recipient_phone})
                       </span>
                     </p>
-                    <p className="text-[14px] mt-2 font-medium text-[#777777] ">
+                    <p className="text-[14px] md:mt-2 mt-0 font-medium text-[#777777] ">
                       {item?.address}
                     </p>
                   </div>
@@ -167,7 +179,7 @@ export default function AddressPage() {
                       alt=""
                       className="w-[18px] h-[23px] mr-2"
                     />
-                    <p className="text-[14px] mt-2 font-medium text-[#777777] ">
+                    <p className="text-[14px] font-medium text-[#777777] ">
                       New, York
                     </p>
                   </div>
@@ -189,18 +201,18 @@ export default function AddressPage() {
                     </div>
                     {indexDialog === index ? (
                       <>
-                        <div className="absolute top-0 right-[100%] px-2 py-2 mr-1 h-auto rounded-sm w-[230px] bg-white shadow-lg">
+                        <div className="absolute top-0 right-[100%] px-3 py-4 mr-1 h-auto rounded-sm w-[230px] bg-white shadow-lg">
                           <p
                             style={{ pointerEvents: `${isPending} && "none"` }}
                             onClick={() => onEditAddress(item?.id)}
-                            className="flex items-center gap-2 mb-2 text-sm cursor-pointer"
+                            className="flex text-[#777777] items-center gap-2 mb-3 text-sm cursor-pointer"
                           >
                             <SlLocationPin /> Set as primary address
                           </p>
                           <p
                             style={{ pointerEvents: `${isPending} && "none"` }}
                             onClick={() => onDeleteAddress(item?.id)}
-                            className="flex items-center gap-2 text-sm cursor-pointer"
+                            className="flex items-center text-[#777777] gap-2 text-sm cursor-pointer"
                           >
                             <AiOutlineDelete /> Delete address
                           </p>
@@ -216,7 +228,7 @@ export default function AddressPage() {
               </div>
             ))}
 
-            <div className=" mt-[30px]">
+            <div className="mt-[30px]">
               <p
                 onClick={() => setAddress((prev) => !prev)}
                 className="flex items-center cursor-pointer text-[20px] font-semibold mr-3 mb-4"
@@ -226,9 +238,9 @@ export default function AddressPage() {
               <button
                 disabled={isPending}
                 onClick={() => onCheckout()}
-                className=" bg-[#F70000] w-full text-center disabled:bg-zinc-400 disabled:text-zinc-200 disabled:border-none rounded-sm h-[50px] text-[18px] font-medium text-white"
+                className=" bg-[#F70000] w-full text-center disabled:bg-zinc-400 disabled:text-zinc-200 disabled:border-none rounded-md h-[50px] text-[18px] font-medium text-white"
               >
-                Proceed to checkout
+                Proceed to Checkout
               </button>
             </div>
           </div>
