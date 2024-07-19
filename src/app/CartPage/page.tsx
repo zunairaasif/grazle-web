@@ -83,12 +83,12 @@ export default function Cartpage() {
                           src={"/" + item.featured_image}
                           width={100}
                           height={100}
-                          alt="Airpod"
+                          alt="Product Image"
                           className="rounded-2xl lg:w-[90px] w-[60px] h-[60px] lg:h-[90px] lg:mr-7 mr-3 "
                         />
 
                         <div>
-                          <p className="lg:text-[24px] text-[12px] sm:text-[14px] md:text-[16px] font-medium text-black">
+                          <p className="lg:text-[24px] text-[16px] font-medium text-black">
                             {item?.title}
                           </p>
 
@@ -112,7 +112,7 @@ export default function Cartpage() {
                             </p>
                           </div>
 
-                          <p className="text-[18px] font-medium">
+                          <p className="md:text-[18px] text-sm font-medium">
                             ₹
                             {item?.discount
                               ? item?.discounted_price * item.qty

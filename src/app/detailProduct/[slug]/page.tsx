@@ -8,6 +8,7 @@ import {
 } from "@/apis";
 import Image from "next/image";
 import heart from "@/assets/like.png";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import ReviewCard from "@/components/ReviewCard";
 import { updateCart } from "@/features/features";
@@ -66,26 +67,26 @@ export default function ProductDetail() {
     router.push("/StoreProduct?id=" + singleProduct.store.store_id);
   };
 
-  const [showPopup, setShowPopup] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false);
 
-  const handleClick = () => {
-    setShowPopup(true);
-  };
+  // const handleClick = () => {
+  //   setShowPopup(true);
+  // };
 
-  const closePopup = () => {
-    setShowPopup(false);
-  };
+  // const closePopup = () => {
+  //   setShowPopup(false);
+  // };
 
-  useEffect(() => {
-    (async () => {
-      if (!singleProduct.brand_id) return;
-      const { data } = await getBrandProductsApi(singleProduct.brand_id);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!singleProduct.brand_id) return;
+  //     const { data } = await getBrandProductsApi(singleProduct.brand_id);
 
-      setStoreProductsDetails(data.products);
-      const res = await getBrandDetails(singleProduct.brand_id);
-      setCurrentStore(res.data.store);
-    })();
-  }, [singleProduct.brand_id]);
+  //     setStoreProductsDetails(data.products);
+  //     const res = await getBrandDetails(singleProduct.brand_id);
+  //     setCurrentStore(res.data.store);
+  //   })();
+  // }, [singleProduct.brand_id]);
 
   const onAddingCart = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -95,6 +96,7 @@ export default function ProductDetail() {
     setCurrentProductId(product.id);
     const updateProduct = { ...product, qty: count };
     dispatch(updateCart({ type: null, product: updateProduct }));
+    toast.success("Item has been added to cart!");
   };
 
   useEffect(() => {
@@ -295,14 +297,14 @@ export default function ProductDetail() {
                 <button
                   className="bg-[#F70000] rounded-full h-[50px] mt-[20px] lg:w-[275px] w-[200px] sm:w-[200px] md:w-[200px] font-medium text-white"
                   onClick={(e) => {
-                    handleClick();
+                    // handleClick();
                     onAddingCart(e, singleProduct);
                   }}
                 >
                   Add to cart
                 </button>
 
-                {showPopup && (
+                {/* {showPopup && (
                   <div className="bg-[#F8F8F8] absolute top-[250px] right-0 h-[50px] shadow-lg  w-[350px] flex items-center">
                     <div className="rounded-l-lg bg-[#4FAD2E] w-3  h-[50px]"></div>
 
@@ -314,7 +316,7 @@ export default function ProductDetail() {
                       </p>
                     </div>
                   </div>
-                )}
+                )} */}
 
                 <button className="border-[1px] border-[#F70000] rounded-full h-[50px] mt-[20px] lg:w-[275px] w-[200px] sm:w-[200px] md:w-[200px]  font-medium text-[#F70000]">
                   Get Started

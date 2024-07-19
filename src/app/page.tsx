@@ -9,6 +9,7 @@ import Cardmm from "@/assets/Cardmmm.png";
 import Cart from "@/assets/CartVector.png";
 import { useRouter } from "next/navigation";
 import Logoo from "@/assets/Grazle Logo.png";
+import Skeleton from "@mui/material/Skeleton";
 import Phone1 from "@/assets/Phone Mockup 1.png";
 import Phone2 from "@/assets/Phone Mockup 2.png";
 import MainSlider from "@/components/mianSlider";
@@ -47,10 +48,13 @@ import {
   guestSuggestedProductsApi,
   getFirstTrendingCategoryApi,
   getSecondTrendingCategoryApi,
+  getAllProductsApi,
 } from "@/apis";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 export default function Home() {
   const [seasonTop, setSeasonTop] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [recentProducts, setRecentProducts] = useState([]);
   const [allCategories, setCategories] = useState(undefined);
   const [trendingProducts, setTrendingProducts] = useState([]);
@@ -91,6 +95,14 @@ export default function Home() {
       const recentProd = await getRecentProductsApi();
 
       setRecentProducts(recentProd?.data?.products || []);
+    })();
+  }, []);
+
+  // all products
+  useEffect(() => {
+    (async () => {
+      const { data } = await getAllProductsApi();
+      setAllProducts(data.products);
     })();
   }, []);
 
@@ -265,25 +277,48 @@ export default function Home() {
           </p>
         </div> */}
 
-        <div className="w-full flex flex-col justify-center items-center mx-2 text-center">
-          <div className="border-[1px] flex justify-center items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] sm:w-[70px] sm:h-[70px]  border-[#F70000] rounded-full bg-[#F8F8F8] ">
-            <Image
-              width={40}
-              height={40}
-              src={Widget}
-              alt=""
-              className=" lg:w-[40px] lg:h-[40px] w-[30px] h-[30px] sm:h-[30px] sm:w-[30px] "
-            />
+        <div className="w-full flex items-center mx-2 text-center">
+          <div className="flex flex-col items-center justify-center">
+            <div className="border-[1px] flex justify-center items-center lg:w-[92px] lg:h-[92px] w-[70px] h-[70px] border-[#F70000] rounded-full bg-[#F8F8F8] ">
+              <Image
+                width={40}
+                height={40}
+                src={Widget}
+                alt="widget"
+                className="lg:w-[40px] lg:h-[40px] w-[30px] h-[30px] sm:h-[30px] sm:w-[30px] "
+              />
+            </div>
+
+            <p className="text-nowrap color-[#393A44] lg:text-[14px] text-[10px] sm:text-[12px] font-normal mt-[4px]">
+              Categories
+            </p>
           </div>
 
-          <p className="text-nowrap color-[#393A44] lg:text-[14px] text-[10px] sm:text-[12px] font-normal mt-[4px]">
-            Categories
-          </p>
-
           {!allCategories?.length && (
-            <h1 className="my-2 text-center text-red-500">
-              Loading categories.....
-            </h1>
+            <>
+              <div className="hidden md:flex justify-between w-full ml-2">
+                {Array(8)
+                  .fill(0)
+                  .map((_, index) => (
+                    <Skeleton
+                      animation="wave"
+                      variant="circular"
+                      className="w-[92px] h-[92px]"
+                    />
+                  ))}
+              </div>
+              <div className="md:hidden flex justify-between w-full ml-2">
+                {Array(4)
+                  .fill(0)
+                  .map((_, index) => (
+                    <Skeleton
+                      animation="wave"
+                      variant="circular"
+                      className="w-[70px] h-[70px]"
+                    />
+                  ))}
+              </div>
+            </>
           )}
         </div>
 
@@ -407,14 +442,27 @@ export default function Home() {
           ) : null}
         </div> */}
 
-        {dynamicViewProducts?.length ? (
+        {allProducts?.length ? (
           <div>
             <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
           </div>
-        ) : typeof dynamicViewProducts === "undefined" ? (
-          <h1 className="text-center text-red-500">Loading products.....</h1>
         ) : (
-          <h1 className="text-center text-red-500">No product found</h1>
+          <>
+            <div className="hidden md:flex items-center justify-between">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+            <div className="md:hidden flex items-center justify-between">
+              {Array(2)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+          </>
         )}
       </div>
 
@@ -443,10 +491,23 @@ export default function Home() {
           <div>
             <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
           </div>
-        ) : typeof dynamicViewProducts === "undefined" ? (
-          <h1 className="text-center text-red-500">Loading products.....</h1>
         ) : (
-          <h1 className="text-center text-red-500">No product found</h1>
+          <>
+            <div className="hidden md:flex items-center justify-between">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+            <div className="md:hidden flex items-center justify-between">
+              {Array(2)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+          </>
         )}
       </div>
 
@@ -536,21 +597,36 @@ export default function Home() {
           <div>
             <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
           </div>
-        ) : typeof dynamicViewProducts === "undefined" ? (
-          <h1 className="text-center text-red-500">Loading products.....</h1>
         ) : (
-          <h1 className="text-center text-red-500">
-            No dynamic view product found
-          </h1>
+          <>
+            <div className="hidden md:flex items-center justify-between">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+            <div className="md:hidden flex items-center justify-between">
+              {Array(2)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+          </>
         )}
       </div>
 
       {/* !!Suggested for you */}
-      {token !== null && (
+      {/* {token !== null && (
         <div className="lg:mx-[150px] md:mx-[60px]  my-[24px]">
           <div className="flex items-center justify-between lg:px-0 px-2">
             <p className="text-[24px] font-semibold">Suggested for you</p>
-            {suggestedProducts?.length > 0 ? (
+            <button className="flex items-center gap-3 border border-[#FC3030] text-[#FC3030] text-sm rounded-lg py-2 px-4">
+              <span>View All</span>
+              <FaArrowRightLong />
+            </button> */}
+      {/* {suggestedProducts?.length > 0 ? (
               <div className="flex items-center gap-4">
                 <div
                   className="h-[46px] w-[46px] rounded-full bg-[#F5F5F5] flex items-center justify-center  "
@@ -566,22 +642,20 @@ export default function Home() {
                   <IoMdArrowForward className="text-black h-[24px] w-[24px]" />
                 </div>
               </div>
-            ) : null}
-          </div>
+            ) : null} */}
+      {/* </div>
 
           {suggestedProducts?.length ? (
             <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
               <RecentViewSlider Data={suggestedProducts} ref={sliderRef2} />
             </div>
-          ) : typeof suggestedProducts === "undefined" ? (
-            <h1 className="text-center text-red-500">Loading products.....</h1>
           ) : (
-            <h1 className="text-center text-red-500">
-              No suggested product found
-            </h1>
+            <div className="flex items-center justify-center text-center text-red-500 w-full p-10">
+              <span>No Product Found</span>
+            </div>
           )}
         </div>
-      )}
+      )} */}
 
       {/* banner */}
       <div className="lg:mx-[150px] md:mx-[60px] mx-0">
@@ -703,7 +777,7 @@ export default function Home() {
               <div className="flex items-center justify-center">
                 <p className="font-semibold text-[14px]">Add to cart</p>
                 <Image
-                  alt=""
+                  alt="cart"
                   src={Cart}
                   className="w-[20px] h-[20px] ml-[12px]"
                 />
@@ -714,7 +788,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-4 lg:px-10 px-0 justify-center lg:w-[40%] w-[100%]">
           <div className="flex items-center gap-2 bg-[#F7000014] w-fit rounded-full py-2 px-3 text-[#FC3030]">
-            <Image src={sale} alt="" />
+            <Image src={sale} alt="sale" />
             <span className="uppercase text-sm font-medium">Kitchen Sale</span>
           </div>
 
@@ -733,7 +807,7 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <p className="font-semibold text-[14px]">Add to cart</p>
               <Image
-                alt=""
+                alt="cart"
                 src={Cart}
                 className="w-[20px] h-[20px] ml-[12px]"
               />
@@ -780,12 +854,23 @@ export default function Home() {
           <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
             <RecentViewSlider Data={trendingProducts} ref={sliderRef3} />
           </div>
-        ) : typeof suggestedProducts === "undefined" ? (
-          <h1 className="text-center text-red-500">Loading products.....</h1>
         ) : (
-          <h1 className="text-center text-red-500 my-10">
-            No trending product found
-          </h1>
+          <>
+            <div className="hidden md:flex items-center justify-between">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+            <div className="md:hidden flex items-center justify-between">
+              {Array(2)
+                .fill(0)
+                .map((_, index) => (
+                  <SkeletonLoader />
+                ))}
+            </div>
+          </>
         )}
       </div>
 
