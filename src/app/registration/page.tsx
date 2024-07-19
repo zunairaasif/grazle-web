@@ -76,9 +76,9 @@ export default function Register() {
   return (
     <form
       action={onRegisterAccount}
-      className="w-[100%] h-auto lg:flex flex-wrap lg:flex md:flex-wrap sm:flex-wrap items-center lg:px-[50px] px-[20px] sm:px-[20px] md:px-[30px]"
+      className="w-[100%] h-auto lg:flex flex-wrap lg:flex md:flex-wrap sm:flex-wrap items-center justify-center lg:px-[50px] px-[20px] sm:px-[20px] md:px-[30px]"
     >
-      <div
+      {/* <div
         style={{
           background:
             "linear-gradient(162.65deg, #FF781E 1.87%, #FDC197 88.1%)",
@@ -99,9 +99,9 @@ export default function Register() {
         </div>
 
         <Image src={register} alt="" className="bottom-0 absolute right-0" />
-      </div>
+      </div> */}
 
-      <div className="lg:w-[50%] sm:[100%] md:[100%] w-[100%] h-auto lg:pl-[50px] pl-[0px] py-[50px] ">
+      <div className="lg:w-[50%] sm:[100%] md:[100%] w-[100%] h-auto items-center justify-center py-[20px] md:px-[40px] px-[20px] mb-5 rounded-lg border border-[#F5F7F9] shadow-lg">
         <div className="flex flex-col justify-center items-center ">
           <Image src={logo} alt="" className="w-[210px] h-[125px]" />
           <p className="mt-6 text-[40px] font-semibold">Get Register!</p>
@@ -199,7 +199,7 @@ export default function Register() {
               },
             }}
           />
-          <p className="text-black font-normal text-[16px] ">
+          <p className="text-black font-normal text-sm">
             By Clicking i agree all terms of services and Privacy & Policy.
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function Register() {
         </button>
 
         <p className="font-normal text-[#777777] text-[16px] text-center mt-10">
-          Don’t Have an Account?
+          Already have an account?
           <Link href="/signIn">
             <strong className="ml-2 font-medium text-[#F70000] cursor-pointer">
               Sign in

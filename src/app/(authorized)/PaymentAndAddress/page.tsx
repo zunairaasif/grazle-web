@@ -26,12 +26,14 @@ import { IoLocationOutline } from "react-icons/io5";
 import Delivery from "@/assets/Group 1820549945.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter, useSearchParams } from "next/navigation";
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 
 export default function PaymentAndAddress() {
   const router = useRouter();
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [delivery, setDelivery] = useState(false);
   const [isPending, setPending] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [otherFields, setOtherFields] = useState({});
@@ -218,66 +220,71 @@ export default function PaymentAndAddress() {
           className="w-[100%] rounded-3xl p-[20px] "
         >
           <div className="flex items-center">
-            <IoLocationOutline className=" w-[33px] h-[46px] mr-3" />
-            <p className="text-[40px] font-bold">Shipping Address</p>
+            <IoLocationOutline
+              color="#777777"
+              className="md:size-10 size-7 mr-3"
+            />
+            <p className="md:text-[40px] text-lg font-medium">
+              Shipping Address
+            </p>
           </div>
 
           <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
             <div className="flex-col ">
-              <label className="text-[16px] font-normal text-[#7777777]">
+              <label className="text-[16px] font-normal text-[#777777]">
                 First Name
               </label>
               <input
                 name="recipient_name"
                 defaultValue={addressDetail?.recipient_name}
-                className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
+                className="border-[1px] mt-[9px] border-[#777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
               />
             </div>
 
             <div className="flex-col ">
-              <label className="text-[16px] font-normal text-[#7777777]">
-                Address Label
+              <label className="text-[16px] font-normal text-[#777777]">
+                Last Name
               </label>
 
               <input
                 name="address_label"
                 defaultValue={addressDetail?.address_label}
-                className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
+                className="border-[1px] mt-[9px] border-[#777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
               />
             </div>
           </div>
 
           <div className="flex-col mt-6">
-            <label className="text-[16px] font-normal text-[#7777777]">
+            <label className="text-[16px] font-normal text-[#777777]">
               Street Address
             </label>
             <input
               name="address"
               defaultValue={addressDetail?.address}
-              className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
+              className="border-[1px] mt-[9px] border-[#777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
             />
           </div>
 
           <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
             <div className="flex-col ">
-              <label className="text-[16px] font-normal text-[#7777777]">
+              <label className="text-[16px] font-normal text-[#777777]">
                 Phone
               </label>
               <input
                 name="recipient_phone"
                 defaultValue={addressDetail?.recipient_phone}
-                className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
+                className="border-[1px] mt-[9px] border-[#777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
               />
             </div>
 
             <div className="flex-col">
-              <label className="text-[16px] font-normal text-[#7777777]">
+              <label className="text-[16px] font-normal text-[#777777]">
                 Note
               </label>
               <input
                 name="note"
                 defaultValue={addressDetail?.note}
-                className="border-[1px] mt-[9px] border-[#7777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
+                className="border-[1px] mt-[9px] border-[#777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
               />
             </div>
           </div>
@@ -302,16 +309,42 @@ export default function PaymentAndAddress() {
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
           className="w-[100%] rounded-3xl p-[20px] mt-4 "
         >
-          <div className="flex items-center gap-2">
-            <Image src={Delivery} alt="Airpod" className=" w-[54px] h-[32px]" />
-            <p className="lg:text-[40px] text-[24px] sm:text-[24px] font-medium ">
-              Delivery Partner
-            </p>
-          </div>
-          <div className="flex items-center gap-2 mt-2">
-            <Image src={FedEx} alt="Airpod" className=" w-[74px] h-[32px]" />
-            <p className="text-[24px] font-medium ">Delivery Partner</p>
-          </div>
+          {delivery ? (
+            <div className="flex items-center gap-2 mt-2">
+              <MdKeyboardArrowLeft
+                size={22}
+                onClick={() => setDelivery(false)}
+                className="cursor-pointer"
+              />
+              <div
+                onClick={() => setDelivery(false)}
+                className="flex items-center gap-2 mt-2"
+              >
+                <Image src={FedEx} alt="Delivery" className="w-auto h-[25px]" />
+                <p className="md:text-lg text-base font-medium ">
+                  FedEx Company
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div
+              onClick={() => setDelivery(true)}
+              className="flex items-center justify-between cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Image
+                  src={Delivery}
+                  alt="Delivery"
+                  className="w-[35px] h-[25px]"
+                />
+                <p className="md:text-lg text-base font-medium ">
+                  Delivery Partner
+                </p>
+              </div>
+
+              <MdKeyboardArrowRight size={22} />
+            </div>
+          )}
         </div>
 
         {/* payment method */}
@@ -321,17 +354,13 @@ export default function PaymentAndAddress() {
           className="w-[100%] rounded-3xl p-[20px] mt-4 "
         >
           <div className="flex items-center gap-2 mt-2">
-            <Image
-              src={card}
-              alt="Airpod"
-              className=" w-[42px] h-[42px] mr-2"
-            />
-            <p className="lg:text-[40px] text-[24px] sm:text-[24px] font-medium ">
+            <Image src={card} alt="Airpod" className="w-[30px] h-[30px] mr-2" />
+            <p className="lg:text-[30px] text-[20px] sm:text-[24px] font-medium ">
               All Payment Options
             </p>
           </div>
 
-          <div
+          {/* <div
             className={`border-[1px] mt-3 p-3 rounded-xl ${
               paymentMethod === "creditcard"
                 ? "border-[#F70000] bg-[rgb(255,229,229)]"
@@ -361,9 +390,7 @@ export default function PaymentAndAddress() {
             </p>
 
             <div className="flex-col mt-6">
-              <label className="text-[16px] font-normal text-[#777777]">
-                Card Number
-              </label>
+              <label className="text-[16px] font-normal">Card Number</label>
               <input
                 maxLength={16}
                 name="cardNumber"
@@ -374,9 +401,7 @@ export default function PaymentAndAddress() {
 
             <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
               <div className="flex-col">
-                <label className="text-[16px] font-normal text-[#777777]">
-                  Card Holder
-                </label>
+                <label className="text-[16px] font-normal">Card Holder</label>
                 <input
                   name="cardName"
                   className="border-[1px] mt-[9px] border-[#777777] w-full rounded-md h-[50px] p-3 focus:outline-none"
@@ -385,9 +410,7 @@ export default function PaymentAndAddress() {
               </div>
 
               <div className="flex-col">
-                <label className="text-[16px] font-normal text-[#777777]">
-                  Card Name
-                </label>
+                <label className="text-[16px] font-normal">Card Name</label>
                 <input
                   name="nameOfCard"
                   className="border-[1px] mt-[9px] border-[#777777] w-full rounded-md h-[50px] p-3 focus:outline-none"
@@ -396,9 +419,7 @@ export default function PaymentAndAddress() {
               </div>
 
               <div className="flex-col">
-                <label className="text-[16px] font-normal text-[#777777]">
-                  Card Type{" "}
-                </label>
+                <label className="text-[16px] font-normal">Card Type </label>
                 <select
                   name="cardType"
                   value={creditcardData.cardType}
@@ -413,9 +434,7 @@ export default function PaymentAndAddress() {
 
             <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap items-center gap-4 mt-6">
               <div className="flex-col">
-                <label className="text-[16px] font-normal text-[#777777]">
-                  Expiry Year
-                </label>
+                <label className="text-[16px] font-normal">Expiry Year</label>
                 <input
                   name="expiryYear"
                   className="border-[1px] mt-[9px] border-[#777777] w-full rounded-md h-[50px] p-3 focus:outline-none"
@@ -424,9 +443,7 @@ export default function PaymentAndAddress() {
               </div>
 
               <div className="flex-col">
-                <label className="text-[16px] font-normal text-[#777777]">
-                  Expiry Month
-                </label>
+                <label className="text-[16px] font-normal">Expiry Month</label>
                 <input
                   name="expiryMonth"
                   className="border-[1px] mt-[9px] border-[#777777] w-full rounded-md h-[50px] p-3 focus:outline-none"
@@ -435,9 +452,7 @@ export default function PaymentAndAddress() {
               </div>
 
               <div className="flex-col">
-                <label className="text-[16px] font-normal text-[#777777]">
-                  CVC Number
-                </label>
+                <label className="text-[16px] font-normal">CVC Number</label>
                 <input
                   maxLength={3}
                   name="cvc"
@@ -446,9 +461,9 @@ export default function PaymentAndAddress() {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div
+          {/* <div
             className={`border-[1px] mt-4 p-3 flex items-center justify-between rounded-xl w-full ${
               paymentMethod === "paypal"
                 ? "border-[#F70000]"
@@ -472,6 +487,32 @@ export default function PaymentAndAddress() {
               <p className="text-[18px] font-medium ml-2 ">Visa</p>
             </div>
             <Image src={visa} alt="visa" className=" w-[42px] h-[42px] mr-2" />
+          </div> */}
+
+          <div
+            className={`border-[1px] mt-4 p-3 flex items-center justify-between rounded-xl w-full ${
+              paymentMethod === "paypal"
+                ? "border-[#F70000]"
+                : "border-[#777777]"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <p className="text-lg text-[#2284b5] font-medium ml-2">CC</p>
+              <p className="font-medium">Avenue</p>
+            </div>
+            <Radio
+              sx={{
+                color: "#F70000",
+                "& .MuiSvgIcon-root": {
+                  fontSize: 24,
+                },
+                "&.Mui-checked": {
+                  color: "#F70000",
+                },
+              }}
+              checked={paymentMethod === "paypal" ? true : false}
+              onChange={() => setPaymentMethod("paypal")}
+            />
           </div>
 
           <div
@@ -525,7 +566,7 @@ export default function PaymentAndAddress() {
                 },
               }}
             />
-            <p className="text-[18px] font-medium ml-2  text-[#777777]">
+            <p className="md:text-base text-sm font-medium ml-2 text-[#777777]">
               By Clicking this, I agree all Terms & Conditions and Privacy &
               Ploicy
             </p>
@@ -539,7 +580,7 @@ export default function PaymentAndAddress() {
           style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
           className="w-full rounded-3xl p-5"
         >
-          <p className="text-[16px] font-medium text-[#777777]">
+          <p className="text-sm font-medium text-[#777777]">
             We will contact you to confirm order
           </p>
 
@@ -581,13 +622,19 @@ export default function PaymentAndAddress() {
             >
               <div className="relative w-[90px] h-[90px]  mr-2">
                 <Badge badgeContent={item.qty} color="primary" className="mr-3">
-                  <Image
-                    src={item.featured_image}
-                    height={50}
-                    width={50}
-                    alt={item.title}
-                    className="rounded-2xl w-full h-full"
-                  />
+                  {item.featured_image ? (
+                    <Image
+                      src={item.featured_image}
+                      height={50}
+                      width={50}
+                      alt={item.title}
+                      className="rounded-2xl w-full h-full"
+                    />
+                  ) : (
+                    <div className="w-[50px] h-[50px] flex items-center text-center justify-center bg-gray-200 rounded-xl">
+                      <span className="text-xs text-gray-500">No Image</span>
+                    </div>
+                  )}
                 </Badge>
               </div>
 
@@ -610,7 +657,7 @@ export default function PaymentAndAddress() {
           ))}
 
           <div className="mt-5 border-b-[1px] border-[#777777]"></div>
-          <p className="text-[24px] font-medium text-blackmt-2">Cart Total</p>
+          <p className="text-[24px] font-medium text-black mt-2">Cart Total</p>
           <div className="flex items-center mt-4 justify-between">
             <p className="text-[18px] font-medium text-[#777777] ">
               Cart Subtotal

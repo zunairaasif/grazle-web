@@ -326,7 +326,7 @@ export default function MyAccount() {
         >
           <div
             onClick={() => handleSectionChange("Personal Info")}
-            className={`cursor-pointer pl-5 text-[18px] font-normal cursor-pointer ${
+            className={`cursor-pointer pl-5 text-[14px] font-medium cursor-pointer ${
               activeSection === "Personal Info"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B] "
@@ -336,7 +336,7 @@ export default function MyAccount() {
           </div>
           <div
             onClick={() => handleSectionChange("Orders")}
-            className={`cursor-pointer pl-5  mt-[40px] text-[18px] font-normal cursor-pointer ${
+            className={`cursor-pointer pl-5  mt-[40px] text-[14px] font-medium cursor-pointer ${
               activeSection === "Orders"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B]"
@@ -346,7 +346,7 @@ export default function MyAccount() {
           </div>
           <div
             onClick={() => handleSectionChange("Manage Address")}
-            className={`cursor-pointer pl-5  mt-[40px] text-[18px] font-normal cursor-pointer ${
+            className={`cursor-pointer pl-5  mt-[40px] text-[14px] font-medium cursor-pointer ${
               activeSection === "Manage Address"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B] "
@@ -356,7 +356,7 @@ export default function MyAccount() {
           </div>
           <div
             onClick={() => handleSectionChange("Payment Method")}
-            className={`cursor-pointer pl-5  mt-[40px] text-[18px] font-normal cursor-pointer ${
+            className={`cursor-pointer pl-5  mt-[40px] text-[14px] font-medium cursor-pointer ${
               activeSection === "Payment Method"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B] "
@@ -366,7 +366,7 @@ export default function MyAccount() {
           </div>
           <div
             onClick={() => handleSectionChange("Password Manager")}
-            className={`cursor-pointer  mt-[40px] pl-5 text-[18px] font-normal cursor-pointer ${
+            className={`cursor-pointer  mt-[40px] pl-5 text-[14px] font-medium cursor-pointer ${
               activeSection === "Password Manager"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B] "
@@ -377,7 +377,7 @@ export default function MyAccount() {
 
           <div
             onClick={() => handleSectionChange("referral")}
-            className={`cursor-pointer  mt-[40px] pl-5 text-[18px] font-normal cursor-pointer ${
+            className={`cursor-pointer  mt-[40px] pl-5 text-[14px] font-medium cursor-pointer ${
               activeSection === "referral"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B] "
@@ -388,7 +388,7 @@ export default function MyAccount() {
 
           <div
             onClick={handelLogout}
-            className={`cursor-pointer  mt-[40px] pl-5  text-[18px] font-normal cursor-pointer   ${
+            className={`cursor-pointer  mt-[40px] pl-5  text-[14px] font-medium cursor-pointer   ${
               activeSection === "Logout"
                 ? "border-l-[4px] border-[#F70000] pl-2"
                 : "text-[#8B8B8B] "
@@ -520,7 +520,7 @@ export default function MyAccount() {
                     Deleting your account may remove all your information From
                     our database, this can not be undone.
                   </p>
-                  <p className="text-[15px] font-normal text-[#777777] mt-[18px]">
+                  <p className="text-[14px] font-normal text-[#777777] mt-[18px]">
                     To Confirm this ype ‘Delete’
                   </p>
                   <div className="flex items-center gap-4 mt-[4px]">
@@ -576,27 +576,27 @@ export default function MyAccount() {
                       <Image
                         src={Home}
                         alt=""
-                        className="w-[50px] h-[50px] mr-4"
+                        className="md:w-[50px] w-[25px] md:h-[50px] h-[25px] mr-4"
                       />
                       <div>
                         <p className="flex items-center">
                           <input
                             readOnly={editEnabled === item?.id ? false : true}
                             name="recipient_name"
-                            className="text-[16px] font-semibold  w-full rounded-md h-[50px] p-3 focus:outline-none "
+                            className="text-[16px] font-semibold  w-full rounded-md p-3 focus:outline-none "
                             defaultValue={item?.recipient_name}
                           />
                           <input
                             readOnly={editEnabled === item?.id ? false : true}
                             name="recipient_phone"
-                            className="text-[16px] w-full rounded-md h-[50px] p-3 focus:outline-none "
+                            className="text-[16px] w-full rounded-md p-3 focus:outline-none "
                             defaultValue={item?.recipient_phone}
                           />
                         </p>
                         <input
                           readOnly={editEnabled === item?.id ? false : true}
                           name="address"
-                          className="text-[14px] mt-2 font-medium text-[#777777]  w-full rounded-md h-[50px] p-3 focus:outline-none"
+                          className="text-[14px] mt-2 font-medium text-[#777777]  w-full rounded-md p-3 focus:outline-none"
                           defaultValue={item?.address}
                         />
                       </div>
@@ -608,7 +608,7 @@ export default function MyAccount() {
                           alt=""
                           className="w-[18px] h-[23px] mr-2"
                         />
-                        <p className="text-[14px] mt-2 font-medium text-[#777777] ">
+                        <p className="text-[14px] font-medium text-[#777777] ">
                           New, York
                         </p>
                       </div>
@@ -917,7 +917,7 @@ export default function MyAccount() {
               className="rounded-3xl p-[30px] w-full "
             >
               <div className="flex-col">
-                <label className="text-[16px] font[semibold"> Password *</label>
+                <label className="text-[16px] font-semibold"> Password *</label>
                 <input
                   placeholder="Enter Password"
                   name="old_password"
@@ -963,11 +963,11 @@ export default function MyAccount() {
             <>
               <CustomModal showModal={showSendModel}>
                 <form action={onLogout} className=" w-[400px] p-6">
-                  <p className="text-[50px] text-center font-bold text-[#191919]">
+                  <p className="text-[40px] text-center font-bold text-[#191919]">
                     Logout
                   </p>
-                  <p className="text-[24px] text-center font-bold text-[#777777] mt-[16px]">
-                    Are yodivu sure you want to log out?
+                  <p className="text-center font-medium text-[#777777] mt-[16px]">
+                    Are you sure you want to log out?
                   </p>
                   <div className="flex justify-center">
                     <button

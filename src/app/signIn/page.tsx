@@ -41,13 +41,13 @@ export default function Login() {
   return (
     <form
       action={onLogin}
-      className="w-[100%] lg:h-auto flex items-start flex-wrap md:flex-wrap sm:flex-wrap sm:h-auto md:h-auto "
+      className="w-[100%] lg:h-auto flex items-center justify-center flex-wrap md:flex-wrap sm:flex-wrap sm:h-auto md:h-auto "
     >
-      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] bounded-5xl pt-8">
+      {/* <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] bounded-5xl pt-8">
         <Image src={login} alt="" />
-      </div>
+      </div> */}
 
-      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] h-auto md:p-[50px] p-[20px]">
+      <div className="lg:w-[50%] w-[100%] sm:w-[100%] md:w-[100%] h-auto md:p-[50px] p-[20px] mb-5 rounded-lg py-[50px] border border-[#F5F7F9] shadow-lg">
         <div className="flex flex-col justify-center items-center ">
           <Image src={logo} alt="" className="w-[210px] h-[125px]" />
           <p className="mt-6 md:text-[40px] text-[30px] font-semibold">
@@ -131,14 +131,14 @@ export default function Login() {
             Log in with Apple
           </button> */}
 
-          <button className="flex justify-center items-center w-[50%] gap-4 w-[50%] bg-[#F7000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
+          <button className="flex justify-center items-center md:w-[50%] w-full gap-4 bg-[#F7000012] rounded-xl h-[50px] mt-[30px] w-[100%] text-[18px] font-medium text-black">
             <Image src={google} alt="google" className="w-[25px] h-[25px]" />
             <span>Log in with Google</span>
           </button>
         </div>
 
         <p className="font-normal text-[#777777] text-[16px] text-center mt-10">
-          Don’t Have an Account?
+          Don’t have an account?
           <Link href="/registration">
             <strong className="ml-2 font-medium text-[#F70000]">Sign Up</strong>
           </Link>

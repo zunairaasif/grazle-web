@@ -43,9 +43,21 @@ export default function Cartpage() {
       {cartProducts.length > 0 ? (
         <div className=" lg:my-[50px] my-[20px] sm:my-[20px] md:my-[30px] lg:mx-[150px] mx-[20px] sm:mx-[20px] md:mx-[30px]">
           <div className="flex items-center">
-            <p className="text-[40px] font-semibold mr-3 ">Cart</p>
-            <p className="text-[24px] font-medium text-[#777777] ">
+            <p className="md:text-[40px] text-[30px] md:font-semibold font-medium mr-3 ">
+              Cart
+            </p>
+            <p className="md:text-[24px] text-[20px] font-medium text-[#777777] ">
               ({cartLength} Products)
+            </p>
+          </div>
+
+          <div className="lg:w-[70%] w-[100%] mb-3 rounded-2xl bg-[#FFFAFA] flex justify-between p-3">
+            <p className="text-[16px] font-medium text-[#777777]">
+              Add More Products
+            </p>
+
+            <p className="text-[16px] font-medium text-[#F70000]">
+              <Link href="/">+ Add</Link>
             </p>
           </div>
 
@@ -55,27 +67,18 @@ export default function Cartpage() {
                 <Fragment key={item.id}>
                   <div
                     style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
-                    className="w-[100%] rounded-[20px] p-[20px] mb-2  border-[1px] border-[#F70000]"
+                    className="w-[100%] rounded-[20px] p-[20px] mb-2  border-[1px] border-[#777777] hover:border-[#F70000]"
                   >
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                       <CiSquareCheck className="text-[#F70000] text-[24px] mr-3" />
                       <p className="text-[24px] font-normal">{item?.title}</p>
-                    </div>
+                    </div> */}
 
-                    <div className="my-5 border-b-[1px] border-[#777777]"></div>
-                    <div className="w-full rounded-2xl bg-[#FFFAFA] flex justify-between p-3">
-                      <p className="text-[16px] font-medium text-[#777777]">
-                        Add More Products
-                      </p>
+                    {/* <div className="my-5 border-b-[1px] border-[#777777]"></div> */}
 
-                      <p className="text-[16px] font-medium text-[#F70000]">
-                        <Link href="/">+ Add</Link>
-                      </p>
-                    </div>
-
-                    <div className="mt-5 flex items-center justify-between">
+                    <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <CiSquareCheck className="text-[#F70000] lg:block sm:hidden hidden text-[32px] mr-3" />
+                        {/* <CiSquareCheck className="text-[#F70000] lg:block sm:hidden hidden text-[32px] mr-3" /> */}
                         <Image
                           src={"/" + item.featured_image}
                           width={100}
@@ -147,10 +150,6 @@ export default function Cartpage() {
                           {/* <div className="lg:w-[43px] lg:h-[43px] h-[30px] w-[30px]  bg-[#5EF7000A] rounded-md flex items-center justify-center">
                                 <FaRegEdit className="lg:text-[24px] text-[18px] text-[#00F763]" />
                               </div> */}
-
-                          <div className="lg:w-[43px] cursor-pointer lg:h-[43px] h-[30px] w-[30px] bg-[#5EF7000A] rounded-md flex items-center justify-center">
-                            <FaRegEdit className="lg:text-[24px] text-[18px] text-[#00F763]" />
-                          </div>
 
                           <div
                             onClick={() => onDeleteProduct(item?.id)}

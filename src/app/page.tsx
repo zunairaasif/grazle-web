@@ -407,19 +407,14 @@ export default function Home() {
           ) : null}
         </div> */}
 
-        {firstTrendingCategory?.data.products?.length ? (
-          <div className="mx-[10px] h-fit md:mx-[20px] lg:mx-[0px]">
-            <RecentViewSlider
-              Data={firstTrendingCategory?.data?.products}
-              ref={sliderRef4}
-            />
+        {dynamicViewProducts?.length ? (
+          <div>
+            <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
           </div>
-        ) : typeof firstTrendingCategory === "undefined" ? (
+        ) : typeof dynamicViewProducts === "undefined" ? (
           <h1 className="text-center text-red-500">Loading products.....</h1>
         ) : (
-          <h1 className="text-center text-red-500">
-            No {firstTrendingCategory?.data.category?.name} found
-          </h1>
+          <h1 className="text-center text-red-500">No product found</h1>
         )}
       </div>
 
@@ -444,19 +439,14 @@ export default function Home() {
       </div>
 
       <div className="lg:mx-[150px] md:mx-[60px] md:my-[24px] my-0">
-        {firstTrendingCategory?.data.products?.length ? (
-          <div className="mx-[20px] sm:mx-[20px] md:mx-[20px] lg:mx-[0px]">
-            <RecentViewSlider
-              Data={firstTrendingCategory?.data?.products}
-              ref={sliderRef4}
-            />
+        {dynamicViewProducts?.length ? (
+          <div>
+            <RecentViewSlider Data={dynamicViewProducts} ref={sliderRef6} />
           </div>
-        ) : typeof firstTrendingCategory === "undefined" ? (
+        ) : typeof dynamicViewProducts === "undefined" ? (
           <h1 className="text-center text-red-500">Loading products.....</h1>
         ) : (
-          <h1 className="text-center text-red-500">
-            No {firstTrendingCategory?.data.category?.name} found
-          </h1>
+          <h1 className="text-center text-red-500">No product found</h1>
         )}
       </div>
 

@@ -9,6 +9,7 @@ import MenuIcon from "@/assets/VectorMenu.png";
 import { Avatar } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { logout } from "@/lib";
 import { Drawer } from "@mui/material";
 
 import { IoClose } from "react-icons/io5";
@@ -32,7 +33,7 @@ import { BiLogOut } from "react-icons/bi";
 import Badge from "@mui/material/Badge";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart } from "@/features/features";
-import { debounce, searchProductApi } from "@/apis";
+import { debounce, searchProductApi, getPopularSearchApi } from "@/apis";
 import axios from "axios";
 export default function Navbar() {
   // const router = useRouter();
@@ -50,7 +51,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [menuBar, setIsMenuBar] = useState(false);
-
+  const [popularSearches, setPopularSearches] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const containerRef: any = useRef(null);
@@ -61,6 +62,17 @@ export default function Navbar() {
   const router = useRouter();
   useEffect(() => {
     !cartProducts.length && dispatch(updateCart({ type: "onRefresh" }));
+
+    const fetchPopularSearches = async () => {
+      try {
+        const { data } = await getPopularSearchApi();
+        setPopularSearches(data);
+      } catch (error) {
+        console.error("Failed to fetch popular searches:", error);
+      }
+    };
+
+    fetchPopularSearches();
   }, []);
   const handleToggleMenu = () => {
     setIsMenuBar((prev) => !prev);
@@ -90,6 +102,19 @@ export default function Navbar() {
       setIsOpenSearch(false);
     }
   };
+
+  //logout
+  async function handelLogout() {
+    try {
+      await logout();
+      localStorage.clear();
+      setIsMenuBar(false);
+      router.push("/signIn");
+    } catch (error) {
+      console.log(error);
+      setIsMenuBar(false);
+    }
+  }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -254,12 +279,12 @@ export default function Navbar() {
                   </p>
                 </Link>
                 <div
-                  className="flex gap-2 mt-4 items-center"
-                  onClick={handleMenuclose}
+                  className="flex gap-2 mt-4 items-center cursor-pointer"
+                  onClick={handelLogout}
                 >
                   <BiLogOut className="text-[18px] text-[#777777]" />
                   <p className="text-[16px] font-normal text-black">Logout</p>
-                </div>{" "}
+                </div>
               </div>
             </Drawer>
 
@@ -361,30 +386,22 @@ export default function Navbar() {
                       <p className="text-black text-[16px] font-semibold">
                         Popular Searches
                       </p>
-                      <div className="flex gap-3 mt-3">
-                        <div className="border-[1px] bg-white border-white rounded-full px-3 py-2">
-                          <p className="text-black text-[14px] font-normal">
-                            Display Tech
-                          </p>
-                        </div>
-                        <div className="border-[1px] bg-white border-white rounded-full px-3 py-2">
-                          <p className="text-black text-[14px] font-normal">
-                            Display Tech
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex gap-3 mt-3">
-                        <div className="border-[1px] bg-white border-white rounded-full px-3 py-2">
-                          <p className="text-black text-[14px] font-normal">
-                            Display Tech
-                          </p>
-                        </div>
-                        <div className="border-[1px] bg-white border-white rounded-full px-3 py-2">
-                          <p className="text-black text-[14px] font-normal">
-                            Display Tech
-                          </p>
-                        </div>
-                      </div>
+                      {Array.isArray(popularSearches) ? (
+                        popularSearches.map((search, index) => (
+                          <div key={index} className="flex gap-3 mt-3">
+                            <Link
+                              href="/StoreprouctPage"
+                              className="text-black text-[14px] font-normal"
+                            >
+                              {search.keyword}
+                            </Link>
+                          </div>
+                        ))
+                      ) : (
+                        <span className="text-sm">
+                          No Popular Search Found!
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -531,8 +548,8 @@ export default function Navbar() {
                       </p>
                     </Link>
                     <div
-                      className="flex gap-2 mt-4 items-center"
-                      onClick={handleMenuclose}
+                      className="flex gap-2 mt-4 items-center cursor-pointer"
+                      onClick={handelLogout}
                     >
                       <BiLogOut className="text-[18px] text-[#777777]" />
                       <p className="text-[16px] font-normal text-[#777777]">

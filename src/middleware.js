@@ -12,7 +12,7 @@ export default async function middleware(request) {
       : false;
 
   if (!authToken && !isAuthPage) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/signIn", request.url));
   }
   if (authToken && isAuthPage) {
     return NextResponse.redirect(new URL("/", request.url));

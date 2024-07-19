@@ -31,7 +31,7 @@ export const decrypt = async (input) => {
 };
 export async function loginAction(formdata) {
   const user = formdata.get("email");
-  const expires = new Date(Date.now() + 10 * 1000);
+  const expires = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
   const session = await encrypt({ user, expires });
   cookies().set("session", session, { secure: true });
   redirect("/");
@@ -49,7 +49,7 @@ export async function updateSession(request) {
   const session = request.cookies().get("session")?.value;
   if (!session) return null;
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 10 * 1000);
+  parsed.expires = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",
