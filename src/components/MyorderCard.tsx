@@ -47,6 +47,7 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
   const cancelModal = () => {
     setIsModalVisible((prev) => !prev);
   };
+
   const handleRevModal = () => {
     setShowLeave((prev) => !prev);
   };
@@ -116,8 +117,7 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
 
   return (
     <>
-      {" "}
-      {order.products.map((prod) => (
+      {order.products.map((prod: any) => (
         <>
           <div
             style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
@@ -132,33 +132,38 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
               </div>
 
               <div className="flex items-center mt-3 lg:mt-0 sm:mt-3 md:mt-2   ">
-                {order.status !== "completed" && (
-                  <button className=" lg:flex sm:hidden hidden items-center p-2 rounded-lg shadow-lg mr-3  cursor-pointer">
-                    <IoCloseSharp
-                      className="text-[24px] text-[#FC0005] mr-4 cursor-pointer"
-                      onClick={cancelModal}
-                    />
-                    <p className="text-[#FC0005] text-[16px] font-semibold mr-4">
-                      Cancel Orders
-                    </p>
-                  </button>
-                )}
+                {orderTracking?.status_history?.slice(-1)[0].status !==
+                  "cancelled" &&
+                  order.status !== "completed" && (
+                    <button
+                      onClick={handleOrderCancel}
+                      className=" lg:flex sm:hidden hidden items-center p-2 rounded-lg shadow-lg mr-3  cursor-pointer"
+                    >
+                      <IoCloseSharp className="text-[24px] text-[#FC0005] mr-4 cursor-pointer" />
+                      <p className="text-[#FC0005] text-[16px] font-semibold mr-4">
+                        Cancel Order
+                      </p>
+                    </button>
+                  )}
                 {/* <div className="border-#00000017 border-[1px] rounded-md h-[30px] w-[30px] flex items-center justify-center">
                   <HiOutlineDotsVertical className="h-[15px] w-4 text-[#D9D9D9]" />
                 </div> */}
               </div>
             </div>
-            {order.status !== "completed" && (
-              <button className=" lg:hidden sm:flex flex mt-4 sm:mt-2 lg:mt-0 items-center p-2 rounded-lg shadow-lg mr-3  cursor-pointer">
-                <IoCloseSharp
-                  className="text-[24px] text-[#FC0005] mr-4 cursor-pointer"
+
+            {orderTracking?.status_history?.slice(-1)[0].status !==
+              "cancelled" &&
+              order.status !== "completed" && (
+                <button
                   onClick={handleOpeneModel}
-                />
-                <p className="text-[#FC0005] text-[16px] font-semibold mr-4">
-                  Cancel Order
-                </p>
-              </button>
-            )}
+                  className=" lg:hidden sm:flex flex mt-4 sm:mt-2 lg:mt-0 items-center p-2 rounded-lg shadow-lg mr-3  cursor-pointer"
+                >
+                  <IoCloseSharp className="text-[24px] text-[#FC0005] mr-4 cursor-pointer" />
+                  <p className="text-[#FC0005] text-[16px] font-semibold mr-4">
+                    Cancel Order
+                  </p>
+                </button>
+              )}
             <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap  items-center justify-between mt-5">
               <div className="flex items-center">
                 <div className="h-[100px] bg-[#F700000D] flex items-center justify-center w-[100px] rounded-2xl mr-5">
@@ -178,22 +183,22 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
             </p> */}
                 </div>
               </div>
-              <p className="lg:text-[24px] text-[18px] mt-3 lg:mt-0 sm:mt-3 md:mt-3 text-[#777777]  font-medium">
+              <p className="lg:text-[20px] text-[18px] mt-3 lg:mt-0 sm:mt-3 md:mt-3 text-[#777777]  font-medium">
                 {prod.quantity}
               </p>
-              <p className="lg:text-[24px] text-[18px] mt-3 lg:mt-0 sm:mt-3 md:mt-3 text-[#777777]  font-medium">
+              <p className="lg:text-[20px] text-[18px] mt-3 lg:mt-0 sm:mt-3 md:mt-3 text-[#777777]  font-medium">
                 ₹{" "}
                 {prod.discounted_price
                   ? prod.discounted_price
                   : prod.price * prod.quantity}
               </p>
               <div className="flex-col mt-3 lg:mt-0 sm:mt-3 md:mt-3  flex">
-                <button className=" bg-[#00F7630F] rounded-2xl h-[50px] outline-[2px] outline-[#26F63B] outline-dashed  lg:w-[181px] w-[300px] sm:w-[300px] md:w-[300px] text-[18px] font-medium text-[#07D459]">
+                <button className=" bg-[#00F7630F] rounded-2xl h-[40px] outline-[2px] outline-[#26F63B] outline-dashed  lg:w-[160px] w-[300px] text-[15px] font-medium text-[#07D459]">
                   {orderTracking?.status_history?.slice(-1)[0].status}
                 </button>
                 {order.status !== "completed" && (
                   <button
-                    className=" bg-[#FFFAF4] mt-3 outline-[2px] outline-[#F69B26] outline-dashed rounded-2xl h-[50px] lg:w-[181px] w-[300px] sm:w-[300px] md:w-[300px]  text-[18px] font-medium text-[#F69B26]"
+                    className=" bg-[#FFFAF4] mt-3 outline-[2px] outline-[#F69B26] outline-dashed rounded-2xl h-[40px] lg:w-[160px] w-[300px]  text-[15px] font-medium text-[#F69B26]"
                     onClick={handleButtonClick}
                   >
                     Order Tracking
@@ -220,10 +225,10 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
                 </div>
                 <div className="flex flex-wrap sm:flex-wrap md:flex-wrap lg:flex-nowrap  lg:gap-8 gap-2 sm:gap-2 mt-5">
                   <p className="text-[14px] text-[#909198] font-normal">
-                    Delivery Details
+                    Expected Delivery Date:
                   </p>
                   <p className="text-[14px]  sm:ml-7 lg:ml-7  ml-10 text-black font-semibold">
-                    {orderTracking.date}
+                    {orderTracking.expected_delivery_date}
                   </p>
                   <p className="text-[14px] text-[#909198] font-normal">
                     Tracking ID:
@@ -233,7 +238,7 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
                   </p>
                 </div>
                 <div className="mt-4">
-                  <p className="text-[16px] font-semibold">Delivery Details</p>
+                  <p className="text-[16px] font-semibold">Order Status</p>
                 </div>
                 <div className="lg:flex  sm:hidden md:hidden hidden  gap-8 mt-5">
                   <div className="flex items-center gap-4 lg:w-auto w-[100%] sm: w-[100%] md: w-[100%]">
@@ -446,7 +451,7 @@ const MyorderCard = ({ order, status }: { order: any; status?: any }) => {
                   Cancel Order
                 </p>
                 <p className="text-[20px] text-[#434343]  font-medium mt-6">
-                  Are you sure you want to cancel the order
+                  Are you sure you want to cancel the order?
                 </p>
                 <div className="mt-6 flex justify-center gap-4">
                   <button

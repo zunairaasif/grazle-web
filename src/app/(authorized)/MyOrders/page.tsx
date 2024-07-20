@@ -10,6 +10,7 @@ import Dots from "@/assets/Group 1820549907.png";
 import CustomModal from "@/components/CustomModel";
 import MyorderCard from "@/components/MyorderCard";
 import React, { useEffect, useState } from "react";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 import BBB from "@/assets/Box.png";
 import close from "@/assets/close.png";
@@ -127,14 +128,18 @@ export default function Leave() {
 
       {activeSection === "Active" && (
         <>
-          {orders.map((order: any) => {
-            return (
-              <MyorderCard
-                status={["in_progress", "new", "shipped"]}
-                order={order}
-              />
-            );
-          })}
+          {!orders?.length ? (
+            <SkeletonLoader />
+          ) : (
+            orders.map((order: any) => {
+              return (
+                <MyorderCard
+                  status={["in_progress", "new", "shipped"]}
+                  order={order}
+                />
+              );
+            })
+          )}
 
           <CustomModal showModal={showConfirm}>
             <div className="flex-col justify-center w-[800px]">
@@ -158,17 +163,25 @@ export default function Leave() {
 
       {activeSection === "Completed" && (
         <>
-          {orders.map((order: any) => {
-            return <MyorderCard status={["completed"]} order={order} />;
-          })}
+          {!orders?.length ? (
+            <SkeletonLoader />
+          ) : (
+            orders.map((order: any) => {
+              return <MyorderCard status={["completed"]} order={order} />;
+            })
+          )}
         </>
       )}
 
       {activeSection === "Cancelled" && (
         <>
-          {orders.map((order: any) => {
-            return <MyorderCard status={["cancelled"]} order={order} />;
-          })}
+          {!orders?.length ? (
+            <SkeletonLoader />
+          ) : (
+            orders.map((order: any) => {
+              return <MyorderCard status={["cancelled"]} order={order} />;
+            })
+          )}
         </>
       )}
     </div>

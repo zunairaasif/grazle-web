@@ -60,13 +60,14 @@ export default function Navbar() {
   const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const router = useRouter();
+
   useEffect(() => {
     !cartProducts.length && dispatch(updateCart({ type: "onRefresh" }));
 
     const fetchPopularSearches = async () => {
       try {
         const { data } = await getPopularSearchApi();
-        setPopularSearches(data);
+        setPopularSearches(data.keywords);
       } catch (error) {
         console.error("Failed to fetch popular searches:", error);
       }
@@ -393,7 +394,7 @@ export default function Navbar() {
                               href="/StoreprouctPage"
                               className="text-black text-[14px] font-normal"
                             >
-                              {search.keyword}
+                              {search}
                             </Link>
                           </div>
                         ))
