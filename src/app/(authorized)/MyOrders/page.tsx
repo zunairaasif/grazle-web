@@ -90,11 +90,11 @@ export default function Leave() {
     <div className="lg:my-[50px] my-[20px] sm:my-[20px] md:my-[30px] lg:mx-[150px] mx-[20px] sm:mx-[20px] md:mx-[30px]">
       <div
         style={{ boxShadow: "0px 4px 29px 0px #0000000A" }}
-        className="rounded-3xl p-[20px] w-[100%] gap-8  flex items-algin "
+        className="rounded-3xl p-[20px] w-[100%] gap-8 md:justify-start justify-center flex items-algin "
       >
         <p
           onClick={() => handleSectionChange("Active")}
-          className={`lg:text-[16px] text-[9px] sm:text-[13px] md:text-[14px]  font-normal text-[#777777] cursor-pointer ${
+          className={`lg:text-[16px] text-[10px] md:text-[14px]  font-normal cursor-pointer ${
             activeSection === "Active"
               ? "border-b-[4px] border-[#F70000] font-semibold"
               : "text-[#8B8B8B]"
@@ -105,7 +105,7 @@ export default function Leave() {
 
         <p
           onClick={() => handleSectionChange("Completed")}
-          className={`lg:text-[16px] text-[9px] sm:text-[13px] md:text-[14px] font-normal text-[#777777] cursor-pointer ${
+          className={`lg:text-[16px] text-[10px] md:text-[14px] font-normal cursor-pointer ${
             activeSection === "Completed"
               ? "border-b-[4px] border-[#F70000] font-semibold"
               : "text-[#8B8B8B]"
@@ -116,7 +116,7 @@ export default function Leave() {
 
         <p
           onClick={() => handleSectionChange("Cancelled")}
-          className={`lg:text-[16px] text-[9px] sm:text-[13px] md:text-[14px] font-normal text-[#777777] cursor-pointer ${
+          className={`lg:text-[16px] text-[10px] md:text-[14px] font-normal cursor-pointer ${
             activeSection === "Cancelled"
               ? "border-b-[4px] border-[#F70000] font-semibold"
               : "text-[#8B8B8B]"

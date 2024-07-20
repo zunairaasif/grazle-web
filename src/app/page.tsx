@@ -832,7 +832,7 @@ export default function Home() {
             </button>
           </div>
 
-          {trendingProducts?.length ? (
+          {/* {trendingProducts?.length ? (
             <div className="flex items-center gap-4">
               <div
                 className="h-[46px] w-[46px] rounded-full bg-[#F5F5F5] flex items-center justify-center  "
@@ -847,7 +847,7 @@ export default function Home() {
                 <IoMdArrowForward className="text-black h-[24px] w-[24px]" />
               </div>
             </div>
-          ) : null}
+          ) : null} */}
         </div>
 
         {trendingProducts?.length ? (
